@@ -1,5 +1,7 @@
 import Logo from "../../assets/kmLogowhite.png";
 
+// const inputStyles = ``;
+
 const Navbar = () => {
   return (
     <div>
