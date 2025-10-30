@@ -11,6 +11,7 @@
 
 body {
   font-family: "Montserrat", sans-serif;
+  height: 1000vh;
 }
 
 h1,
@@ -21,4 +22,12 @@ h5,
 h6 {
   font-family: "Cormorant Garamond", serif;
   font-optical-sizing: auto;
+}
+
+.backone {
+  background-image: url(../src/assets/backtwo.jpeg);
+  background-position: center center;
+  background-size: cover;
+  background-attachment: scroll;
+  height: 50rem;
 }
