@@ -16,14 +16,23 @@ const Navbar = () => {
             </div>
           </div>
           <div className="flex justify-between">
-            <div>
-              <p className="text-sm">Works</p>
+            <div className="cursor-pointer group">
+              <p className="text-sm text-white transition-all duration-300 group-hover:text-[#F87B1B] group-hover:-translate-y-1">
+                Works
+              </p>
+              <div className="h-0.5 w-0 bg-[#F87B1B] transition-all duration-300 group-hover:w-full"></div>
             </div>
-            <div className="mx-2">
-              <p className="text-sm">About</p>
+            <div className="mx-8 cursor-pointer group">
+              <p className="text-sm text-white transition-all duration-300 group-hover:text-[#F87B1B] group-hover:-translate-y-1">
+                About
+              </p>
+              <div className="h-0.5 w-0 bg-[#F87B1B] transition-all duration-300 group-hover:w-full"></div>
             </div>
-            <div>
-              <p className="text-sm">Contact</p>
+            <div className="cursor-pointer group">
+              <p className="text-sm text-white transition-all duration-300 group-hover:text-[#F87B1B] group-hover:-translate-y-1">
+                Contact
+              </p>
+              <div className="h-0.5 w-0 bg-[#F87B1B] transition-all duration-300 group-hover:w-full"></div>
             </div>
           </div>
         </div>
