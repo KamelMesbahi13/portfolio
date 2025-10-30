@@ -1,9 +1,9 @@
-import BackgroundHomePage from "./BackgroundHomePage/BackgroundHomePage";
+import HeroSectionHomePage from "./HeroSectionHomePage/HeroSectionHomePage";
 
 const Home = () => {
   return (
     <div>
-      <BackgroundHomePage />
+      <HeroSectionHomePage />
     </div>
   );
 };
