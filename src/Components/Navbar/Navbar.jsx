@@ -2,7 +2,7 @@ import Logo from "../../assets/kmLogowhite.png";
 
 const Navbar = () => {
   return (
-    <div className="backone">
+    <div>
       <div className="container">
         <div className="flex items-center justify-between text-white border-b border-white ">
           <div>

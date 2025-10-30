@@ -25,9 +25,8 @@ h6 {
 }
 
 .backone {
-  background-image: url(../src/assets/backtwo.jpeg);
-  background-position: center center;
+  background-image: url(../src/assets/backtwo.jpg);
   background-size: cover;
-  background-attachment: scroll;
+  background-attachment: fixed;
   height: 50rem;
 }
