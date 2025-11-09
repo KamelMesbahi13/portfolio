@@ -1,9 +1,11 @@
-import HeroSectionHomePage from "./HeroSectionHomePage/HeroSectionHomePage";
+import Card from "./Card/Card";
+import HeroFirstContent from "./HeroFirstContent/HeroFirstContent";
+import PorfolioPage from "./PorfolioPage/PorfolioPage";
 
 const Home = () => {
   return (
     <div>
-      <HeroSectionHomePage />
+      <PorfolioPage />
     </div>
   );
 };

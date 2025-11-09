@@ -26,6 +26,8 @@
 body {
   font-family: "Montserrat", sans-serif;
   height: 1000vh;
+  background-color: #151312;
+  color: white;
 }
 
 h1,
