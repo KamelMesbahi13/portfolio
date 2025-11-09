@@ -18,10 +18,12 @@ const Card = () => {
           <div className="absolute w-20 h-20 border-2 border-dashed rounded-full border-secondColor -top-4 -right-4"></div>
         </div>
         {/* Name */}
-        <p className="mb-4 text-4xl font-semibold text-black">Mesbahi Kamel</p>
+        <p className="mb-4 text-2xl font-semibold text-black md:text-4xl">
+          Mesbahi Kamel
+        </p>
 
         <div>
-          <p className="text-black">
+          <p className="text-sm text-black md:text-base">
             A Software Engineer who has developed countless innovative
             solutions.
           </p>
