@@ -1,4 +1,4 @@
-import Logo from "../../../assets/kmLogowhite.png";
+import mypic from "../../../assets/mypic.png";
 
 const Card = () => {
   return (
@@ -9,7 +9,7 @@ const Card = () => {
           <div className="overflow-hidden bg-secondColor aspect-square rounded-2xl">
             {/* Replace this with actual image */}
             <img
-              src={Logo}
+              src={mypic}
               alt="Profile"
               className="object-cover w-full h-full"
             />

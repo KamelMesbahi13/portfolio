@@ -19,13 +19,11 @@ export default function AnimatedNavbar() {
         className="px-6 py-3 shadow-lg rounded-2xl"
         style={{ backgroundColor: "#1C1A19" }}
       >
-        <div className="flex items-center gap-6">
-          {/* Logo Section */}
+        <div className="flex items-center gap-2 md:gap-6">
           <div className="pr-4 border-r border-gray-700">
-            <img src={Logo} alt="Logo" className="w-auto h-10" />
+            <img src={Logo} alt="Logo" className="w-auto h-8 md:h-10" />
           </div>
 
-          {/* Navigation Items */}
           {navItems.map((item, index) => {
             const Icon = item.icon;
             const isHovered = hoveredIndex === index;
@@ -44,7 +42,6 @@ export default function AnimatedNavbar() {
                   />
                 </button>
 
-                {/* Animated label */}
                 <div
                   className={`absolute top-full mt-2 whitespace-nowrap text-xs font-medium transition-all duration-300 ${
                     isHovered
