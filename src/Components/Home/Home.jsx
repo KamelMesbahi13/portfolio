@@ -1,11 +1,11 @@
 import Card from "./Card/Card";
 import HeroFirstContent from "./HeroFirstContent/HeroFirstContent";
-import PorfolioPage from "./PorfolioPage/PorfolioPage";
+import PortfolioPage from "./PortfolioPage/PortfolioPage";
 
 const Home = () => {
   return (
     <div>
-      <PorfolioPage />
+      <PortfolioPage />
     </div>
   );
 };

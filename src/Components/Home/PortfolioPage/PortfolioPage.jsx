@@ -1,7 +1,7 @@
 import Card from "../Card/Card";
 import HeroFirstContent from "../HeroFirstContent/HeroFirstContent";
 
-const PorfolioPage = () => {
+const PortfolioPage = () => {
   return (
     <div className="min-h-screen text-white">
       {/* Main Content */}
@@ -23,4 +23,4 @@ const PorfolioPage = () => {
   );
 };
 
-export default PorfolioPage;
+export default PortfolioPage;

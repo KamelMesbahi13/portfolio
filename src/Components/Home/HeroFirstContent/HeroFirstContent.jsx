@@ -5,10 +5,10 @@ const HeroFirstContent = () => {
         {/* Large stacked text */}
         <div className="mb-8">
           <div className="flex flex-col -space-y-4 leading-none">
-            <div className="text-7xl md:text-8xl lg:text-9xl xl:text-[12rem] font-black tracking-tighter">
+            <div className="text-4xl md:text-5xl lg:text-6xl xl:text-[10rem] font-black tracking-tighter">
               <span className="text-white">SOFTWARE</span>
             </div>
-            <div className="text-7xl md:text-8xl lg:text-9xl xl:text-[12rem] font-black tracking-tighter">
+            <div className="text-4xl md:text-5xl lg:text-9xl xl:text-[10rem] font-black tracking-tighter">
               <span className="text-gray-800">ENGINEER</span>
             </div>
           </div>
