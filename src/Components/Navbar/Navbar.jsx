@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Home, Folder, Briefcase, Wrench, Mail } from "lucide-react";
 import Logo from "../../assets/kmLogowhite.png";
 

@@ -1,3 +1,5 @@
+import Logo from "../../../assets/kmLogowhite.png";
+
 const Card = () => {
   return (
     <div className="w-full lg:sticky lg:top-32 h-fit">
@@ -7,7 +9,7 @@ const Card = () => {
           <div className="overflow-hidden bg-secondColor aspect-square rounded-2xl">
             {/* Replace this with actual image */}
             <img
-              src="/api/placeholder/400/400"
+              src={Logo}
               alt="Profile"
               className="object-cover w-full h-full"
             />
