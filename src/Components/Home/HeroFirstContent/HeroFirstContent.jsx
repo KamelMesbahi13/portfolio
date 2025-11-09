@@ -5,7 +5,7 @@ const HeroFirstContent = () => {
         {/* Large stacked text */}
         <div className="mb-8">
           <div className="flex flex-col -space-y-4 leading-none">
-            <div className="text-2xl md:text-3xl lg:text-4xl xl:text-[8rem] font-black tracking-tighter">
+            <div className="text-3xl md:text-3xl lg:text-4xl xl:text-[8rem] font-black tracking-tighter">
               <span className="text-white">SOFTWARE</span>
             </div>
             <div className="text-2xl md:text-3xl !mt-10 lg:text-4xl xl:text-[8rem] font-black tracking-tighter">

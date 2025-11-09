@@ -4,10 +4,8 @@ const Card = () => {
   return (
     <div className="w-full lg:sticky lg:top-32 h-fit">
       <div className="p-6 bg-white shadow-2xl rounded-3xl">
-        {/* Profile Image with orange background */}
         <div className="relative mb-6">
           <div className="overflow-hidden bg-secondColor aspect-square rounded-2xl">
-            {/* Replace this with actual image */}
             <img
               src={mypic}
               alt="Profile"
