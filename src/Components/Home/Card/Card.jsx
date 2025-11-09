@@ -2,7 +2,7 @@ import mypic from "../../../assets/mypic.png";
 
 const Card = () => {
   return (
-    <div className="w-full lg:sticky lg:top-32 h-fit">
+    <div className="w-full mb-4 lg:sticky md:mb-0 lg:top-32 h-fit">
       <div className="p-6 bg-white shadow-2xl rounded-3xl">
         <div className="relative mb-6">
           <div className="overflow-hidden bg-secondColor aspect-square rounded-2xl">
