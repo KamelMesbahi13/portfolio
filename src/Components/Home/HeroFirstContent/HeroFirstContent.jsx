@@ -3,13 +3,13 @@ const HeroFirstContent = () => {
     <div className="space-y-12">
       <div>
         {/* Large stacked text */}
-        <div className="mb-8">
+        <div className="mb-4 md:mb-8">
           <div className="flex flex-col -space-y-4 leading-none">
-            <div className="text-3xl md:text-3xl lg:text-4xl xl:text-[8rem] font-black tracking-tighter">
-              <span className="text-white">SOFTWARE</span>
+            <div className="text-5xl md:text-6xl lg:text-6xl xl:text-[6rem] font-black tracking-tighter">
+              <span className="text-white">WEB</span>
             </div>
-            <div className="text-2xl md:text-3xl !mt-10 lg:text-4xl xl:text-[8rem] font-black tracking-tighter">
-              <span className="text-gray-800">ENGINEER</span>
+            <div className="text-5xl !-mt-[10px] md:text-6xl lg:text-6xl xl:text-[6rem] font-black tracking-tighter">
+              <span className="text-gray-800">DEVELOPER</span>
             </div>
           </div>
         </div>
