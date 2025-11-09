@@ -23,7 +23,7 @@ const HeroFirstContent = () => {
       {/* Stats Section */}
       <div className="grid grid-cols-3 gap-6 pt-12 lg:gap-12">
         <div>
-          <div className="mb-2 text-5xl font-black text-white lg:text-7xl">
+          <div className="mb-2 text-4xl font-black text-white md:text-5xl lg:text-7xl">
             +12
           </div>
           <div className="text-xs font-medium tracking-wide text-gray-500 uppercase lg:text-sm">
@@ -33,7 +33,7 @@ const HeroFirstContent = () => {
           </div>
         </div>
         <div>
-          <div className="mb-2 text-5xl font-black text-white lg:text-7xl">
+          <div className="mb-2 text-4xl font-black text-white md:text-5xl lg:text-7xl">
             +46
           </div>
           <div className="text-xs font-medium tracking-wide text-gray-500 uppercase lg:text-sm">
@@ -43,7 +43,7 @@ const HeroFirstContent = () => {
           </div>
         </div>
         <div>
-          <div className="mb-2 text-5xl font-black text-white lg:text-7xl">
+          <div className="mb-2 text-4xl font-black text-white md:text-5xl lg:text-7xl">
             +20
           </div>
           <div className="text-xs font-medium tracking-wide text-gray-500 uppercase lg:text-sm">
