@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Home, Folder, Briefcase, Wrench, Mail } from "lucide-react";
+import Logo from "../../assets/kmLogowhite.png";
 
 export default function AnimatedNavbar() {
   const [hoveredIndex, setHoveredIndex] = useState(null);
@@ -19,6 +20,12 @@ export default function AnimatedNavbar() {
         style={{ backgroundColor: "#1C1A19" }}
       >
         <div className="flex items-center gap-6">
+          {/* Logo Section */}
+          <div className="pr-4 border-r border-gray-700">
+            <img src={Logo} alt="Logo" className="w-auto h-10" />
+          </div>
+
+          {/* Navigation Items */}
           {navItems.map((item, index) => {
             const Icon = item.icon;
             const isHovered = hoveredIndex === index;

@@ -17,15 +17,15 @@
 }
 
 .container {
-  padding-left: 1rem;
-  padding-right: 1rem;
+  padding-left: 4rem;
+  padding-right: 4rem;
   margin-left: auto;
   margin-right: auto;
 }
 
 body {
   font-family: "Montserrat", sans-serif;
-  height: 1000vh;
+  /* height: 1000vh; */
   background-color: #151312;
   color: white;
 }
