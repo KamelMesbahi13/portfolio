@@ -157,11 +157,11 @@ const RecentWork = () => {
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
 
               <div className="absolute inset-0 flex flex-col justify-between p-8 text-white">
-                <div>
+                <div className="relative -translate-y-1/2 top-1/2">
                   <p className="text-xs font-semibold tracking-[0.1em] opacity-80 mb-3">
                     {project.category}
                   </p>
-                  <h2 className="max-w-md text-2xl font-bold leading-tight md:text-4xl">
+                  <h2 className="max-w-md text-xl font-bold leading-tight md:text-4xl">
                     {project.title}
                   </h2>
                 </div>
@@ -237,13 +237,12 @@ const RecentWork = () => {
                     <p className="text-xs font-semibold tracking-[0.2em] opacity-90 mb-3">
                       {selectedCard.category}
                     </p>
-                    <h2 className="mb-4 text-4xl font-bold leading-tight md:text-5xl">
+                    <h2 className="mb-4 text-3xl font-bold leading-tight md:text-5xl">
                       {selectedCard.title}
                     </h2>
                   </div>
                 </div>
 
-                {/* Content Section */}
                 <div
                   className="p-8 md:p-12"
                   style={{
@@ -256,7 +255,6 @@ const RecentWork = () => {
                     {selectedCard.description}
                   </p>
 
-                  {/* Tech Stack */}
                   <div className="mb-8">
                     <h3 className="mb-4 text-sm font-semibold tracking-wider text-gray-500 uppercase">
                       Technologies Used
@@ -280,7 +278,6 @@ const RecentWork = () => {
                     </div>
                   </div>
 
-                  {/* Features */}
                   <div className="mb-8">
                     <h3 className="mb-4 text-sm font-semibold tracking-wider text-gray-500 uppercase">
                       Key Features
