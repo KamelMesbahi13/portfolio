@@ -15,8 +15,8 @@ const HeroFirstContent = () => {
         </div>
 
         <p className="max-w-xl text-base leading-relaxed text-gray-400 lg:text-lg">
-          Passionate about creating intuitive and engaging user experiences.
-          Specialize in transforming ideas into beautifully crafted products.
+          "Full-stack MERN developer dedicated to crafting efficient, scalable,
+          and visually appealing web solutions that bring ideas to life."
         </p>
       </div>
 
@@ -24,7 +24,7 @@ const HeroFirstContent = () => {
       <div className="grid grid-cols-3 gap-6 pt-0 md:pt-12 lg:gap-12">
         <div>
           <div className="mb-2 text-4xl font-black text-white md:text-5xl lg:text-7xl">
-            +12
+            +4
           </div>
           <div className="text-xs font-medium tracking-wide text-gray-500 uppercase lg:text-sm">
             YEARS OF
@@ -34,7 +34,7 @@ const HeroFirstContent = () => {
         </div>
         <div>
           <div className="mb-2 text-4xl font-black text-white md:text-5xl lg:text-7xl">
-            +46
+            +30
           </div>
           <div className="text-xs font-medium tracking-wide text-gray-500 uppercase lg:text-sm">
             PROJECTS
@@ -44,10 +44,10 @@ const HeroFirstContent = () => {
         </div>
         <div>
           <div className="mb-2 text-4xl font-black text-white md:text-5xl lg:text-7xl">
-            +20
+            +25
           </div>
           <div className="text-xs font-medium tracking-wide text-gray-500 uppercase lg:text-sm">
-            WORLDWIDE
+            Satisfied
             <br />
             CLIENTS
           </div>

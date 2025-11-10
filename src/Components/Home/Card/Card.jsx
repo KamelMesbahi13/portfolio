@@ -13,10 +13,7 @@ const Card = () => {
             />
           </div>
           {/* Decorative dashed line */}
-          <div
-            className="absolute w-20 h-20 border-2 border-dashed rounded-full border-secondColor -top-4 -right-4"
-            style={{ animation: "spin 6s linear infinite" }}
-          ></div>{" "}
+          <div className="absolute w-20 h-20 border-2 border-dashed rounded-full border-secondColor -top-4 -right-4 animate-spin [animation-duration:6s]"></div>
         </div>
         {/* Name */}
         <p className="mb-4 text-2xl font-semibold text-black md:text-4xl">
