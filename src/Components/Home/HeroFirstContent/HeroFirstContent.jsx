@@ -31,7 +31,6 @@ const HeroFirstContent = () => {
   return (
     <div className="space-y-4">
       <div>
-        {/* Large stacked text */}
         <div className="mb-3 md:mb-8">
           <div className="flex flex-col -space-y-4 leading-none">
             <div className="text-5xl md:text-6xl lg:text-6xl xl:text-[6rem] font-black tracking-tighter">
@@ -49,9 +48,7 @@ const HeroFirstContent = () => {
         </p>
       </div>
 
-      {/* Stats Section */}
       <div className="grid grid-cols-3 gap-6 pt-0 md:pt-0 lg:gap-12">
-        {/* YEARS OF EXPERIENCE */}
         <div>
           <div className="mb-2 text-4xl font-extrabold text-white md:text-5xl lg:text-7xl">
             <p>
@@ -64,7 +61,6 @@ const HeroFirstContent = () => {
           </div>
         </div>
 
-        {/* PROJECTS COMPLETED */}
         <div>
           <div className="mb-2 text-4xl font-extrabold text-white md:text-5xl lg:text-7xl">
             <p>
@@ -77,7 +73,6 @@ const HeroFirstContent = () => {
           </div>
         </div>
 
-        {/* SATISFIED CLIENTS */}
         <div>
           <div className="mb-2 text-4xl font-extrabold text-white md:text-5xl lg:text-7xl">
             <p>
