@@ -31,7 +31,7 @@ const HeroFirstContent = () => {
   return (
     <div className="space-y-4">
       <div>
-        <div className="mb-3 md:mb-8">
+        <div className="mb-3 md:mb-4">
           <div className="flex flex-col -space-y-4 leading-none">
             <div className="text-5xl md:text-6xl lg:text-6xl xl:text-[6rem] font-black tracking-tighter">
               <span className="text-white">WEB</span>
@@ -41,11 +41,12 @@ const HeroFirstContent = () => {
             </div>
           </div>
         </div>
-
-        <p className="max-w-xl text-base leading-relaxed text-gray-400 lg:text-lg">
-          Full-stack MERN developer dedicated to crafting efficient, scalable,
-          and visually appealing web solutions that bring ideas to life.
-        </p>
+        <div>
+          <p className="max-w-xl text-base leading-relaxed text-gray-400 lg:text-lg">
+            Full-stack MERN developer dedicated to crafting efficient, scalable,
+            and visually appealing web solutions that bring ideas to life.
+          </p>
+        </div>
       </div>
 
       <div className="grid grid-cols-3 gap-6 pt-0 md:pt-0 lg:gap-12">
