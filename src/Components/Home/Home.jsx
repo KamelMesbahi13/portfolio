@@ -1,7 +1,7 @@
 // eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
 import PortfolioPage from "./PortfolioPage/PortfolioPage";
-import FeaturedWork from "./FeaturedWork/FeaturedWork";
+import RecentWork from "./RecentWork/RecentWork";
 
 const Home = () => (
   <div>
@@ -13,7 +13,7 @@ const Home = () => (
     >
       <PortfolioPage />
     </motion.div>
-    <FeaturedWork />
+    <RecentWork />
   </div>
 );
 
