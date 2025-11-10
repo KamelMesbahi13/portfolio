@@ -8,7 +8,7 @@ const HeroFirstContent = () => {
             <div className="text-5xl md:text-6xl lg:text-6xl xl:text-[6rem] font-black tracking-tighter">
               <span className="text-white">WEB</span>
             </div>
-            <div className="text-5xl !-mt-[10px] md:text-6xl lg:text-6xl xl:text-[6rem] font-black tracking-tighter">
+            <div className="text-5xl md:!-mt-[40px] !-mt-[20px] md:text-6xl lg:text-6xl xl:text-[6rem] font-black tracking-tighter">
               <span className="text-gray-800">DEVELOPER</span>
             </div>
           </div>
