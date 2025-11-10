@@ -29,7 +29,7 @@ const Counter = ({ from = 0, to, duration = 2 }) => {
 
 const HeroFirstContent = () => {
   return (
-    <div className="space-y-4">
+    <div className="container space-y-4">
       <div>
         <div className="mb-3 md:mb-4">
           <div className="flex flex-col -space-y-4 leading-none">
