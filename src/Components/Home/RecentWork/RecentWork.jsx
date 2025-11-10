@@ -201,7 +201,6 @@ const RecentWork = () => {
               }}
             >
               <div className="bg-white rounded-[32px] overflow-hidden shadow-2xl max-h-[90vh] overflow-y-auto">
-                {/* Hero Image Section */}
                 <div className="relative h-[400px] md:h-[500px]">
                   <img
                     src={selectedCard.image}
