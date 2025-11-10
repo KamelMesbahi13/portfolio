@@ -130,7 +130,7 @@ const RecentWork = () => {
     <div className="min-h-screen mt-12">
       <div className="container py-12 max-w-7xl md:py-16">
         <div className="mb-12 text-center text-white">
-          <h1 className="mb-3 text-5xl font-bold md:text-6xl">Recent Work</h1>
+          <h1 className="mb-3 text-4xl font-bold md:text-6xl">Recent Work</h1>
           <p className="text-lg">MERN Stack Projects</p>
         </div>
 
@@ -140,7 +140,7 @@ const RecentWork = () => {
               key={project.id}
               ref={(el) => (cardRefs.current[project.id] = el)}
               onClick={() => handleCardClick(project)}
-              className={`relative h-[500px] rounded-[28px] overflow-hidden cursor-pointer group transition-all duration-300 ${
+              className={`relative h-[350px] md:h-[500px] rounded-[28px] overflow-hidden cursor-pointer group transition-all duration-300 ${
                 selectedCard?.id === project.id
                   ? "opacity-0"
                   : "hover:scale-[0.98]"
@@ -158,10 +158,10 @@ const RecentWork = () => {
 
               <div className="absolute inset-0 flex flex-col justify-between p-8 text-white">
                 <div>
-                  <p className="text-xs font-semibold tracking-[0.2em] opacity-80 mb-3">
+                  <p className="text-xs font-semibold tracking-[0.1em] opacity-80 mb-3">
                     {project.category}
                   </p>
-                  <h2 className="max-w-md text-3xl font-bold leading-tight md:text-4xl">
+                  <h2 className="max-w-md text-2xl font-bold leading-tight md:text-4xl">
                     {project.title}
                   </h2>
                 </div>
