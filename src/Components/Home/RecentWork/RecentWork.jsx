@@ -212,7 +212,7 @@ const RecentWork = () => {
 
                   <button
                     onClick={handleClose}
-                    className="absolute z-10 flex items-center justify-center w-12 h-12 text-white transition-all duration-200 rounded-full top-6 right-6 bg-white/20 backdrop-blur-md hover:bg-white/30"
+                    className="absolute z-10 flex items-center justify-center w-12 h-12 transition-all duration-200 rounded-full text-secondColor top-6 right-6 hover:bg-white/30"
                   >
                     <svg
                       width="20"
@@ -253,7 +253,7 @@ const RecentWork = () => {
                       : "none",
                   }}
                 >
-                  <p className="mb-8 text-lg leading-relaxed text-gray-700">
+                  <p className="mb-8 text-lg leading-relaxed text-mainColor">
                     {selectedCard.description}
                   </p>
 
@@ -299,8 +299,8 @@ const RecentWork = () => {
                               : "none",
                           }}
                         >
-                          <div className="w-2 h-2 bg-gray-800 rounded-full" />
-                          <span className="text-gray-700">{feature}</span>
+                          <div className="w-2 h-2 rounded-full bg-mainColor" />
+                          <span className="text-mainColor">{feature}</span>
                         </div>
                       ))}
                     </div>
@@ -323,7 +323,7 @@ const RecentWork = () => {
                     </a>
                     <a
                       href={selectedCard.live}
-                      className="flex-1 py-4 font-semibold text-center text-white transition-colors bg-[#0C2B4E] rounded-2xl hover:bg-blue-700"
+                      className="flex-1 py-4 font-semibold text-center text-white transition-colors bg-mainColor rounded-2xl hover:bg-[#0c2b4eea]"
                     >
                       Live Demo
                     </a>
