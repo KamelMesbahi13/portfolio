@@ -29,15 +29,15 @@ const Counter = ({ from = 0, to, duration = 2 }) => {
 
 const HeroFirstContent = () => {
   return (
-    <div className="container space-y-4">
+    <div className="space-y-4 md:container ">
       <div>
         <div className="mb-3 md:mb-4">
           <div className="flex flex-col -space-y-4 leading-none">
-            <div className="text-5xl md:text-6xl lg:text-6xl xl:text-[6rem] font-black tracking-tighter">
-              <span className="text-white">WEB</span>
+            <div className="text-[2.5rem] md:text-6xl lg:text-6xl xl:text-[6rem] font-black tracking-tighter">
+              <p className="text-white">WEB</p>
             </div>
-            <div className="text-5xl md:!-mt-[40px] !-mt-[20px] md:text-6xl lg:text-6xl xl:text-[6rem] font-black tracking-tighter">
-              <span className="text-gray-800">DEVELOPER</span>
+            <div className="text-[2.5rem] md:!-mt-[40px] !-mt-[20px] md:text-6xl lg:text-6xl xl:text-[6rem] font-black tracking-tighter">
+              <p className="text-gray-800">DEVELOPER</p>
             </div>
           </div>
         </div>
