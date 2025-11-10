@@ -37,7 +37,7 @@ const HeroFirstContent = () => {
               <p className="text-white">WEB</p>
             </div>
             <div className="text-[2.5rem] md:!-mt-[40px] !-mt-[20px] md:text-6xl lg:text-6xl xl:text-[6rem] font-black tracking-tighter">
-              <p className="text-gray-800">DEVELOPER</p>
+              <p className="text-mainColor">DEVELOPER</p>
             </div>
           </div>
         </div>

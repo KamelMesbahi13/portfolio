@@ -129,11 +129,9 @@ const RecentWork = () => {
   return (
     <div className="min-h-screen mt-12">
       <div className="container py-12 max-w-7xl md:py-16">
-        <div className="mb-12">
-          <h1 className="mb-3 text-5xl font-bold text-gray-800 md:text-6xl">
-            Recent Work
-          </h1>
-          <p className="text-lg text-gray-600">MERN Stack Projects</p>
+        <div className="mb-12 text-center text-white">
+          <h1 className="mb-3 text-5xl font-bold md:text-6xl">Recent Work</h1>
+          <p className="text-lg">MERN Stack Projects</p>
         </div>
 
         <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
@@ -268,7 +266,7 @@ const RecentWork = () => {
                       {selectedCard.tech.map((tech, i) => (
                         <span
                           key={i}
-                          className="px-4 py-2 text-sm font-medium text-gray-800 bg-gray-100 rounded-full"
+                          className="px-4 py-2 text-sm font-medium rounded-full bg-secondColor"
                           style={{
                             animation: isAnimating
                               ? `fadeInScale 0.4s cubic-bezier(0.22, 1, 0.36, 1) ${
@@ -301,7 +299,7 @@ const RecentWork = () => {
                               : "none",
                           }}
                         >
-                          <div className="w-2 h-2 bg-blue-500 rounded-full" />
+                          <div className="w-2 h-2 bg-gray-800 rounded-full" />
                           <span className="text-gray-700">{feature}</span>
                         </div>
                       ))}
@@ -325,7 +323,7 @@ const RecentWork = () => {
                     </a>
                     <a
                       href={selectedCard.live}
-                      className="flex-1 py-4 font-semibold text-center text-white transition-colors bg-blue-600 rounded-2xl hover:bg-blue-700"
+                      className="flex-1 py-4 font-semibold text-center text-white transition-colors bg-[#0C2B4E] rounded-2xl hover:bg-blue-700"
                     >
                       Live Demo
                     </a>
