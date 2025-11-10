@@ -1,6 +1,6 @@
 const HeroFirstContent = () => {
   return (
-    <div className="space-y-12">
+    <div className="space-y-4">
       <div>
         {/* Large stacked text */}
         <div className="mb-3 md:mb-8">
@@ -21,35 +21,32 @@ const HeroFirstContent = () => {
       </div>
 
       {/* Stats Section */}
-      <div className="grid grid-cols-3 gap-6 pt-0 md:pt-12 lg:gap-12">
+      <div className="grid grid-cols-3 gap-6 pt-0 md:pt-0 lg:gap-12">
         <div>
           <div className="mb-2 text-4xl font-extrabold text-white md:text-5xl lg:text-7xl">
-            +4
+            <p>+4</p>
           </div>
           <div className="text-xs font-medium tracking-wide text-gray-500 uppercase lg:text-sm">
-            YEARS OF
-            <br />
-            EXPERIENCE
+            <p>YEARS OF</p>
+            <p>EXPERIENCE</p>
           </div>
         </div>
         <div>
           <div className="mb-2 text-4xl font-extrabold text-white md:text-5xl lg:text-7xl">
-            +30
+            <p>+30</p>
           </div>
           <div className="text-xs font-medium tracking-wide text-gray-500 uppercase lg:text-sm">
-            PROJECTS
-            <br />
-            COMPLETED
+            <p>PROJECTS</p>
+            <p>COMPLETED</p>
           </div>
         </div>
         <div>
           <div className="mb-2 text-4xl font-extrabold text-white md:text-5xl lg:text-7xl">
-            +25
+            <p>+25</p>
           </div>
           <div className="text-xs font-medium tracking-wide text-gray-500 uppercase lg:text-sm">
-            Satisfied
-            <br />
-            CLIENTS
+            <p>Satisfied</p>
+            <p>CLIENTS</p>
           </div>
         </div>
       </div>
