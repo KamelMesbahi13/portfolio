@@ -131,7 +131,6 @@ const RecentWork = () => {
       <div className="container py-12 max-w-7xl md:py-16">
         <div className="mb-12 text-center text-white">
           <h1 className="mb-3 text-4xl font-bold md:text-6xl">Recent Work</h1>
-          <p className="text-lg">MERN Stack Projects</p>
         </div>
 
         <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
@@ -227,7 +226,7 @@ const RecentWork = () => {
                   </button>
 
                   <div
-                    className="absolute inset-0 flex flex-col justify-end p-8 text-white md:p-12"
+                    className="absolute inset-0 flex flex-col justify-end p-8 text-white md:px-12"
                     style={{
                       animation: isAnimating
                         ? "fadeInUp 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.2s backwards"
@@ -261,7 +260,7 @@ const RecentWork = () => {
                     </h3>
                     <div className="flex flex-wrap gap-2">
                       {selectedCard.tech.map((tech, i) => (
-                        <span
+                        <p
                           key={i}
                           className="px-4 py-2 text-sm font-medium rounded-full bg-secondColor"
                           style={{
@@ -273,7 +272,7 @@ const RecentWork = () => {
                           }}
                         >
                           {tech}
-                        </span>
+                        </p>
                       ))}
                     </div>
                   </div>
@@ -296,7 +295,7 @@ const RecentWork = () => {
                           }}
                         >
                           <div className="w-2 h-2 rounded-full bg-mainColor" />
-                          <span className="text-mainColor">{feature}</span>
+                          <span className="text-gray-700">{feature}</span>
                         </div>
                       ))}
                     </div>
