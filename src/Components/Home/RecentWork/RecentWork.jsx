@@ -1,4 +1,5 @@
-import React, { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
+import projectNumOne from "../../../../src/assets/projectnumone.png";
 
 const RecentWork = () => {
   const [selectedCard, setSelectedCard] = useState(null);
@@ -11,8 +12,7 @@ const RecentWork = () => {
       id: 1,
       category: "E-COMMERCE",
       title: "Full-Stack Online Shopping Platform",
-      image:
-        "https://images.unsplash.com/photo-1557821552-17105176677c?w=800&q=80",
+      image: projectNumOne,
       description:
         "A complete e-commerce solution with product management, shopping cart, secure checkout, and payment integration.",
       tech: ["React", "Node.js", "MongoDB", "Stripe", "Redux", "Express.js"],
@@ -78,8 +78,7 @@ const RecentWork = () => {
       id: 4,
       category: "ENTERTAINMENT",
       title: "Video Streaming Platform",
-      image:
-        "https://images.unsplash.com/photo-1574375927938-d5a98e8ffe85?w=800&q=80",
+      image: "",
       description:
         "A Netflix-style streaming platform with video playback, user subscriptions, and content management.",
       tech: ["React", "Node.js", "MongoDB", "AWS S3", "Video.js", "Stripe"],
@@ -129,8 +128,8 @@ const RecentWork = () => {
   return (
     <div className="min-h-screen mt-12">
       <div className="container py-12 max-w-7xl md:py-16">
-        <div className="mb-12 text-center text-white">
-          <h1 className="mb-3 text-4xl font-bold heading-gradient md:text-6xl">
+        <div className="mb-8 text-center text-white md:mb-16">
+          <h1 className="text-4xl font-bold heading-gradient md:text-6xl">
             Recent Work
           </h1>
         </div>
@@ -153,7 +152,7 @@ const RecentWork = () => {
               <img
                 src={project.image}
                 alt={project.title}
-                className="absolute inset-0 object-cover w-full h-full"
+                className="absolute inset-0 object-contain w-full h-full"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
 
@@ -206,7 +205,7 @@ const RecentWork = () => {
                   <img
                     src={selectedCard.image}
                     alt={selectedCard.title}
-                    className="object-cover w-full h-full"
+                    className="object-contain w-full h-full"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
 
