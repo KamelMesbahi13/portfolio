@@ -1,5 +1,8 @@
 import { useState, useEffect, useRef } from "react";
 import projectNumOne from "../../../../src/assets/projectnumone.jpeg";
+import projectNumTwo from "../../../../src/assets/projectnumtwo.jpeg";
+import projectNumThree from "../../../../src/assets/projectnumthree.jpeg";
+import projectNumFour from "../../../../src/assets/projectnumfour.jpeg";
 
 const RecentWork = () => {
   const [selectedCard, setSelectedCard] = useState(null);
@@ -31,8 +34,7 @@ const RecentWork = () => {
       id: 2,
       category: "SOCIAL MEDIA",
       title: "Real-Time Social Networking App",
-      image:
-        "https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=800&q=80",
+      image: projectNumTwo,
       description:
         "A social media platform with real-time messaging, posts, likes, comments, and user profiles.",
       tech: ["React", "Socket.io", "Node.js", "MongoDB", "JWT", "Cloudinary"],
@@ -51,8 +53,7 @@ const RecentWork = () => {
       id: 3,
       category: "PRODUCTIVITY",
       title: "Task Management & Collaboration Tool",
-      image:
-        "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&q=80",
+      image: projectNumThree,
       description:
         "A project management application with team collaboration, task tracking, and deadline management.",
       tech: [
@@ -78,7 +79,7 @@ const RecentWork = () => {
       id: 4,
       category: "ENTERTAINMENT",
       title: "Video Streaming Platform",
-      image: "",
+      image: projectNumFour,
       description:
         "A Netflix-style streaming platform with video playback, user subscriptions, and content management.",
       tech: ["React", "Node.js", "MongoDB", "AWS S3", "Video.js", "Stripe"],
