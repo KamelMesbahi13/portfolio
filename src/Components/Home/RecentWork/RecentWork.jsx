@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import projectNumOne from "../../../../src/assets/projectnumone.png";
+import projectNumOne from "../../../../src/assets/projectnumone.jpeg";
 
 const RecentWork = () => {
   const [selectedCard, setSelectedCard] = useState(null);
@@ -152,9 +152,9 @@ const RecentWork = () => {
               <img
                 src={project.image}
                 alt={project.title}
-                className="absolute inset-0 object-contain w-full h-full"
+                className="absolute inset-0 object-cover w-full h-full"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
 
               <div className="absolute inset-0 flex flex-col justify-between p-8 text-white">
                 <div className="relative -translate-y-1/2 top-1/2">
