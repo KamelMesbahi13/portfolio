@@ -141,7 +141,7 @@ const RecentWork = () => {
               key={project.id}
               ref={(el) => (cardRefs.current[project.id] = el)}
               onClick={() => handleCardClick(project)}
-              className={`relative h-[350px] md:h-[500px] rounded-[28px] overflow-hidden cursor-pointer group transition-all duration-300 ${
+              className={`relative h-[280px] md:h-[380px] rounded-[24px] overflow-hidden cursor-pointer group transition-all duration-300 ${
                 selectedCard?.id === project.id
                   ? "opacity-0"
                   : "hover:scale-[0.98]"
