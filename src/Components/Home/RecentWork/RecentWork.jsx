@@ -218,9 +218,7 @@ const RecentWork = () => {
     <div className="min-h-screen mt-12">
       <div className="container py-12 max-w-7xl md:py-16">
         <div className="mb-8 text-center text-white md:mb-16">
-          <h1 className="text-4xl font-bold heading-gradient md:text-6xl">
-            Recent Work
-          </h1>
+          <h1>Recent Work</h1>
         </div>
 
         <div className="grid grid-cols-1 gap-5 md:grid-cols-2">

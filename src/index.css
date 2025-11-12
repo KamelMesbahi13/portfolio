@@ -4,7 +4,7 @@
 
 @layer components {
   h1 {
-    @apply mb-4 text-2xl font-bold md:font-bold md:text-5xl;
+    @apply mb-4 text-4xl font-bold md:font-bold heading-gradient md:text-6xl;
   }
 
   h2 {

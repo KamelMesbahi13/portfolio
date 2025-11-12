@@ -98,26 +98,17 @@ const MyQualityServices = () => {
   const { ref, show } = useReveal();
 
   return (
-    <section
-      id="services"
-      className="relative bg-[#0B0B10] text-white py-20 md:py-28"
-    >
-      {/* top glow line */}
-      <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#F87B1B]/45 to-transparent" />
+    <section id="services" className="relative py-20 text-white md:py-28">
+      <div className="absolute inset-x-0 top-0 h-px pointer-events-none bg-gradient-to-r from-transparent via-secondColor/45 to-transparent" />
 
       <div className="max-w-6xl px-6 mx-auto">
-        {/* Heading */}
         <div
           ref={ref}
           className={`text-center transition-all duration-700 ${
             show ? "opacity-100 translate-y-0" : "opacity-0 translate-y-3"
           }`}
         >
-          <h2 className="text-4xl font-extrabold tracking-tight md:text-6xl">
-            <span className="bg-gradient-to-r from-[#F87B1B] to-[#0C2B4E] bg-clip-text text-transparent">
-              My Quality Services
-            </span>
-          </h2>
+          <h1>My Quality Services</h1>
           <p className="max-w-3xl mx-auto mt-4 text-base md:text-lg text-white/70">
             We put your ideas and thus your wishes in the form of a unique web
             project that inspires you and your customers.
@@ -135,7 +126,7 @@ const MyQualityServices = () => {
               >
                 {/* brand gradient on hover / active */}
                 <div
-                  className={`absolute inset-0 bg-gradient-to-r from-[#0C2B4E] to-[#F87B1B] transition-opacity duration-300 ${
+                  className={`absolute inset-0 bg-gradient-to-r from-mainColor to-secondColor transition-opacity duration-300 ${
                     isOpen ? "opacity-100" : "opacity-0 group-hover:opacity-100"
                   }`}
                 />
@@ -190,7 +181,7 @@ const MyQualityServices = () => {
                     <ul className="grid gap-2 mt-2 text-sm md:text-base text-white/90 md:grid-cols-2">
                       {s.details.map((d, idx) => (
                         <li key={idx} className="flex items-start gap-2">
-                          <span className="mt-1 inline-block h-1.5 w-1.5 rounded-full bg-[#F87B1B]" />
+                          <span className="mt-1 inline-block h-1.5 w-1.5 rounded-full bg-secondColor" />
                           <span>{d}</span>
                         </li>
                       ))}
