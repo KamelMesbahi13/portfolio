@@ -1,4 +1,6 @@
 import { useEffect, useRef, useState } from "react";
+// eslint-disable-next-line no-unused-vars
+import { motion } from "framer-motion";
 
 const services = [
   {
@@ -59,7 +61,6 @@ const services = [
   },
 ];
 
-// Fade-up on scroll
 const useReveal = () => {
   const ref = useRef(null);
   const [show, setShow] = useState(false);
@@ -78,23 +79,273 @@ const useReveal = () => {
   return { ref, show };
 };
 
-const ArrowIcon = ({ open }) => (
-  <svg
-    viewBox="0 0 24 24"
-    className={`h-5 w-5 transition-transform duration-300 ${
-      open ? "rotate-45 translate-x-0.5 -translate-y-0.5" : ""
-    }`}
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="2"
-  >
-    <path d="M7 17L17 7" />
-    <path d="M7 7h10v10" />
-  </svg>
-);
+const ServiceCard = ({ service, index, isOpen, onToggle }) => {
+  const [isHovered, setIsHovered] = useState(false);
+  const isActive = isHovered || isOpen;
+  const isHoveredAndOpen = isHovered && isOpen;
+
+  return (
+    <motion.li
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay: index * 0.1, duration: 0.5 }}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      className="relative"
+    >
+      <motion.div
+        animate={{
+          y: isActive ? -4 : 0,
+        }}
+        transition={{ type: "spring", stiffness: 300, damping: 30 }}
+        className="relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.02] backdrop-blur-sm"
+      >
+        {/* Background overlay - stronger when hovered and open */}
+        <motion.div
+          className="absolute inset-0 bg-gradient-to-br from-mainColor/10 via-mainColor/5 to-transparent"
+          animate={{
+            opacity: isActive ? 1 : 0,
+          }}
+          transition={{ duration: 0.4 }}
+        />
+
+        {/* Main color background - shows when open, stronger when hovered */}
+        <motion.div
+          className="absolute inset-0"
+          style={{ backgroundColor: "#0C2B4E" }}
+          animate={{
+            opacity: isOpen ? (isHoveredAndOpen ? 0.4 : 0.25) : 0,
+          }}
+          transition={{ duration: 0.4 }}
+        />
+
+        {/* Subtle border glow */}
+        <motion.div
+          className="absolute inset-0 rounded-2xl"
+          animate={{
+            boxShadow: isActive
+              ? "inset 0 0 0 1px rgba(255, 255, 255, 0.1), 0 10px 40px -10px rgba(0, 0, 0, 0.4)"
+              : "inset 0 0 0 1px rgba(255, 255, 255, 0.05), 0 0 0 0 rgba(0, 0, 0, 0)",
+          }}
+          transition={{ duration: 0.3 }}
+        />
+
+        <button
+          onClick={onToggle}
+          className="relative w-full px-6 text-left py-7 sm:px-8 sm:py-8"
+        >
+          <div className="flex items-start justify-between gap-6">
+            <div className="flex-1 space-y-4">
+              {/* Number and line */}
+              <div className="flex items-center gap-4">
+                <motion.span
+                  animate={{
+                    color: isActive
+                      ? "rgba(255,255,255,0.9)"
+                      : "rgba(255,255,255,0.4)",
+                  }}
+                  transition={{ duration: 0.3 }}
+                  className="text-xs font-bold tracking-[0.3em]"
+                >
+                  {service.id}
+                </motion.span>
+                <motion.div
+                  className="flex-1 h-px bg-gradient-to-r from-white/20 to-transparent"
+                  animate={{
+                    scaleX: isActive ? 1 : 0.6,
+                    opacity: isActive ? 0.6 : 0.3,
+                  }}
+                  transition={{ duration: 0.4 }}
+                  style={{ originX: 0 }}
+                />
+              </div>
+
+              {/* Title */}
+              <motion.h3
+                animate={{
+                  x: isActive ? 2 : 0,
+                }}
+                transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                className="text-2xl font-bold md:text-3xl lg:text-4xl"
+              >
+                {service.title}
+              </motion.h3>
+
+              {/* Summary */}
+              <motion.p
+                animate={{
+                  color: isActive
+                    ? "rgba(255,255,255,0.9)"
+                    : "rgba(255,255,255,0.6)",
+                }}
+                transition={{ duration: 0.3 }}
+                className="pr-4 text-sm leading-relaxed md:text-base"
+              >
+                {service.summary}
+              </motion.p>
+            </div>
+
+            {/* Arrow button */}
+            <motion.div
+              animate={{
+                scale: isActive ? 1.05 : 1,
+              }}
+              transition={{ type: "spring", stiffness: 400, damping: 25 }}
+              className="shrink-0"
+            >
+              <motion.div
+                className="flex items-center justify-center border rounded-full h-14 w-14 border-white/20 bg-white/5 backdrop-blur-sm"
+                animate={{
+                  borderColor: isActive
+                    ? "rgba(255,255,255,0.3)"
+                    : "rgba(255,255,255,0.15)",
+                  backgroundColor: isActive
+                    ? "rgba(255,255,255,0.1)"
+                    : "rgba(255,255,255,0.05)",
+                }}
+                transition={{ duration: 0.3 }}
+              >
+                <motion.svg
+                  className="w-6 h-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  strokeWidth={2}
+                  animate={{
+                    rotate: isOpen ? 180 : 0,
+                  }}
+                  transition={{
+                    type: "spring",
+                    stiffness: 200,
+                    damping: 20,
+                  }}
+                >
+                  <motion.path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M19 9l-7 7-7-7"
+                    animate={{
+                      strokeWidth: isActive ? 2.5 : 2,
+                    }}
+                    transition={{ duration: 0.2 }}
+                  />
+                </motion.svg>
+              </motion.div>
+            </motion.div>
+          </div>
+        </button>
+
+        {/* Expandable content */}
+        <motion.div
+          initial={false}
+          animate={{
+            height: isOpen ? "auto" : 0,
+            opacity: isOpen ? 1 : 0,
+          }}
+          transition={{
+            height: {
+              duration: 0.6,
+              ease: [0.32, 0.72, 0, 1],
+            },
+            opacity: {
+              duration: 0.4,
+              delay: isOpen ? 0.1 : 0.1,
+              ease: "easeInOut",
+            },
+          }}
+          className="overflow-hidden"
+        >
+          <div className="px-6 pb-8 sm:px-8">
+            {/* Divider */}
+            <motion.div
+              initial={{ scaleX: 0, opacity: 0 }}
+              animate={{
+                scaleX: isOpen ? 1 : 0,
+                opacity: isOpen ? 1 : 0,
+              }}
+              transition={{
+                scaleX: {
+                  duration: 0.5,
+                  delay: isOpen ? 0.1 : 0,
+                  ease: [0.32, 0.72, 0, 1],
+                },
+                opacity: {
+                  duration: 0.4,
+                  delay: isOpen ? 0.1 : 0,
+                },
+              }}
+              className="h-px mb-6 origin-left bg-gradient-to-r from-white/20 via-white/10 to-transparent"
+            />
+
+            {/* Details list with stagger */}
+            <motion.ul
+              initial="hidden"
+              animate={isOpen ? "visible" : "hidden"}
+              variants={{
+                visible: {
+                  transition: {
+                    staggerChildren: 0.08,
+                    delayChildren: 0.15,
+                  },
+                },
+                hidden: {
+                  transition: {
+                    staggerChildren: 0.06,
+                    staggerDirection: -1,
+                    delayChildren: 0,
+                  },
+                },
+              }}
+              className="space-y-3 md:grid md:grid-cols-2 md:gap-x-8 md:gap-y-3 md:space-y-0"
+            >
+              {service.details.map((detail, idx) => (
+                <motion.li
+                  key={idx}
+                  variants={{
+                    hidden: {
+                      opacity: 0,
+                      x: -8,
+                      transition: {
+                        duration: 0.3,
+                        ease: "easeInOut",
+                      },
+                    },
+                    visible: {
+                      opacity: 1,
+                      x: 0,
+                      transition: {
+                        type: "spring",
+                        stiffness: 300,
+                        damping: 24,
+                      },
+                    },
+                  }}
+                  className="flex items-start gap-3 text-white/90"
+                >
+                  <span className="mt-1.5 block h-1.5 w-1.5 shrink-0 rounded-full bg-secondColor" />
+                  <span className="text-sm md:text-base">{detail}</span>
+                </motion.li>
+              ))}
+            </motion.ul>
+          </div>
+        </motion.div>
+
+        {/* Bottom accent line */}
+        <motion.div
+          className="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-mainColor/50 to-transparent"
+          animate={{
+            opacity: isActive ? 1 : 0,
+            scaleX: isActive ? 1 : 0.8,
+          }}
+          transition={{ duration: 0.4 }}
+        />
+      </motion.div>
+    </motion.li>
+  );
+};
 
 const MyQualityServices = () => {
-  const [open, setOpen] = useState(0);
+  const [open, setOpen] = useState(null);
   const { ref, show } = useReveal();
 
   return (
@@ -102,115 +353,55 @@ const MyQualityServices = () => {
       <div className="absolute inset-x-0 top-0 h-px pointer-events-none bg-gradient-to-r from-transparent via-secondColor/45 to-transparent" />
 
       <div className="max-w-6xl px-6 mx-auto">
-        <div
+        <motion.div
           ref={ref}
-          className={`text-center transition-all duration-700 ${
-            show ? "opacity-100 translate-y-0" : "opacity-0 translate-y-3"
-          }`}
+          initial={{ opacity: 0, y: 20 }}
+          animate={show ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+          transition={{ duration: 0.7 }}
+          className="text-center"
         >
           <h1>My Quality Services</h1>
           <p className="max-w-3xl mx-auto mt-4 text-base md:text-lg text-white/70">
             We put your ideas and thus your wishes in the form of a unique web
             project that inspires you and your customers.
           </p>
-        </div>
+        </motion.div>
 
-        {/* List */}
         <ul className="mt-12 space-y-6 md:mt-16">
-          {services.map((s, i) => {
-            const isOpen = open === i;
-            return (
-              <li
-                key={s.id}
-                className="relative overflow-hidden border group rounded-xl border-white/10"
-              >
-                {/* brand gradient on hover / active */}
-                <div
-                  className={`absolute inset-0 bg-gradient-to-r from-mainColor to-secondColor transition-opacity duration-300 ${
-                    isOpen ? "opacity-100" : "opacity-0 group-hover:opacity-100"
-                  }`}
-                />
-
-                <button
-                  onClick={() => setOpen((prev) => (prev === i ? -1 : i))}
-                  className="relative z-10 w-full px-6 py-6 text-left sm:px-8"
-                >
-                  <div className="flex items-center gap-6">
-                    <span
-                      className={`text-sm font-semibold tracking-widest ${
-                        isOpen ? "text-white/85" : "text-white/60"
-                      }`}
-                    >
-                      {s.id}
-                    </span>
-
-                    <h3 className="text-2xl md:text-[28px] font-extrabold flex-1">
-                      {s.title}
-                    </h3>
-
-                    <span
-                      className={`shrink-0 inline-flex h-10 w-10 items-center justify-center rounded-full transition-all duration-300 ${
-                        isOpen
-                          ? "bg-white/15 text-white"
-                          : "bg-white/5 text-white/70 group-hover:text-white"
-                      }`}
-                      aria-hidden
-                    >
-                      <ArrowIcon open={isOpen} />
-                    </span>
-                  </div>
-
-                  <p
-                    className={`mt-3 text-sm md:text-base transition-colors ${
-                      isOpen ? "text-white/90" : "text-white/70"
-                    }`}
-                  >
-                    {s.summary}
-                  </p>
-
-                  <div className="w-full h-px mt-6 bg-gradient-to-r from-transparent via-white/20 to-transparent" />
-                </button>
-
-                {/* Accordion */}
-                <div
-                  className={`relative z-10 px-6 sm:px-8 pb-6 grid transition-[grid-template-rows] duration-300 ease-out ${
-                    isOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
-                  }`}
-                >
-                  <div className="overflow-hidden">
-                    <ul className="grid gap-2 mt-2 text-sm md:text-base text-white/90 md:grid-cols-2">
-                      {s.details.map((d, idx) => (
-                        <li key={idx} className="flex items-start gap-2">
-                          <span className="mt-1 inline-block h-1.5 w-1.5 rounded-full bg-secondColor" />
-                          <span>{d}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
-              </li>
-            );
-          })}
+          {services.map((service, i) => (
+            <ServiceCard
+              key={service.id}
+              service={service}
+              index={i}
+              isOpen={open === i}
+              onToggle={() => setOpen(open === i ? null : i)}
+            />
+          ))}
         </ul>
       </div>
 
-      {/* optional scroll-to-top */}
-      <a
+      {/* Scroll to top */}
+      <motion.a
         href="#top"
-        className="fixed flex items-center justify-center text-white transition border rounded-full bottom-6 right-6 md:bottom-10 md:right-10 h-11 w-11 bg-white/10 hover:bg-white/20 backdrop-blur-sm border-white/10"
+        whileHover={{ scale: 1.1, y: -2 }}
+        whileTap={{ scale: 0.95 }}
+        className="fixed flex items-center justify-center w-12 h-12 text-white border rounded-full bottom-8 right-8 border-white/20 bg-white/10 backdrop-blur-md"
         aria-label="Scroll to top"
       >
         <svg
-          viewBox="0 0 24 24"
           className="w-5 h-5"
           fill="none"
+          viewBox="0 0 24 24"
           stroke="currentColor"
-          strokeWidth="2"
+          strokeWidth={2}
         >
-          <path d="M12 19V5" />
-          <path d="M5 12l7-7 7 7" />
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M5 15l7-7 7 7"
+          />
         </svg>
-      </a>
+      </motion.a>
     </section>
   );
 };
