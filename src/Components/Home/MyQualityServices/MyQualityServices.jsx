@@ -5,58 +5,93 @@ import { motion } from "framer-motion";
 const services = [
   {
     id: "01",
-    title: "Web Development",
+    title: "Full-Stack Web Development",
     summary:
-      "Conducting qualitative and quantitative research to understand user needs, behaviors, and pain points. Utilizing methods...",
+      "I build fast, scalable, and visually appealing web applications using the MERN stack. From concept to deployment, I turn ideas into high-performing digital products.",
     details: [
-      "Responsive, accessible, and performant builds",
-      "Next.js / React, Tailwind, TypeScript",
-      "API integration and state management",
-      "SEO, SSR/SSG, analytics",
+      "MERN stack (MongoDB, Express, React, Node.js)",
+      "Responsive UI with Tailwind CSS & Bootstrap",
+      "RESTful API integration and state management (Redux)",
+      "Multilingual websites (Arabic, French, English)",
+      "Deployment on Render / Vercel with CI/CD setup",
     ],
   },
   {
     id: "02",
-    title: "UI/UX Design",
+    title: "WordPress Development",
+    tagline: "Building professional websites with WordPress & WooCommerce.",
     summary:
-      "Conducting qualitative and quantitative research to understand user needs, behaviors, and pain points. Utilizing methods...",
+      "I design and customize WordPress and WooCommerce websites that are modern, fast, and easy to manage. I also develop custom plugins to add unique features and improve functionality.",
     details: [
-      "Wireframes, user flows, interactive prototypes",
-      "Design systems and components",
-      "Usability testing and iterations",
+      "Custom WordPress & WooCommerce website creation",
+      "Theme customization and plugin integration",
+      "Development of custom plugins for unique features",
+      "SEO-friendly, responsive, and secure design",
+      "Training and long-term client support",
     ],
   },
+
   {
     id: "03",
-    title: "Content Writing",
+    title: "Website Maintenance & Optimization",
+    tagline: "Keeping your website fast, secure, and up-to-date.",
     summary:
-      "Conducting qualitative and quantitative research to understand user needs, behaviors, and pain points. Utilizing methods...",
+      "I offer ongoing support to ensure your website stays optimized, secure, and aligned with your business goals.",
     details: [
-      "Website and product copy",
-      "Blog strategy and editorial guidelines",
-      "Tone-of-voice and brand messaging",
+      "Performance and security updates",
+      "Bug fixes and feature enhancements",
+      "Speed optimization and SEO improvements",
+      "Regular backups and technical support",
     ],
   },
   {
     id: "04",
-    title: "Branding",
+    title: "UI/UX Design",
     summary:
-      "Conducting qualitative and quantitative research to understand user needs, behaviors, and pain points. Utilizing methods...",
+      "I craft clean, modern, and user-friendly interfaces that provide seamless user experiences across all devices. I focus on clarity, consistency, and conversion.",
     details: [
-      "Logo, palette, and typography",
-      "Brand system and guidelines",
-      "Assets for marketing and socials",
+      "Wireframes, mockups, and interactive prototypes",
+      "Modern layouts using Figma & Tailwind CSS",
+      "Responsive design & accessibility",
+      "User testing and design iteration",
     ],
   },
   {
     id: "05",
-    title: "SEO & Marketing",
+    title: "E-Commerce Development",
     summary:
-      "Conducting qualitative and quantitative research to understand user needs, behaviors, and pain points. Utilizing methods...",
+      "I create professional e-commerce solutions that help businesses sell online effectively — from product management to payment and order systems.",
     details: [
-      "Technical SEO audit & fixes",
-      "On-page optimization & schema",
-      "Campaign strategy and tracking",
+      "Custom online stores built with MERN / WooCommerce",
+      "Product, order, and user management systems",
+      "Multiple image upload and gallery integration",
+      "Secure payments and responsive dashboards",
+      "Optimized checkout and admin panels",
+    ],
+  },
+  {
+    id: "06",
+    title: "Branding & Logo Design",
+    summary:
+      "I help brands define their visual identity through creative logo design and consistent branding systems that reflect their mission and values.",
+    details: [
+      "Logo creation and brand guidelines",
+      "Color palettes and typography systems",
+      "Visual assets for marketing and social media",
+      "Brand storytelling and identity alignment",
+    ],
+  },
+  {
+    id: "07",
+    title: "Social Media Design & Content Creation",
+    tagline: "Making your brand shine across social platforms.",
+    summary:
+      "I design engaging social media posts, stories, and ad creatives that match your brand’s identity and help attract the right audience.",
+    details: [
+      "Custom designs for Instagram, Facebook, and LinkedIn",
+      "Ad creatives for marketing campaigns",
+      "Story templates and carousel post design",
+      "Consistent brand visuals and tone",
     ],
   },
 ];
