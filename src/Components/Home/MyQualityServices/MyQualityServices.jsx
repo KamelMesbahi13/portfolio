@@ -222,7 +222,7 @@ const ServiceCard = ({ service, index, isOpen, onToggle }) => {
               className="shrink-0"
             >
               <motion.div
-                className="flex items-center justify-center w-10 h-10 border rounded-full md:h-14 md:w-14 border-white/20 bg-white/5 backdrop-blur-sm"
+                className="flex items-center justify-center w-8 h-8 border rounded-full md:h-14 md:w-14 border-white/20 bg-white/5 backdrop-blur-sm"
                 animate={{
                   borderColor: isActive
                     ? "rgba(255,255,255,0.3)"
