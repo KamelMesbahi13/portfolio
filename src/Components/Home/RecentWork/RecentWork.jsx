@@ -1,4 +1,6 @@
+/* eslint-disable no-unused-vars */
 import { useState, useEffect, useRef } from "react";
+import { motion } from "framer-motion";
 import projectNumOne from "../../../../src/assets/zidaneproject.jpeg";
 import projectNumTwo from "../../../../src/assets/migrationproject.jpeg";
 import projectNumThree from "../../../../src/assets/toolsproject.jpeg";
@@ -194,6 +196,32 @@ const RecentWork = () => {
     setSelectedCard(project);
   };
 
+  const useReveal = (threshold = 0.2) => {
+    const ref = useRef(null);
+    const [isVisible, setIsVisible] = useState(false);
+
+    useEffect(() => {
+      const el = ref.current;
+      if (!el) return;
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              setIsVisible(true);
+            }
+          });
+        },
+        { threshold }
+      );
+
+      observer.observe(el);
+      return () => observer.disconnect();
+    }, [threshold]);
+
+    return { ref, isVisible };
+  };
+
   const handleClose = (e) => {
     if (e) e.stopPropagation();
     setIsAnimating(false);
@@ -214,18 +242,38 @@ const RecentWork = () => {
     };
   }, [selectedCard]);
 
+  const { ref, isVisible } = useReveal(0.1);
+
   return (
     <div className="min-h-screen mt-12">
       <div className="container py-12 max-w-7xl md:py-16">
-        <div className="mb-8 text-center">
-          <h1>Recent Work</h1>
-          <p className="max-w-3xl mx-auto mt-4 text-base md:text-lg text-white/70">
+        <div ref={ref} className="text-center">
+          <motion.h1
+            initial={{ opacity: 0, y: 30 }}
+            animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+          >
+            Recent Work{" "}
+          </motion.h1>
+
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+            transition={{
+              duration: 0.7,
+              delay: 0.15,
+              ease: [0.22, 1, 0.36, 1],
+            }}
+            className="max-w-3xl mx-auto mt-4 text-base md:text-lg text-white/70"
+          >
             I deliver modern, high-quality digital solutions that help
             businesses grow and stand out online.
-          </p>
+          </motion.p>
+
+          <div className="h-px max-w-xs mx-auto mt-8 bg-gradient-to-r from-transparent via-secondColor/50 to-transparent" />
         </div>
 
-        <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
+        <div className="grid grid-cols-1 gap-5 mt-4 md:mt-12 md:grid-cols-2">
           {projects.map((project) => (
             <div
               key={project.id}

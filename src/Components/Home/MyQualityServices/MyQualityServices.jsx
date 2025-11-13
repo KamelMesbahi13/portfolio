@@ -391,7 +391,6 @@ const MyQualityServices = () => {
     <section id="services" className="relative pt-20 text-white md:pt-28">
       <div className="max-w-6xl px-6 mx-auto">
         <div ref={ref} className="text-center">
-          {/* Animated h1 */}
           <motion.h1
             initial={{ opacity: 0, y: 30 }}
             animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
@@ -400,7 +399,6 @@ const MyQualityServices = () => {
             My Quality Services
           </motion.h1>
 
-          {/* Animated paragraph */}
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
@@ -415,15 +413,7 @@ const MyQualityServices = () => {
             project that inspires you and your customers.
           </motion.p>
 
-          {/* Decorative line */}
-          <motion.div
-            initial={{ scaleX: 0, opacity: 0 }}
-            animate={
-              isVisible ? { scaleX: 1, opacity: 1 } : { scaleX: 0, opacity: 0 }
-            }
-            transition={{ duration: 0.8, delay: 0.3, ease: "easeInOut" }}
-            className="h-px max-w-xs mx-auto mt-8 bg-gradient-to-r from-transparent via-secondColor/50 to-transparent"
-          />
+          <div className="h-px max-w-xs mx-auto mt-8 bg-gradient-to-r from-transparent via-secondColor/50 to-transparent" />
         </div>
 
         <ul className="mt-12 space-y-6 md:mt-16">
