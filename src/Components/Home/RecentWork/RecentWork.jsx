@@ -217,8 +217,12 @@ const RecentWork = () => {
   return (
     <div className="min-h-screen mt-12">
       <div className="container py-12 max-w-7xl md:py-16">
-        <div className="mb-8 text-center text-white md:mb-16">
+        <div className="mb-8 text-center md:mb-16">
           <h1>Recent Work</h1>
+          <p className="max-w-3xl mx-auto mt-4 text-base md:text-lg text-white/70">
+            I deliver modern, high-quality digital solutions that help
+            businesses grow and stand out online.
+          </p>
         </div>
 
         <div className="grid grid-cols-1 gap-5 md:grid-cols-2">

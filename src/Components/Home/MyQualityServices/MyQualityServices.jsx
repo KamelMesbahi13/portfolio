@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 // eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
 
@@ -96,23 +96,23 @@ const services = [
   },
 ];
 
-const useReveal = () => {
-  const ref = useRef(null);
-  const [show, setShow] = useState(false);
+// const useReveal = () => {
+//   const ref = useRef(null);
+//   const [show, setShow] = useState(false);
 
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    const io = new IntersectionObserver(
-      (entries) => entries.forEach((e) => e.isIntersecting && setShow(true)),
-      { threshold: 0.15 }
-    );
-    io.observe(el);
-    return () => io.disconnect();
-  }, []);
+//   useEffect(() => {
+//     const el = ref.current;
+//     if (!el) return;
+//     const io = new IntersectionObserver(
+//       (entries) => entries.forEach((e) => e.isIntersecting && setShow(true)),
+//       { threshold: 0.15 }
+//     );
+//     io.observe(el);
+//     return () => io.disconnect();
+//   }, []);
 
-  return { ref, show };
-};
+//   return { ref, show };
+// };
 
 const ServiceCard = ({ service, index, isOpen, onToggle }) => {
   const [isHovered, setIsHovered] = useState(false);
@@ -370,20 +370,11 @@ const ServiceCard = ({ service, index, isOpen, onToggle }) => {
 
 const MyQualityServices = () => {
   const [open, setOpen] = useState(null);
-  const { ref, show } = useReveal();
 
   return (
-    <section id="services" className="relative py-20 text-white md:py-28">
-      <div className="absolute inset-x-0 top-0 h-px pointer-events-none bg-gradient-to-r from-transparent via-secondColor/45 to-transparent" />
-
+    <section id="services" className="relative pt-20 text-white md:pt-28">
       <div className="max-w-6xl px-6 mx-auto">
-        <motion.div
-          ref={ref}
-          initial={{ opacity: 0, y: 20 }}
-          animate={show ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-          transition={{ duration: 0.7 }}
-          className="text-center"
-        >
+        <motion.div className="text-center">
           <h1>My Quality Services</h1>
           <p className="max-w-3xl mx-auto mt-4 text-base md:text-lg text-white/70">
             We put your ideas and thus your wishes in the form of a unique web
