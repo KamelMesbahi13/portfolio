@@ -374,13 +374,13 @@ const MyQualityServices = () => {
   return (
     <section id="services" className="relative pt-20 text-white md:pt-28">
       <div className="max-w-6xl px-6 mx-auto">
-        <motion.div className="text-center">
+        <div className="text-center">
           <h1>My Quality Services</h1>
           <p className="max-w-3xl mx-auto mt-4 text-base md:text-lg text-white/70">
             We put your ideas and thus your wishes in the form of a unique web
             project that inspires you and your customers.
           </p>
-        </motion.div>
+        </div>
 
         <ul className="mt-12 space-y-6 md:mt-16">
           {services.map((service, i) => (
