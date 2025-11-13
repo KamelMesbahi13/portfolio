@@ -1,5 +1,5 @@
-import { useState } from "react";
-// eslint-disable-next-line no-unused-vars
+/* eslint-disable no-unused-vars */
+import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 
 const services = [
@@ -86,7 +86,7 @@ const services = [
     title: "Social Media Design & Content Creation",
     tagline: "Making your brand shine across social platforms.",
     summary:
-      "I design engaging social media posts, stories, and ad creatives that match your brand’s identity and help attract the right audience.",
+      "I design engaging social media posts, stories, and ad creatives that match your brand's identity and help attract the right audience.",
     details: [
       "Custom designs for Instagram, Facebook, and LinkedIn",
       "Ad creatives for marketing campaigns",
@@ -96,34 +96,49 @@ const services = [
   },
 ];
 
-// const useReveal = () => {
-//   const ref = useRef(null);
-//   const [show, setShow] = useState(false);
+// Custom hook for individual element reveal
+const useReveal = (threshold = 0.2) => {
+  const ref = useRef(null);
+  const [isVisible, setIsVisible] = useState(false);
 
-//   useEffect(() => {
-//     const el = ref.current;
-//     if (!el) return;
-//     const io = new IntersectionObserver(
-//       (entries) => entries.forEach((e) => e.isIntersecting && setShow(true)),
-//       { threshold: 0.15 }
-//     );
-//     io.observe(el);
-//     return () => io.disconnect();
-//   }, []);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
 
-//   return { ref, show };
-// };
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setIsVisible(true);
+          }
+        });
+      },
+      { threshold }
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [threshold]);
+
+  return { ref, isVisible };
+};
 
 const ServiceCard = ({ service, index, isOpen, onToggle }) => {
   const [isHovered, setIsHovered] = useState(false);
+  const { ref, isVisible } = useReveal(0.15);
   const isActive = isHovered || isOpen;
   const isHoveredAndOpen = isHovered && isOpen;
 
   return (
     <motion.li
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: index * 0.1, duration: 0.5 }}
+      ref={ref}
+      initial={{ opacity: 0, y: 50 }}
+      animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
+      transition={{
+        duration: 0.6,
+        ease: [0.22, 1, 0.36, 1],
+        delay: 0.1,
+      }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       className="relative"
@@ -181,7 +196,7 @@ const ServiceCard = ({ service, index, isOpen, onToggle }) => {
                   {service.id}
                 </motion.span>
                 <motion.div
-                  className="flex-1 h-px bg-gradient-to-r from-white/20 to-transparent"
+                  className="flex-1 h-px bg-gradient-to-r from-secondColor/50 to-transparent"
                   animate={{
                     scaleX: isActive ? 1 : 0.6,
                     opacity: isActive ? 0.6 : 0.3,
@@ -222,7 +237,7 @@ const ServiceCard = ({ service, index, isOpen, onToggle }) => {
               className="shrink-0"
             >
               <motion.div
-                className="flex items-center justify-center w-8 h-8 border rounded-full md:h-14 md:w-14 border-white/20 bg-white/5 backdrop-blur-sm"
+                className="flex items-center justify-center w-8 h-8 border rounded-full md:h-12 md:w-12 border-white/20 bg-white/5 backdrop-blur-sm"
                 animate={{
                   borderColor: isActive
                     ? "rgba(255,255,255,0.3)"
@@ -300,7 +315,7 @@ const ServiceCard = ({ service, index, isOpen, onToggle }) => {
                   delay: isOpen ? 0.1 : 0,
                 },
               }}
-              className="h-px mb-6 origin-left bg-gradient-to-r from-white/20 via-white/10 to-transparent"
+              className="h-px mb-6 origin-left bg-gradient-to-r from-secondColor/50 via-secondColor/30 to-transparent"
             />
 
             <motion.ul
@@ -370,16 +385,45 @@ const ServiceCard = ({ service, index, isOpen, onToggle }) => {
 
 const MyQualityServices = () => {
   const [open, setOpen] = useState(null);
+  const { ref, isVisible } = useReveal(0.1);
 
   return (
     <section id="services" className="relative pt-20 text-white md:pt-28">
       <div className="max-w-6xl px-6 mx-auto">
-        <div className="text-center">
-          <h1>My Quality Services</h1>
-          <p className="max-w-3xl mx-auto mt-4 text-base md:text-lg text-white/70">
+        <div ref={ref} className="text-center">
+          {/* Animated h1 */}
+          <motion.h1
+            initial={{ opacity: 0, y: 30 }}
+            animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+          >
+            My Quality Services
+          </motion.h1>
+
+          {/* Animated paragraph */}
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+            transition={{
+              duration: 0.7,
+              delay: 0.15,
+              ease: [0.22, 1, 0.36, 1],
+            }}
+            className="max-w-3xl mx-auto mt-4 text-base md:text-lg text-white/70"
+          >
             We put your ideas and thus your wishes in the form of a unique web
             project that inspires you and your customers.
-          </p>
+          </motion.p>
+
+          {/* Decorative line */}
+          <motion.div
+            initial={{ scaleX: 0, opacity: 0 }}
+            animate={
+              isVisible ? { scaleX: 1, opacity: 1 } : { scaleX: 0, opacity: 0 }
+            }
+            transition={{ duration: 0.8, delay: 0.3, ease: "easeInOut" }}
+            className="h-px max-w-xs mx-auto mt-8 bg-gradient-to-r from-transparent via-secondColor/50 to-transparent"
+          />
         </div>
 
         <ul className="mt-12 space-y-6 md:mt-16">
