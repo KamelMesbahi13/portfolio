@@ -100,7 +100,6 @@ const ServiceCard = ({ service, index, isOpen, onToggle }) => {
         transition={{ type: "spring", stiffness: 300, damping: 30 }}
         className="relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.02] backdrop-blur-sm"
       >
-        {/* Background overlay - stronger when hovered and open */}
         <motion.div
           className="absolute inset-0 bg-gradient-to-br from-mainColor/10 via-mainColor/5 to-transparent"
           animate={{
@@ -109,7 +108,6 @@ const ServiceCard = ({ service, index, isOpen, onToggle }) => {
           transition={{ duration: 0.4 }}
         />
 
-        {/* Main color background - shows when open, stronger when hovered */}
         <motion.div
           className="absolute inset-0"
           style={{ backgroundColor: "#0C2B4E" }}
@@ -119,7 +117,6 @@ const ServiceCard = ({ service, index, isOpen, onToggle }) => {
           transition={{ duration: 0.4 }}
         />
 
-        {/* Subtle border glow */}
         <motion.div
           className="absolute inset-0 rounded-2xl"
           animate={{
@@ -136,7 +133,6 @@ const ServiceCard = ({ service, index, isOpen, onToggle }) => {
         >
           <div className="flex items-start justify-between gap-6">
             <div className="flex-1 space-y-4">
-              {/* Number and line */}
               <div className="flex items-center gap-4">
                 <motion.span
                   animate={{
@@ -160,7 +156,6 @@ const ServiceCard = ({ service, index, isOpen, onToggle }) => {
                 />
               </div>
 
-              {/* Title */}
               <motion.h3
                 animate={{
                   x: isActive ? 2 : 0,
@@ -171,7 +166,6 @@ const ServiceCard = ({ service, index, isOpen, onToggle }) => {
                 {service.title}
               </motion.h3>
 
-              {/* Summary */}
               <motion.p
                 animate={{
                   color: isActive
@@ -185,7 +179,6 @@ const ServiceCard = ({ service, index, isOpen, onToggle }) => {
               </motion.p>
             </div>
 
-            {/* Arrow button */}
             <motion.div
               animate={{
                 scale: isActive ? 1.05 : 1,
@@ -194,7 +187,7 @@ const ServiceCard = ({ service, index, isOpen, onToggle }) => {
               className="shrink-0"
             >
               <motion.div
-                className="flex items-center justify-center border rounded-full h-14 w-14 border-white/20 bg-white/5 backdrop-blur-sm"
+                className="flex items-center justify-center w-10 h-10 border rounded-full md:h-14 md:w-14 border-white/20 bg-white/5 backdrop-blur-sm"
                 animate={{
                   borderColor: isActive
                     ? "rgba(255,255,255,0.3)"
@@ -206,7 +199,7 @@ const ServiceCard = ({ service, index, isOpen, onToggle }) => {
                 transition={{ duration: 0.3 }}
               >
                 <motion.svg
-                  className="w-6 h-6"
+                  className="w-4 h-4 md:w-6 md:h-6"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
@@ -235,7 +228,6 @@ const ServiceCard = ({ service, index, isOpen, onToggle }) => {
           </div>
         </button>
 
-        {/* Expandable content */}
         <motion.div
           initial={false}
           animate={{
@@ -256,7 +248,6 @@ const ServiceCard = ({ service, index, isOpen, onToggle }) => {
           className="overflow-hidden"
         >
           <div className="px-6 pb-8 sm:px-8">
-            {/* Divider */}
             <motion.div
               initial={{ scaleX: 0, opacity: 0 }}
               animate={{
@@ -277,7 +268,6 @@ const ServiceCard = ({ service, index, isOpen, onToggle }) => {
               className="h-px mb-6 origin-left bg-gradient-to-r from-white/20 via-white/10 to-transparent"
             />
 
-            {/* Details list with stagger */}
             <motion.ul
               initial="hidden"
               animate={isOpen ? "visible" : "hidden"}
@@ -330,7 +320,6 @@ const ServiceCard = ({ service, index, isOpen, onToggle }) => {
           </div>
         </motion.div>
 
-        {/* Bottom accent line */}
         <motion.div
           className="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-mainColor/50 to-transparent"
           animate={{
@@ -379,29 +368,6 @@ const MyQualityServices = () => {
           ))}
         </ul>
       </div>
-
-      {/* Scroll to top */}
-      <motion.a
-        href="#top"
-        whileHover={{ scale: 1.1, y: -2 }}
-        whileTap={{ scale: 0.95 }}
-        className="fixed flex items-center justify-center w-12 h-12 text-white border rounded-full bottom-8 right-8 border-white/20 bg-white/10 backdrop-blur-md"
-        aria-label="Scroll to top"
-      >
-        <svg
-          className="w-5 h-5"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-          strokeWidth={2}
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M5 15l7-7 7 7"
-          />
-        </svg>
-      </motion.a>
     </section>
   );
 };
