@@ -7,9 +7,9 @@ import HomeAbout from "./HomeAbout/HomeAbout";
 const Home = () => (
   <div>
     <PortfolioPage />
-    <HomeAbout />
-    {/* <MyQualityServices /> */}
-    {/* <RecentWork /> */}
+    {/* <HomeAbout /> */}
+    <MyQualityServices />
+    <RecentWork />
     {/* <Technologies /> */}
   </div>
 );
