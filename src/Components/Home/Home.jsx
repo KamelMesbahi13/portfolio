@@ -2,13 +2,15 @@ import PortfolioPage from "./PortfolioPage/PortfolioPage";
 import RecentWork from "./RecentWork/RecentWork";
 import MyQualityServices from "./MyQualityServices/MyQualityServices";
 import Technologies from "./Technologies/Technologies";
+import HomeAbout from "./HomeAbout/HomeAbout";
 
 const Home = () => (
   <div>
     <PortfolioPage />
-    <MyQualityServices />
-    <RecentWork />
-    <Technologies />
+    <HomeAbout />
+    {/* <MyQualityServices /> */}
+    {/* <RecentWork /> */}
+    {/* <Technologies /> */}
   </div>
 );
 
