@@ -7,9 +7,9 @@ const HomeAbout = () => {
         <div>
           <h1>MERN Developer, WordPress Creator & Digital Builder</h1>
         </div>
-        <div>
-          <div className="flex flex-row-reverse content-center justify-between">
-            <div className="w-1/4">
+        <div className="mt-40">
+          <div className="flex flex-row-reverse items-center justify-between">
+            <div className="w-4/12">
               <div>
                 <p>
                   Lorem ipsum dolor, sit amet consectetur adipisicing elit. Aut
@@ -18,11 +18,13 @@ const HomeAbout = () => {
                 </p>
               </div>
               <div>
-                <img src={Img} alt="" />
-                <img src={Img} alt="" />
+                <div className="flex justify-between mt-10">
+                  <img className="w-[45%]" src={Img} alt="" />
+                  <img className="w-[45%]" src={Img} alt="" />
+                </div>
               </div>
             </div>
-            <div className="w-1/2">
+            <div className="w-[30%]">
               <img src={Img} alt="" />
             </div>
           </div>
