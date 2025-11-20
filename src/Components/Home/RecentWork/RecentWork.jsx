@@ -273,7 +273,7 @@ const RecentWork = () => {
           <div className="h-px max-w-xs mx-auto mt-8 bg-gradient-to-r from-transparent via-secondColor/50 to-transparent" />
         </div>
 
-        <div className="grid grid-cols-1 gap-5 mt-4 md:mt-12 md:grid-cols-2">
+        <div className="grid grid-cols-1 gap-5 mt-7 md:mt-12 md:grid-cols-2">
           {projects.map((project) => (
             <div
               key={project.id}

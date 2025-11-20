@@ -7,7 +7,7 @@ import HomeAbout from "./HomeAbout/HomeAbout";
 const Home = () => (
   <div>
     <PortfolioPage />
-    {/* <HomeAbout /> */}
+    <HomeAbout />
     <MyQualityServices />
     <RecentWork />
     {/* <Technologies /> */}
