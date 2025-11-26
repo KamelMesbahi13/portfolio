@@ -111,10 +111,7 @@ const HomeAbout = () => {
   });
 
   return (
-    <section
-      ref={sectionRef}
-      className="container w-full my-20 overflow-hidden"
-    >
+    <div ref={sectionRef} className="container w-full my-20 overflow-hidden">
       <div className="mx-auto max-w-7xl">
         <div className="grid items-center grid-cols-1 gap-12 lg:grid-cols-3">
           {/* Left Column */}
@@ -317,7 +314,7 @@ const HomeAbout = () => {
           </div>
         </div>
       </div>
-    </section>
+    </div>
   );
 };
 

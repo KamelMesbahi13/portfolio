@@ -36,7 +36,7 @@ const HeroFirstContent = () => {
             <div className="text-[2.5rem] md:text-6xl lg:text-6xl xl:text-[6rem] font-black tracking-tighter">
               <p className="text-white">WEB</p>
             </div>
-            <div className="text-[2.5rem] md:!-mt-[40px] !-mt-[20px] md:text-6xl lg:text-6xl xl:text-[6rem] font-black tracking-tighter">
+            <div className="text-[2.5rem] md:!-mt-[40px] !-mt-[17px] md:text-6xl lg:text-6xl xl:text-[6rem] font-black tracking-tighter">
               <p className="text-mainColor">DEVELOPER</p>
             </div>
           </div>
