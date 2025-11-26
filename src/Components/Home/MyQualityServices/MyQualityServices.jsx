@@ -388,7 +388,7 @@ const MyQualityServices = () => {
   const { ref, isVisible } = useReveal(0.1);
 
   return (
-    <section id="services" className="relative pt-20 text-white md:pt-28">
+    <section id="services" className="relative pt-12 text-white md:pt-28">
       <div className="max-w-6xl px-6 mx-auto">
         <div ref={ref} className="text-center">
           <motion.h1

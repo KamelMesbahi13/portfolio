@@ -111,10 +111,12 @@ const HomeAbout = () => {
   });
 
   return (
-    <div ref={sectionRef} className="container w-full my-20 overflow-hidden">
-      <div className="mx-auto max-w-7xl">
+    <div
+      ref={sectionRef}
+      className="container w-full mt-12 overflow-hidden md:mt-20"
+    >
+      <div>
         <div className="grid items-center grid-cols-1 gap-12 lg:grid-cols-3">
-          {/* Left Column */}
           <motion.div
             ref={leftColumnRef}
             initial="hidden"
