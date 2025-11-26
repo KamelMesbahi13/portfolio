@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import { useState, useEffect, useRef } from "react";
-import { motion } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 import projectNumOne from "../../../../src/assets/zidaneproject.jpeg";
 import projectNumTwo from "../../../../src/assets/migrationproject.jpeg";
 import projectNumThree from "../../../../src/assets/toolsproject.jpeg";
@@ -11,6 +11,14 @@ const RecentWork = () => {
   const [isAnimating, setIsAnimating] = useState(false);
   const [cardRect, setCardRect] = useState(null);
   const cardRefs = useRef({});
+
+  // Refs for scroll animations
+  const headerRef = useRef(null);
+  const gridRef = useRef(null);
+
+  // InView hooks
+  const headerInView = useInView(headerRef, { once: true, margin: "-100px" });
+  const gridInView = useInView(gridRef, { once: true, margin: "-50px" });
 
   const projects = [
     {
@@ -46,7 +54,6 @@ const RecentWork = () => {
       github: "#",
       live: "#",
     },
-
     {
       id: 2,
       category: "EDUCATION / E-LEARNING",
@@ -79,7 +86,6 @@ const RecentWork = () => {
       github: "#",
       live: "https://migrationacademydz.com",
     },
-
     {
       id: 3,
       category: "E-COMMERCE",
@@ -138,7 +144,7 @@ const RecentWork = () => {
       id: 4,
       category: "E-COMMERCE",
       title: "Hoggar Shop - Home Appliances E-Commerce Store",
-      image: projectNumFour, // Replace with your project image
+      image: projectNumFour,
       description:
         "A comprehensive e-commerce platform specializing in home appliances and electrical equipment. Features a complete product catalog with small and large appliances, shopping cart, promotional offers, and bilingual support for the Algerian market.",
       tech: [
@@ -181,7 +187,7 @@ const RecentWork = () => {
         "Modern Landing Page Design",
         "SEO Optimization",
       ],
-      github: "#", // Add your GitHub repo link if applicable
+      github: "#",
       live: "https://hoggarshop.com/",
     },
   ];
@@ -194,32 +200,6 @@ const RecentWork = () => {
     }
     setIsAnimating(true);
     setSelectedCard(project);
-  };
-
-  const useReveal = (threshold = 0.2) => {
-    const ref = useRef(null);
-    const [isVisible, setIsVisible] = useState(false);
-
-    useEffect(() => {
-      const el = ref.current;
-      if (!el) return;
-
-      const observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              setIsVisible(true);
-            }
-          });
-        },
-        { threshold }
-      );
-
-      observer.observe(el);
-      return () => observer.disconnect();
-    }, [threshold]);
-
-    return { ref, isVisible };
   };
 
   const handleClose = (e) => {
@@ -242,27 +222,47 @@ const RecentWork = () => {
     };
   }, [selectedCard]);
 
-  const { ref, isVisible } = useReveal(0.1);
+  // Animation variants
+  const headerVariants = {
+    hidden: { opacity: 0, y: 40 },
+    visible: { opacity: 1, y: 0 },
+  };
+
+  const cardVariants = {
+    hidden: { opacity: 0, y: 60 },
+    visible: { opacity: 1, y: 0 },
+  };
+
+  const dividerVariants = {
+    hidden: { scaleX: 0, opacity: 0 },
+    visible: { scaleX: 1, opacity: 1 },
+  };
 
   return (
     <div className="min-h-screen mt-12">
       <div className="container py-12 max-w-7xl md:py-16">
-        <div ref={ref} className="text-center">
+        {/* Header Section */}
+        <div ref={headerRef} className="text-center">
           <motion.h1
-            initial={{ opacity: 0, y: 30 }}
-            animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+            initial="hidden"
+            animate={headerInView ? "visible" : "hidden"}
+            variants={headerVariants}
+            transition={{
+              duration: 0.7,
+              ease: [0.25, 0.46, 0.45, 0.94],
+            }}
           >
-            Recent Work{" "}
+            Recent Work
           </motion.h1>
 
           <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+            initial="hidden"
+            animate={headerInView ? "visible" : "hidden"}
+            variants={headerVariants}
             transition={{
               duration: 0.7,
               delay: 0.15,
-              ease: [0.22, 1, 0.36, 1],
+              ease: [0.25, 0.46, 0.45, 0.94],
             }}
             className="max-w-3xl mx-auto mt-4 text-base md:text-lg text-white/70"
           >
@@ -270,23 +270,41 @@ const RecentWork = () => {
             businesses grow and stand out online.
           </motion.p>
 
-          <div className="h-px max-w-xs mx-auto mt-8 bg-gradient-to-r from-transparent via-secondColor/50 to-transparent" />
+          <motion.div
+            initial="hidden"
+            animate={headerInView ? "visible" : "hidden"}
+            variants={dividerVariants}
+            transition={{
+              duration: 0.8,
+              delay: 0.3,
+              ease: [0.25, 0.46, 0.45, 0.94],
+            }}
+            className="h-px max-w-xs mx-auto mt-8 bg-gradient-to-r from-transparent via-secondColor/50 to-transparent"
+          />
         </div>
 
-        <div className="grid grid-cols-1 gap-5 mt-7 md:mt-12 md:grid-cols-2">
-          {projects.map((project) => (
-            <div
+        {/* Projects Grid */}
+        <div
+          ref={gridRef}
+          className="grid grid-cols-1 gap-5 mt-7 md:mt-12 md:grid-cols-2"
+        >
+          {projects.map((project, index) => (
+            <motion.div
               key={project.id}
               ref={(el) => (cardRefs.current[project.id] = el)}
-              onClick={() => handleCardClick(project)}
-              className={`relative h-[280px] md:h-[380px] rounded-[24px] overflow-hidden cursor-pointer group transition-all duration-300 ${
-                selectedCard?.id === project.id
-                  ? "opacity-0"
-                  : "hover:scale-[0.98]"
-              }`}
-              style={{
-                transition: "opacity 0.3s ease-in-out, transform 0.3s ease-out",
+              initial="hidden"
+              animate={gridInView ? "visible" : "hidden"}
+              variants={cardVariants}
+              transition={{
+                duration: 0.6,
+                delay: index * 0.15,
+                ease: [0.25, 0.46, 0.45, 0.94],
               }}
+              whileHover={{ scale: 0.98 }}
+              onClick={() => handleCardClick(project)}
+              className={`relative h-[280px] md:h-[380px] rounded-[24px] overflow-hidden cursor-pointer group ${
+                selectedCard?.id === project.id ? "opacity-0" : ""
+              }`}
             >
               <img
                 src={project.image}
@@ -305,11 +323,12 @@ const RecentWork = () => {
                   </h2>
                 </div>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>
 
+      {/* Modal */}
       {selectedCard && (
         <>
           <div
@@ -441,7 +460,6 @@ const RecentWork = () => {
                     </div>
                   </div>
 
-                  {/* Action Buttons */}
                   <div
                     className="flex gap-4"
                     style={{
