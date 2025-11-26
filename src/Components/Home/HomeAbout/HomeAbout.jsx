@@ -11,30 +11,42 @@ import {
 const paragraphs = [
   {
     id: 1,
-    content: "You're struggling to scale and don't know what to prioritize.",
+    content:
+      "You need a developer who can build fast, modern, and scalable web solutions tailored to your business.",
   },
 
   {
     id: 2,
-    content: "You feel exhausted juggling too many roles in your business.",
+    content:
+      "You feel stuck with a website that’s slow, outdated, or impossible to manage.",
   },
 
   {
     id: 3,
     content:
-      "You crave a clear, personalized roadmap to grow faster and smarter.",
+      "You're losing clients because your online presence doesn’t look professional or convert well.",
   },
 ];
 
+const FeatureItem = ({ icon, title, description }) => (
+  <div className="flex flex-col gap-3 group">
+    <div className="w-12 h-12 rounded-full border border-[#2a2826] bg-[#0C2B4E]/30 flex items-center justify-center mb-2 group-hover:border-[#F87B1B] transition-colors duration-300">
+      {icon}
+    </div>
+    <h3 className="text-xl font-bold text-white">{title}</h3>
+    <p className="text-sm leading-relaxed text-gray-400">{description}</p>
+  </div>
+);
+
 const HomeAbout = () => {
   return (
-    <section className="bg-[#151312] py-16 container w-full overflow-hidden">
+    <section className="container w-full my-20 overflow-hidden">
       <div className="mx-auto max-w-7xl">
         <div className="grid items-center grid-cols-1 gap-12 lg:grid-cols-3">
           <div className="space-y-8">
             <h2 className="text-4xl font-bold leading-tight text-white lg:text-5xl">
-              Feeling Stuck or Overwhelmed as a{" "}
-              <span className="text-[#F87B1B]">Business Owner?</span>
+              Struggling to Fix or Improve{" "}
+              <span className="text-[#F87B1B]">Your Website?</span>
             </h2>
 
             <button className="group bg-[#F87B1B] hover:bg-[#e06a10] transition-colors text-white font-semibold rounded-full pl-6 pr-2 py-2 flex items-center gap-3 shadow-lg shadow-orange-900/20">
@@ -70,22 +82,20 @@ const HomeAbout = () => {
           <div className="space-y-10 lg:pl-4">
             <FeatureItem
               icon={<BarChart3 className="text-[#F87B1B]" />}
-              title="Growth Stuck"
-              description="Your business has plateaued, and you need fresh strategies to break through the ceiling."
+              title="Website Not Performing"
+              description="Your website isn’t bringing results — it’s slow, poorly designed, or not user-friendly, and it’s hurting your business."
             />
 
-            {/* Item 2 */}
             <FeatureItem
               icon={<Settings className="text-[#F87B1B]" />}
-              title="Wearing Hats"
-              description="You're juggling everything alone—operations, marketing, sales—and it's draining your energy fast."
+              title="Tech Overload"
+              description="Managing your website, design, content, and social media alone is draining — you need someone who can handle the technical work professionally."
             />
 
-            {/* Item 3 */}
             <FeatureItem
               icon={<RefreshCw className="text-[#F87B1B]" />}
-              title="Lack Clarity"
-              description="Without a clear roadmap, every decision feels risky, slow, and emotionally exhausting to make."
+              title="No Clear Digital Strategy"
+              description="You’re unsure how to structure your site, improve the design, or scale it with the right tech — every change feels risky and time-consuming."
             />
           </div>
         </div>
@@ -93,15 +103,5 @@ const HomeAbout = () => {
     </section>
   );
 };
-
-const FeatureItem = ({ icon, title, description }) => (
-  <div className="flex flex-col gap-3 group">
-    <div className="w-12 h-12 rounded-full border border-[#2a2826] bg-[#0C2B4E]/30 flex items-center justify-center mb-2 group-hover:border-[#F87B1B] transition-colors duration-300">
-      {icon}
-    </div>
-    <h3 className="text-xl font-bold text-white">{title}</h3>
-    <p className="text-sm leading-relaxed text-gray-400">{description}</p>
-  </div>
-);
 
 export default HomeAbout;
