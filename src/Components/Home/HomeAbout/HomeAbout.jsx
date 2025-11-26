@@ -3,9 +3,9 @@ import MyPic from "../../../assets/mypictwo.png";
 import {
   ArrowRight,
   Check,
-  BarChart3,
-  Settings,
-  RefreshCw,
+  TrendingDown,
+  BrainCircuit,
+  Puzzle,
 } from "lucide-react";
 
 const paragraphs = [
@@ -81,19 +81,19 @@ const HomeAbout = () => {
 
           <div className="space-y-10 lg:pl-4">
             <FeatureItem
-              icon={<BarChart3 className="text-[#F87B1B]" />}
+              icon={<TrendingDown className="text-[#F87B1B]" />}
               title="Website Not Performing"
               description="Your website isn’t bringing results — it’s slow, poorly designed, or not user-friendly, and it’s hurting your business."
             />
 
             <FeatureItem
-              icon={<Settings className="text-[#F87B1B]" />}
+              icon={<BrainCircuit className="text-[#F87B1B]" />}
               title="Tech Overload"
               description="Managing your website, design, content, and social media alone is draining — you need someone who can handle the technical work professionally."
             />
 
             <FeatureItem
-              icon={<RefreshCw className="text-[#F87B1B]" />}
+              icon={<Puzzle className="text-[#F87B1B]" />}
               title="No Clear Digital Strategy"
               description="You’re unsure how to structure your site, improve the design, or scale it with the right tech — every change feels risky and time-consuming."
             />
