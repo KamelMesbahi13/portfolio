@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   // eslint-disable-next-line no-unused-vars
   motion,
@@ -6,6 +6,7 @@ import {
   useTransform,
   animate,
   useInView,
+  AnimatePresence,
 } from "framer-motion";
 
 const Counter = ({ from = 0, to, duration = 2 }) => {
@@ -27,9 +28,40 @@ const Counter = ({ from = 0, to, duration = 2 }) => {
   return <motion.span ref={ref}>{rounded}</motion.span>;
 };
 
-const HeroFirstContent = () => {
+const TypewriterText = ({ words, interval = 2500, className = "" }) => {
+  const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setIndex((current) => (current + 1) % words.length);
+    }, interval);
+    return () => clearInterval(timer);
+  }, [words.length, interval]);
+
   return (
-    <div className="space-y-4 md:container ">
+    <AnimatePresence mode="wait">
+      <motion.span
+        key={words[index]}
+        initial={{ opacity: 0, y: 20, filter: "blur(10px)" }}
+        animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+        exit={{ opacity: 0, y: -20, filter: "blur(10px)" }}
+        transition={{
+          duration: 0.4,
+          ease: [0.25, 0.46, 0.45, 0.94],
+        }}
+        className={className}
+      >
+        {words[index]}
+      </motion.span>
+    </AnimatePresence>
+  );
+};
+
+const HeroFirstContent = () => {
+  const roles = ["DEVELOPER", "DESIGNER", "FREELANCER"];
+
+  return (
+    <div className="space-y-4 md:container">
       <div>
         <div className="mb-3 md:mb-4">
           <div className="flex flex-col -space-y-4 leading-none">
@@ -37,7 +69,13 @@ const HeroFirstContent = () => {
               <p className="text-white">WEB</p>
             </div>
             <div className="text-[2.5rem] md:!-mt-[40px] !-mt-[17px] md:text-6xl lg:text-6xl xl:text-[6rem] font-black tracking-tighter">
-              <p className="text-mainColor">DEVELOPER</p>
+              <p className="text-mainColor">
+                <TypewriterText
+                  words={roles}
+                  interval={2500}
+                  className="inline-block"
+                />
+              </p>
             </div>
           </div>
         </div>
