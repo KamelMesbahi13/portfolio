@@ -12,7 +12,6 @@ import {
   GitGraph,
 } from "lucide-react";
 
-// --- Data Configuration ---
 const skills = [
   {
     name: "Frontend Arch",
@@ -66,12 +65,7 @@ const Skills = () => {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-5xl font-bold tracking-tight text-white md:text-6xl">
-              My{" "}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#F87B1B] to-orange-200">
-                Stack
-              </span>
-            </h2>
+            <h1>My Stack</h1>
           </motion.div>
 
           <motion.p
