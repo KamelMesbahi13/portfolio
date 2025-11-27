@@ -1,6 +1,6 @@
 import { useState, useRef } from "react";
 // eslint-disable-next-line no-unused-vars
-import { motion } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 import {
   Layers,
   Code2,
@@ -12,6 +12,44 @@ import {
   Puzzle,
   Brush,
 } from "lucide-react";
+
+const fadeInUp = {
+  hidden: { opacity: 0, y: 40 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] },
+  },
+};
+
+const fadeInLeft = {
+  hidden: { opacity: 0, x: -60 },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: { duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] },
+  },
+};
+
+const fadeInRight = {
+  hidden: { opacity: 0, x: 60 },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: { duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] },
+  },
+};
+
+const staggerContainer = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+      delayChildren: 0.1,
+    },
+  },
+};
 
 const skills = [
   {
@@ -62,23 +100,36 @@ const skills = [
 ];
 
 const Skills = () => {
+  const headerRef = useRef(null);
+  const gridRef = useRef(null);
+
+  const headerInView = useInView(headerRef, { once: true, margin: "-50px" });
+  const gridInView = useInView(gridRef, { once: true, margin: "-50px" });
+
   return (
     <div className="md:py-20 py-12 bg-transparent overflow-hidden selection:bg-[#F87B1B] selection:text-white">
       <div className="container px-6 mx-auto">
-        <div className="flex flex-col items-start justify-between gap-6 mb-12 md:flex-row md:items-end md:pb-20">
+        <div
+          ref={headerRef}
+          className="flex flex-col items-start justify-between gap-6 pb-12 mb-12 border-b md:flex-row md:items-end md:pb-20 border-white/10"
+        >
           <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
+            initial="hidden"
+            animate={headerInView ? "visible" : "hidden"}
+            variants={fadeInLeft}
           >
-            <h1>My Stack</h1>
+            <h2 className="text-4xl font-bold tracking-tight text-white md:text-6xl">
+              My{" "}
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#F87B1B] to-orange-200">
+                Stack
+              </span>
+            </h2>
           </motion.div>
 
           <motion.p
-            initial={{ opacity: 0, x: 20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            /* FIXED: text-left for mobile, text-right for desktop */
+            initial="hidden"
+            animate={headerInView ? "visible" : "hidden"}
+            variants={fadeInRight}
             className="max-w-md text-lg text-left text-gray-400 md:text-right"
           >
             Building scalable solutions with the latest technologies in the
@@ -86,18 +137,23 @@ const Skills = () => {
           </motion.p>
         </div>
 
-        {/* Grid */}
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+        <motion.div
+          ref={gridRef}
+          initial="hidden"
+          animate={gridInView ? "visible" : "hidden"}
+          variants={staggerContainer}
+          className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
+        >
           {skills.map((skill, index) => (
-            <SpotlightCard key={index} skill={skill} index={index} />
+            <SpotlightCard key={index} skill={skill} />
           ))}
-        </div>
+        </motion.div>
       </div>
     </div>
   );
 };
 
-const SpotlightCard = ({ skill, index }) => {
+const SpotlightCard = ({ skill }) => {
   const divRef = useRef(null);
   const [position, setPosition] = useState({ x: 0, y: 0 });
 
@@ -115,11 +171,8 @@ const SpotlightCard = ({ skill, index }) => {
   return (
     <motion.div
       ref={divRef}
+      variants={fadeInUp}
       onMouseMove={handleMouseMove}
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ delay: index * 0.05 }}
       className="relative h-full overflow-hidden border rounded-2xl border-white/10 bg-white/5 backdrop-blur-sm group"
     >
       <div
