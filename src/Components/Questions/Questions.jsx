@@ -1,7 +1,13 @@
-import React from "react";
-
 const Questions = () => {
-  return <div>Questions</div>;
+  return (
+    <div className="container">
+      <div>
+        <div>
+          <div></div>
+        </div>
+      </div>
+    </div>
+  );
 };
 
 export default Questions;
