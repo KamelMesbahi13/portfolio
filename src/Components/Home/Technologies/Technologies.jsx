@@ -1,65 +1,71 @@
-import React, { useState, useRef } from "react";
+import { useState, useRef } from "react";
 // eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
 import {
   Layers,
-  Cpu,
+  Code2,
   Globe,
   Palette,
   Database,
-  Terminal,
-  Smartphone,
+  Server,
   GitGraph,
+  Puzzle,
+  Brush,
 } from "lucide-react";
 
 const skills = [
   {
-    name: "Frontend Arch",
-    icon: Layers,
-    tags: ["React", "Next.js", "Redux Toolkit"],
+    name: "MERN Development",
+    icon: Code2,
+    tags: ["MongoDB", "Express", "React", "Node.js"],
   },
   {
-    name: "UI Engineering",
+    name: "WordPress Development",
+    icon: Puzzle,
+    tags: ["Theme Customization", "Plugins", "WooCommerce"],
+  },
+  {
+    name: "Frontend Engineering",
+    icon: Layers,
+    tags: ["React", "Vite", "Redux Toolkit", "Tailwind CSS"],
+  },
+  {
+    name: "Web Design",
     icon: Palette,
-    tags: ["Tailwind CSS", "Framer Motion", "Figma"],
+    tags: ["UI/UX", "Figma", "Modern Layouts"],
   },
   {
     name: "Backend Logic",
-    icon: Cpu,
-    tags: ["Node.js", "Express", "REST APIs"],
+    icon: Server,
+    tags: ["REST APIs", "Express.js", "Authentication"],
   },
   {
-    name: "Database",
+    name: "Database Systems",
     icon: Database,
-    tags: ["MongoDB", "PostgreSQL", "Prisma"],
+    tags: ["MongoDB", "Mongoose", "SQL Basics"],
   },
   {
-    name: "Web Standards",
+    name: "SEO & Web Standards",
     icon: Globe,
-    tags: ["HTML5", "SEO", "Accessibility"],
+    tags: ["SEO", "Performance", "Accessibility"],
   },
   {
-    name: "DevOps & Tools",
-    icon: Terminal,
-    tags: ["Docker", "Webpack", "Vite"],
-  },
-  {
-    name: "Mobile Dev",
-    icon: Smartphone,
-    tags: ["React Native", "Responsive Design"],
+    name: "Social Media Design",
+    icon: Brush,
+    tags: ["Branding", "Content Creation", "Canva/Photoshop"],
   },
   {
     name: "Version Control",
     icon: GitGraph,
-    tags: ["Git", "GitHub Actions", "CI/CD"],
+    tags: ["Git", "GitHub", "CI/CD"],
   },
 ];
 
 const Skills = () => {
   return (
-    <div className="py-32 bg-transparent overflow-hidden selection:bg-[#F87B1B] selection:text-white">
+    <div className="md:py-20 py-12 bg-transparent overflow-hidden selection:bg-[#F87B1B] selection:text-white">
       <div className="container px-6 mx-auto">
-        <div className="flex flex-col items-end justify-between gap-6 pb-8 md:flex-row">
+        <div className="flex flex-col items-start justify-between gap-6 mb-12 md:flex-row md:items-end md:pb-20">
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -72,14 +78,16 @@ const Skills = () => {
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="max-w-md text-lg text-right text-gray-400 md:text-left"
+            /* FIXED: text-left for mobile, text-right for desktop */
+            className="max-w-md text-lg text-left text-gray-400 md:text-right"
           >
             Building scalable solutions with the latest technologies in the
             modern web ecosystem.
           </motion.p>
         </div>
 
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
+        {/* Grid */}
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {skills.map((skill, index) => (
             <SpotlightCard key={index} skill={skill} index={index} />
           ))}
