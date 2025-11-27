@@ -107,7 +107,7 @@ const Technologies = () => {
   const gridInView = useInView(gridRef, { once: true, margin: "-50px" });
 
   return (
-    <div className="md:py-20 py-12 bg-transparent overflow-hidden selection:bg-[#F87B1B] selection:text-white">
+    <div className="py-12 overflow-hidden bg-transparent md:py-20">
       <div className="container px-6 mx-auto">
         <div
           ref={headerRef}
