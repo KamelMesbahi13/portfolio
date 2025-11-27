@@ -125,7 +125,7 @@ const Technologies = () => {
             initial="hidden"
             animate={headerInView ? "visible" : "hidden"}
             variants={fadeInRight}
-            className="max-w-md text-lg text-gray-400 text-inherit md:text-right"
+            className="max-w-md text-lg text-white/70"
           >
             A blend of development, design, and digital creativity to craft
             modern and high-impact web experiences.
