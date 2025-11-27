@@ -118,17 +118,17 @@ const Technologies = () => {
             animate={headerInView ? "visible" : "hidden"}
             variants={fadeInLeft}
           >
-            <h1>My Stack</h1>
+            <h1>Skills & Technologies</h1>
           </motion.div>
 
           <motion.p
             initial="hidden"
             animate={headerInView ? "visible" : "hidden"}
             variants={fadeInRight}
-            className="max-w-md text-lg text-left text-gray-400 md:text-right"
+            className="max-w-md text-lg text-gray-400 text-inherit md:text-right"
           >
-            Building scalable solutions with the latest technologies in the
-            modern web ecosystem.
+            A blend of development, design, and digital creativity to craft
+            modern and high-impact web experiences.
           </motion.p>
         </div>
 
