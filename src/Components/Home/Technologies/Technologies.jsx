@@ -57,11 +57,8 @@ const skills = [
 
 const Skills = () => {
   return (
-    <section className="relative py-32 bg-[#0C2B4E] overflow-hidden selection:bg-[#F87B1B] selection:text-white">
-      {/* --- Premium Background Effects --- */}
-      {/* 1. Noise Texture Overlay (Optional: Adds a gritty, premium feel) */}
+    <section className="relative py-32 overflow-hidden selection:bg-[#F87B1B] selection:text-white">
       <div className="absolute inset-0 pointer-events-none opacity-20 mix-blend-soft-light">
-        {/* You can use a local SVG or this data URL for noise */}
         <div
           className="w-full h-full"
           style={{
@@ -70,11 +67,9 @@ const Skills = () => {
         ></div>
       </div>
 
-      {/* 2. Ambient Glow Blob */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-[#F87B1B] opacity-10 blur-[120px] rounded-full pointer-events-none"></div>
 
       <div className="container relative z-10 px-6 mx-auto">
-        {/* --- Header Section --- */}
         <div className="flex flex-col items-end justify-between gap-6 pb-8 mb-20 border-b md:flex-row border-white/10">
           <motion.div
             initial={{ opacity: 0, x: -20 }}
@@ -100,7 +95,6 @@ const Skills = () => {
           </motion.p>
         </div>
 
-        {/* --- Grid Section --- */}
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
           {skills.map((skill, index) => (
             <SpotlightCard key={index} skill={skill} index={index} />
@@ -111,7 +105,6 @@ const Skills = () => {
   );
 };
 
-// --- Card Component with Spotlight Effect ---
 const SpotlightCard = ({ skill, index }) => {
   const divRef = useRef(null);
   const [position, setPosition] = useState({ x: 0, y: 0 });
@@ -137,7 +130,6 @@ const SpotlightCard = ({ skill, index }) => {
       transition={{ delay: index * 0.05 }}
       className="relative h-full rounded-2xl border border-white/10 bg-[#0f355f]/50 backdrop-blur-sm overflow-hidden group"
     >
-      {/* 1. Spotlight Effect Layer */}
       <div
         className="absolute transition duration-300 opacity-0 pointer-events-none -inset-px group-hover:opacity-100"
         style={{
@@ -145,9 +137,7 @@ const SpotlightCard = ({ skill, index }) => {
         }}
       />
 
-      {/* 2. Content Layer */}
       <div className="relative z-10 flex flex-col items-start h-full gap-6 p-8">
-        {/* Icon & Title */}
         <div className="flex items-center gap-4">
           <div className="p-3 rounded-xl bg-white/5 border border-white/10 text-[#F87B1B] group-hover:scale-110 group-hover:bg-[#F87B1B] group-hover:text-white transition-all duration-300">
             <Icon size={28} />
@@ -155,10 +145,8 @@ const SpotlightCard = ({ skill, index }) => {
           <h3 className="text-xl font-bold text-white">{skill.name}</h3>
         </div>
 
-        {/* Subtle Divider */}
         <div className="w-full h-px bg-gradient-to-r from-white/10 to-transparent"></div>
 
-        {/* Tech Tags */}
         <div className="flex flex-wrap gap-2">
           {skill.tags.map((tag, i) => (
             <span
