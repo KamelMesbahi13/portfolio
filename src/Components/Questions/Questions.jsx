@@ -36,6 +36,119 @@ const faqData = [
   },
 ];
 
+const FAQItem = ({ item, isOpen }) => {
+  return (
+    <Accordion.Item value={item.id} className="relative">
+      <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.02] backdrop-blur-sm">
+        <motion.div
+          className="absolute inset-0 bg-mainColor"
+          animate={{
+            opacity: isOpen ? 0.25 : 0,
+          }}
+          transition={{ duration: 0.4 }}
+        />
+
+        <Accordion.Header>
+          <Accordion.Trigger className="relative w-full px-6 text-left cursor-pointer py-7 sm:px-8 sm:py-8">
+            <div className="flex items-center justify-between gap-6">
+              <div className="flex-1 space-y-3">
+                <div className="flex items-center gap-4">
+                  <motion.span
+                    animate={{
+                      color: isOpen
+                        ? "rgba(255,255,255,0.9)"
+                        : "rgba(255,255,255,0.4)",
+                    }}
+                    transition={{ duration: 0.3 }}
+                    className="text-xs font-bold tracking-[0.3em]"
+                  >
+                    {item.id.padStart(2, "0")}
+                  </motion.span>
+                  <motion.div
+                    className="flex-1 h-px bg-gradient-to-r from-secondColor/50 to-transparent"
+                    animate={{
+                      scaleX: isOpen ? 1 : 0.6,
+                      opacity: isOpen ? 0.6 : 0.3,
+                    }}
+                    transition={{ duration: 0.4 }}
+                    style={{ originX: 0 }}
+                  />
+                </div>
+
+                <h3 className="text-lg font-bold text-white md:text-xl lg:text-2xl">
+                  {item.question}
+                </h3>
+              </div>
+
+              <div className="shrink-0">
+                <motion.div
+                  className="flex items-center justify-center w-10 h-10 border rounded-full md:h-12 md:w-12 border-white/20 bg-white/5 backdrop-blur-sm"
+                  animate={{
+                    borderColor: isOpen
+                      ? "rgba(248, 123, 27, 0.6)"
+                      : "rgba(255,255,255,0.15)",
+                    backgroundColor: isOpen
+                      ? "rgba(248, 123, 27, 0.2)"
+                      : "rgba(255,255,255,0.05)",
+                  }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <motion.svg
+                    width="14"
+                    height="14"
+                    viewBox="0 0 14 14"
+                    fill="none"
+                    className="text-white"
+                    animate={{ rotate: isOpen ? 45 : 0 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <path
+                      d="M7 1V13M1 7H13"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                    />
+                  </motion.svg>
+                </motion.div>
+              </div>
+            </div>
+          </Accordion.Trigger>
+        </Accordion.Header>
+
+        {/* Content */}
+        <AnimatePresence initial={false}>
+          {isOpen && (
+            <Accordion.Content forceMount asChild>
+              <motion.div
+                initial={{ height: 0, opacity: 0 }}
+                animate={{ height: "auto", opacity: 1 }}
+                exit={{ height: 0, opacity: 0 }}
+                transition={{
+                  height: { duration: 0.4, ease: [0.32, 0.72, 0, 1] },
+                  opacity: { duration: 0.3, delay: isOpen ? 0.1 : 0 },
+                }}
+                className="overflow-hidden"
+              >
+                <div className="px-6 pb-8 sm:px-8">
+                  {/* Answer */}
+                  <motion.p
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.3, delay: 0.15 }}
+                    className="text-sm leading-relaxed md:text-base text-white/80"
+                  >
+                    {item.answer}
+                  </motion.p>
+                </div>
+              </motion.div>
+            </Accordion.Content>
+          )}
+        </AnimatePresence>
+      </div>
+    </Accordion.Item>
+  );
+};
+
 const FAQAccordion = () => {
   const [openItem, setOpenItem] = useState(null);
 
@@ -55,59 +168,10 @@ const FAQAccordion = () => {
           collapsible
           value={openItem}
           onValueChange={setOpenItem}
-          className="space-y-3"
+          className="space-y-4"
         >
           {faqData.map((item) => (
-            <Accordion.Item
-              key={item.id}
-              value={item.id}
-              className="rounded-xl overflow-hidden bg-[#0C2B4E]"
-            >
-              <Accordion.Header>
-                <Accordion.Trigger className="flex items-center justify-between w-full px-6 py-5 text-left cursor-pointer">
-                  <span className="pr-4 text-lg font-medium text-white">
-                    {item.question}
-                  </span>
-                  <motion.div
-                    animate={{ rotate: openItem === item.id ? 45 : 0 }}
-                    transition={{ duration: 0.2 }}
-                    className="flex-shrink-0 w-8 h-8 rounded-full bg-[#F87B1B] flex items-center justify-center"
-                  >
-                    <svg
-                      width="14"
-                      height="14"
-                      viewBox="0 0 14 14"
-                      fill="none"
-                      className="text-white"
-                    >
-                      <path
-                        d="M7 1V13M1 7H13"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                      />
-                    </svg>
-                  </motion.div>
-                </Accordion.Trigger>
-              </Accordion.Header>
-              <AnimatePresence initial={false}>
-                {openItem === item.id && (
-                  <Accordion.Content forceMount asChild>
-                    <motion.div
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: "auto", opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
-                      className="overflow-hidden"
-                    >
-                      <div className="px-6 pb-5 leading-relaxed text-gray-300">
-                        {item.answer}
-                      </div>
-                    </motion.div>
-                  </Accordion.Content>
-                )}
-              </AnimatePresence>
-            </Accordion.Item>
+            <FAQItem key={item.id} item={item} isOpen={openItem === item.id} />
           ))}
         </Accordion.Root>
       </div>
