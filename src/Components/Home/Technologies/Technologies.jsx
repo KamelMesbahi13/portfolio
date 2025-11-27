@@ -99,7 +99,7 @@ const skills = [
   },
 ];
 
-const Skills = () => {
+const Technologies = () => {
   const headerRef = useRef(null);
   const gridRef = useRef(null);
 
@@ -118,12 +118,7 @@ const Skills = () => {
             animate={headerInView ? "visible" : "hidden"}
             variants={fadeInLeft}
           >
-            <h2 className="text-4xl font-bold tracking-tight text-white md:text-6xl">
-              My{" "}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#F87B1B] to-orange-200">
-                Stack
-              </span>
-            </h2>
+            <h1>My Stack</h1>
           </motion.div>
 
           <motion.p
@@ -209,4 +204,4 @@ const SpotlightCard = ({ skill }) => {
   );
 };
 
-export default Skills;
+export default Technologies;
