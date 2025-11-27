@@ -59,7 +59,7 @@ const Skills = () => {
   return (
     <div className="py-32 bg-transparent overflow-hidden selection:bg-[#F87B1B] selection:text-white">
       <div className="container px-6 mx-auto">
-        <div className="flex flex-col items-end justify-between gap-6 pb-8 mb-20 border-b md:flex-row border-white/10">
+        <div className="flex flex-col items-end justify-between gap-6 pb-8 md:flex-row">
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
