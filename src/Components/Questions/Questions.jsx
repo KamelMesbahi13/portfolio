@@ -43,9 +43,7 @@ const FAQAccordion = () => {
     <div className="container py-20">
       <div className="max-w-3xl mx-auto">
         <div className="mb-12 text-center">
-          <h2 className="text-4xl md:text-5xl font-bold mb-4 text-[#F87B1B]">
-            Frequently Asked Questions
-          </h2>
+          <h1>Frequently Asked Questions</h1>
           <p className="text-lg text-gray-400">
             Find answers to common questions about our services
           </p>
