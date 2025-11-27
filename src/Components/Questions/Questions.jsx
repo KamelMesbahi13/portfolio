@@ -157,7 +157,7 @@ const FAQAccordion = () => {
       <div className="max-w-3xl mx-auto">
         <div className="mb-12 text-center">
           <h1>Frequently Asked Questions</h1>
-          <p className="max-w-3xl mx-auto mt-4 text-base md:text-lg text-white/70">
+          <p className="max-w-4xl mx-auto mt-4 text-base md:text-lg text-white/70">
             Find answers to common questions about our services
           </p>
           <div className="h-px max-w-xs mx-auto mt-8 bg-gradient-to-r from-transparent via-secondColor/50 to-transparent"></div>

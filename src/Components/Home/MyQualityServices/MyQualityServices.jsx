@@ -1,407 +1,196 @@
-/* eslint-disable no-unused-vars */
-import { useEffect, useRef, useState } from "react";
-import { motion } from "framer-motion";
+import * as Accordion from "@radix-ui/react-accordion";
+// eslint-disable-next-line no-unused-vars
+import { motion, AnimatePresence, useInView } from "framer-motion";
+import { useState, useRef } from "react";
 
-const services = [
+const faqData = [
   {
-    id: "01",
-    title: "Full-Stack Web Development",
-    summary:
-      "I build fast, scalable, and visually appealing web applications using the MERN stack. From concept to deployment, I turn ideas into high-performing digital products.",
-    details: [
-      "MERN stack (MongoDB, Express, React, Node.js)",
-      "Responsive UI with Tailwind CSS & Bootstrap",
-      "RESTful API integration and state management (Redux)",
-      "Multilingual websites (Arabic, French, English)",
-      "Deployment on Render / Vercel with CI/CD setup",
-    ],
+    id: "1",
+    question: "What services do you offer?",
+    answer:
+      "We offer a comprehensive range of services including web development, mobile app development, UI/UX design, and digital marketing solutions tailored to meet your business needs.",
   },
   {
-    id: "02",
-    title: "WordPress Development",
-    tagline: "Building professional websites with WordPress & WooCommerce.",
-    summary:
-      "I design and customize WordPress and WooCommerce websites that are modern, fast, and easy to manage. I also develop custom plugins to add unique features and improve functionality.",
-    details: [
-      "Custom WordPress & WooCommerce website creation",
-      "Theme customization and plugin integration",
-      "Development of custom plugins for unique features",
-      "SEO-friendly, responsive, and secure design",
-      "Training and long-term client support",
-    ],
-  },
-
-  {
-    id: "03",
-    title: "Website Maintenance & Optimization",
-    tagline: "Keeping your website fast, secure, and up-to-date.",
-    summary:
-      "I offer ongoing support to ensure your website stays optimized, secure, and aligned with your business goals.",
-    details: [
-      "Performance and security updates",
-      "Bug fixes and feature enhancements",
-      "Speed optimization and SEO improvements",
-      "Regular backups and technical support",
-    ],
+    id: "2",
+    question: "How long does a typical project take?",
+    answer:
+      "Project timelines vary depending on complexity and scope. A simple website might take 2-4 weeks, while a complex web application could take 3-6 months.",
   },
   {
-    id: "04",
-    title: "UI/UX Design",
-    summary:
-      "I craft clean, modern, and user-friendly interfaces that provide seamless user experiences across all devices. I focus on clarity, consistency, and conversion.",
-    details: [
-      "Wireframes, mockups, and interactive prototypes",
-      "Modern layouts using Figma & Tailwind CSS",
-      "Responsive design & accessibility",
-      "User testing and design iteration",
-    ],
+    id: "3",
+    question: "What is your pricing structure?",
+    answer:
+      "We offer flexible pricing models including fixed-price projects, hourly rates, and retainer agreements. Each project is quoted individually based on requirements.",
   },
   {
-    id: "05",
-    title: "E-Commerce Development",
-    summary:
-      "I create professional e-commerce solutions that help businesses sell online effectively — from product management to payment and order systems.",
-    details: [
-      "Custom online stores built with MERN / WooCommerce",
-      "Product, order, and user management systems",
-      "Multiple image upload and gallery integration",
-      "Secure payments and responsive dashboards",
-      "Optimized checkout and admin panels",
-    ],
+    id: "4",
+    question: "Do you provide ongoing support?",
+    answer:
+      "Yes, we offer various support and maintenance packages to ensure your project continues to run smoothly after launch.",
   },
   {
-    id: "06",
-    title: "Branding & Logo Design",
-    summary:
-      "I help brands define their visual identity through creative logo design and consistent branding systems that reflect their mission and values.",
-    details: [
-      "Logo creation and brand guidelines",
-      "Color palettes and typography systems",
-      "Visual assets for marketing and social media",
-      "Brand storytelling and identity alignment",
-    ],
-  },
-  {
-    id: "07",
-    title: "Social Media Design & Content Creation",
-    tagline: "Making your brand shine across social platforms.",
-    summary:
-      "I design engaging social media posts, stories, and ad creatives that match your brand's identity and help attract the right audience.",
-    details: [
-      "Custom designs for Instagram, Facebook, and LinkedIn",
-      "Ad creatives for marketing campaigns",
-      "Story templates and carousel post design",
-      "Consistent brand visuals and tone",
-    ],
+    id: "5",
+    question: "How do we get started?",
+    answer:
+      "Getting started is easy! Simply reach out through our contact form or schedule a free consultation.",
   },
 ];
 
-// Custom hook for individual element reveal
-const useReveal = (threshold = 0.2) => {
+const FAQItem = ({ item, isOpen }) => {
   const ref = useRef(null);
-  const [isVisible, setIsVisible] = useState(false);
-
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setIsVisible(true);
-          }
-        });
-      },
-      { threshold }
-    );
-
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, [threshold]);
-
-  return { ref, isVisible };
-};
-
-const ServiceCard = ({ service, index, isOpen, onToggle }) => {
-  const [isHovered, setIsHovered] = useState(false);
-  const { ref, isVisible } = useReveal(0.15);
-  const isActive = isHovered || isOpen;
-  const isHoveredAndOpen = isHovered && isOpen;
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <motion.li
+    <motion.div
       ref={ref}
       initial={{ opacity: 0, y: 50 }}
-      animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
+      animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
       transition={{
         duration: 0.6,
         ease: [0.22, 1, 0.36, 1],
-        delay: 0.1,
       }}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-      className="relative"
     >
-      <motion.div
-        animate={{
-          y: isActive ? -4 : 0,
-        }}
-        transition={{ type: "spring", stiffness: 300, damping: 30 }}
-        className="relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.02] backdrop-blur-sm"
-      >
-        <motion.div
-          className="absolute inset-0 bg-gradient-to-br from-mainColor/10 via-mainColor/5 to-transparent"
-          animate={{
-            opacity: isActive ? 1 : 0,
-          }}
-          transition={{ duration: 0.4 }}
-        />
+      <Accordion.Item value={item.id} className="relative">
+        <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.02] backdrop-blur-sm">
+          {/* Background color when open */}
+          <motion.div
+            className="absolute inset-0 bg-mainColor"
+            animate={{
+              opacity: isOpen ? 0.25 : 0,
+            }}
+            transition={{ duration: 0.4 }}
+          />
 
-        <motion.div
-          className="absolute inset-0"
-          style={{ backgroundColor: "#0C2B4E" }}
-          animate={{
-            opacity: isOpen ? (isHoveredAndOpen ? 0.4 : 0.25) : 0,
-          }}
-          transition={{ duration: 0.4 }}
-        />
+          {/* Trigger */}
+          <Accordion.Header>
+            <Accordion.Trigger className="relative w-full px-6 text-left cursor-pointer py-7 sm:px-8 sm:py-8">
+              <div className="flex items-center justify-between gap-6">
+                <div className="flex-1 space-y-3">
+                  {/* Number and gradient line */}
+                  <div className="flex items-center gap-4">
+                    <motion.span
+                      animate={{
+                        color: isOpen
+                          ? "rgba(255,255,255,0.9)"
+                          : "rgba(255,255,255,0.4)",
+                      }}
+                      transition={{ duration: 0.3 }}
+                      className="text-xs font-bold tracking-[0.3em]"
+                    >
+                      {item.id.padStart(2, "0")}
+                    </motion.span>
+                    <motion.div
+                      className="flex-1 h-px bg-gradient-to-r from-secondColor/50 to-transparent"
+                      animate={{
+                        scaleX: isOpen ? 1 : 0.6,
+                        opacity: isOpen ? 0.6 : 0.3,
+                      }}
+                      transition={{ duration: 0.4 }}
+                      style={{ originX: 0 }}
+                    />
+                  </div>
 
-        <motion.div
-          className="absolute inset-0 rounded-2xl"
-          animate={{
-            boxShadow: isActive
-              ? "inset 0 0 0 1px rgba(255, 255, 255, 0.1), 0 10px 40px -10px rgba(0, 0, 0, 0.4)"
-              : "inset 0 0 0 1px rgba(255, 255, 255, 0.05), 0 0 0 0 rgba(0, 0, 0, 0)",
-          }}
-          transition={{ duration: 0.3 }}
-        />
+                  {/* Question */}
+                  <h3 className="text-lg font-bold text-white md:text-xl lg:text-2xl">
+                    {item.question}
+                  </h3>
+                </div>
 
-        <button
-          onClick={onToggle}
-          className="relative w-full px-6 text-left py-7 sm:px-8 sm:py-8"
-        >
-          <div className="flex items-start justify-between gap-6">
-            <div className="flex-1 space-y-4">
-              <div className="flex items-center gap-4">
-                <motion.span
-                  animate={{
-                    color: isActive
-                      ? "rgba(255,255,255,0.9)"
-                      : "rgba(255,255,255,0.4)",
-                  }}
-                  transition={{ duration: 0.3 }}
-                  className="text-xs font-bold tracking-[0.3em]"
-                >
-                  {service.id}
-                </motion.span>
-                <motion.div
-                  className="flex-1 h-px bg-gradient-to-r from-secondColor/50 to-transparent"
-                  animate={{
-                    scaleX: isActive ? 1 : 0.6,
-                    opacity: isActive ? 0.6 : 0.3,
-                  }}
-                  transition={{ duration: 0.4 }}
-                  style={{ originX: 0 }}
-                />
-              </div>
-
-              <motion.h3
-                animate={{
-                  x: isActive ? 2 : 0,
-                }}
-                transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                className="text-2xl font-bold md:text-3xl lg:text-4xl"
-              >
-                {service.title}
-              </motion.h3>
-
-              <motion.p
-                animate={{
-                  color: isActive
-                    ? "rgba(255,255,255,0.9)"
-                    : "rgba(255,255,255,0.6)",
-                }}
-                transition={{ duration: 0.3 }}
-                className="pr-4 text-sm leading-relaxed md:text-base"
-              >
-                {service.summary}
-              </motion.p>
-            </div>
-
-            <motion.div
-              animate={{
-                scale: isActive ? 1.05 : 1,
-              }}
-              transition={{ type: "spring", stiffness: 400, damping: 25 }}
-              className="shrink-0"
-            >
-              <motion.div
-                className="flex items-center justify-center w-8 h-8 border rounded-full md:h-12 md:w-12 border-white/20 bg-white/5 backdrop-blur-sm"
-                animate={{
-                  borderColor: isActive
-                    ? "rgba(255,255,255,0.3)"
-                    : "rgba(255,255,255,0.15)",
-                  backgroundColor: isActive
-                    ? "rgba(255,255,255,0.1)"
-                    : "rgba(255,255,255,0.05)",
-                }}
-                transition={{ duration: 0.3 }}
-              >
-                <motion.svg
-                  className="w-4 h-4 md:w-6 md:h-6"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  strokeWidth={2}
-                  animate={{
-                    rotate: isOpen ? 180 : 0,
-                  }}
-                  transition={{
-                    type: "spring",
-                    stiffness: 200,
-                    damping: 20,
-                  }}
-                >
-                  <motion.path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M19 9l-7 7-7-7"
+                {/* Plus icon button */}
+                <div className="shrink-0">
+                  <motion.div
+                    className="flex items-center justify-center w-10 h-10 border rounded-full md:h-12 md:w-12 border-white/20 bg-white/5 backdrop-blur-sm"
                     animate={{
-                      strokeWidth: isActive ? 2.5 : 2,
+                      borderColor: isOpen
+                        ? "rgba(248, 123, 27, 0.6)"
+                        : "rgba(255,255,255,0.15)",
+                      backgroundColor: isOpen
+                        ? "rgba(248, 123, 27, 0.2)"
+                        : "rgba(255,255,255,0.05)",
                     }}
-                    transition={{ duration: 0.2 }}
-                  />
-                </motion.svg>
-              </motion.div>
-            </motion.div>
-          </div>
-        </button>
+                    transition={{ duration: 0.3 }}
+                  >
+                    <motion.svg
+                      width="14"
+                      height="14"
+                      viewBox="0 0 14 14"
+                      fill="none"
+                      className="text-white"
+                      animate={{ rotate: isOpen ? 45 : 0 }}
+                      transition={{ duration: 0.2 }}
+                    >
+                      <path
+                        d="M7 1V13M1 7H13"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                      />
+                    </motion.svg>
+                  </motion.div>
+                </div>
+              </div>
+            </Accordion.Trigger>
+          </Accordion.Header>
 
-        <motion.div
-          initial={false}
-          animate={{
-            height: isOpen ? "auto" : 0,
-            opacity: isOpen ? 1 : 0,
-          }}
-          transition={{
-            height: {
-              duration: 0.6,
-              ease: [0.32, 0.72, 0, 1],
-            },
-            opacity: {
-              duration: 0.4,
-              delay: isOpen ? 0.1 : 0.1,
-              ease: "easeInOut",
-            },
-          }}
-          className="overflow-hidden"
-        >
-          <div className="px-6 pb-8 sm:px-8">
-            <motion.div
-              initial={{ scaleX: 0, opacity: 0 }}
-              animate={{
-                scaleX: isOpen ? 1 : 0,
-                opacity: isOpen ? 1 : 0,
-              }}
-              transition={{
-                scaleX: {
-                  duration: 0.5,
-                  delay: isOpen ? 0.1 : 0,
-                  ease: [0.32, 0.72, 0, 1],
-                },
-                opacity: {
-                  duration: 0.4,
-                  delay: isOpen ? 0.1 : 0,
-                },
-              }}
-              className="h-px mb-6 origin-left bg-gradient-to-r from-secondColor/50 via-secondColor/30 to-transparent"
-            />
-
-            <motion.ul
-              initial="hidden"
-              animate={isOpen ? "visible" : "hidden"}
-              variants={{
-                visible: {
-                  transition: {
-                    staggerChildren: 0.08,
-                    delayChildren: 0.15,
-                  },
-                },
-                hidden: {
-                  transition: {
-                    staggerChildren: 0.06,
-                    staggerDirection: -1,
-                    delayChildren: 0,
-                  },
-                },
-              }}
-              className="space-y-3 md:grid md:grid-cols-2 md:gap-x-8 md:gap-y-3 md:space-y-0"
-            >
-              {service.details.map((detail, idx) => (
-                <motion.li
-                  key={idx}
-                  variants={{
-                    hidden: {
-                      opacity: 0,
-                      x: -8,
-                      transition: {
-                        duration: 0.3,
-                        ease: "easeInOut",
-                      },
-                    },
-                    visible: {
-                      opacity: 1,
-                      x: 0,
-                      transition: {
-                        type: "spring",
-                        stiffness: 300,
-                        damping: 24,
-                      },
-                    },
+          {/* Content */}
+          <AnimatePresence initial={false}>
+            {isOpen && (
+              <Accordion.Content forceMount asChild>
+                <motion.div
+                  initial={{ height: 0, opacity: 0 }}
+                  animate={{ height: "auto", opacity: 1 }}
+                  exit={{ height: 0, opacity: 0 }}
+                  transition={{
+                    height: { duration: 0.4, ease: [0.32, 0.72, 0, 1] },
+                    opacity: { duration: 0.3, delay: isOpen ? 0.1 : 0 },
                   }}
-                  className="flex items-start gap-3 text-white/90"
+                  className="overflow-hidden"
                 >
-                  <span className="mt-1.5 block h-1.5 w-1.5 shrink-0 rounded-full bg-secondColor" />
-                  <span className="text-sm md:text-base">{detail}</span>
-                </motion.li>
-              ))}
-            </motion.ul>
-          </div>
-        </motion.div>
-
-        <motion.div
-          className="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-mainColor/50 to-transparent"
-          animate={{
-            opacity: isActive ? 1 : 0,
-            scaleX: isActive ? 1 : 0.8,
-          }}
-          transition={{ duration: 0.4 }}
-        />
-      </motion.div>
-    </motion.li>
+                  <div className="px-6 pb-8 sm:px-8">
+                    <motion.p
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.3, delay: 0.15 }}
+                      className="text-sm leading-relaxed md:text-base text-white/80"
+                    >
+                      {item.answer}
+                    </motion.p>
+                  </div>
+                </motion.div>
+              </Accordion.Content>
+            )}
+          </AnimatePresence>
+        </div>
+      </Accordion.Item>
+    </motion.div>
   );
 };
 
-const MyQualityServices = () => {
-  const [open, setOpen] = useState(null);
-  const { ref, isVisible } = useReveal(0.1);
+const FAQAccordion = () => {
+  const [openItem, setOpenItem] = useState(null);
+  const headerRef = useRef(null);
+  const isHeaderInView = useInView(headerRef, { once: true, margin: "-100px" });
 
   return (
-    <section id="services" className="relative pt-12 text-white md:pt-28">
-      <div className="max-w-6xl px-6 mx-auto">
-        <div ref={ref} className="text-center">
+    <div className="container py-20">
+      <div className="max-w-3xl mx-auto">
+        {/* Header */}
+        <div ref={headerRef} className="mb-12 text-center">
           <motion.h1
             initial={{ opacity: 0, y: 30 }}
-            animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+            animate={
+              isHeaderInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }
+            }
             transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
           >
-            My Quality Services
+            Frequently Asked Questions
           </motion.h1>
 
           <motion.p
             initial={{ opacity: 0, y: 20 }}
-            animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+            animate={
+              isHeaderInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }
+            }
             transition={{
               duration: 0.7,
               delay: 0.15,
@@ -409,27 +198,40 @@ const MyQualityServices = () => {
             }}
             className="max-w-3xl mx-auto mt-4 text-base md:text-lg text-white/70"
           >
-            We put your ideas and thus your wishes in the form of a unique web
-            project that inspires you and your customers.
+            Find answers to common questions about our services
           </motion.p>
 
-          <div className="h-px max-w-xs mx-auto mt-8 bg-gradient-to-r from-transparent via-secondColor/50 to-transparent" />
+          <motion.div
+            initial={{ scaleX: 0, opacity: 0 }}
+            animate={
+              isHeaderInView
+                ? { scaleX: 1, opacity: 1 }
+                : { scaleX: 0, opacity: 0 }
+            }
+            transition={{
+              duration: 0.7,
+              delay: 0.3,
+              ease: [0.22, 1, 0.36, 1],
+            }}
+            className="h-px max-w-xs mx-auto mt-8 bg-gradient-to-r from-transparent via-secondColor/50 to-transparent"
+          />
         </div>
 
-        <ul className="mt-12 space-y-6 md:mt-16">
-          {services.map((service, i) => (
-            <ServiceCard
-              key={service.id}
-              service={service}
-              index={i}
-              isOpen={open === i}
-              onToggle={() => setOpen(open === i ? null : i)}
-            />
+        {/* Accordion */}
+        <Accordion.Root
+          type="single"
+          collapsible
+          value={openItem}
+          onValueChange={setOpenItem}
+          className="space-y-4"
+        >
+          {faqData.map((item) => (
+            <FAQItem key={item.id} item={item} isOpen={openItem === item.id} />
           ))}
-        </ul>
+        </Accordion.Root>
       </div>
-    </section>
+    </div>
   );
 };
 
-export default MyQualityServices;
+export default FAQAccordion;
