@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import React, { useState, useRef } from "react";
 // eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
 import {
@@ -12,6 +12,7 @@ import {
   GitGraph,
 } from "lucide-react";
 
+// --- Data Configuration ---
 const skills = [
   {
     name: "Frontend Arch",
@@ -57,19 +58,8 @@ const skills = [
 
 const Skills = () => {
   return (
-    <section className="relative py-32 overflow-hidden selection:bg-[#F87B1B] selection:text-white">
-      <div className="absolute inset-0 pointer-events-none opacity-20 mix-blend-soft-light">
-        <div
-          className="w-full h-full"
-          style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='1'/%3E%3C/svg%3E")`,
-          }}
-        ></div>
-      </div>
-
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-[#F87B1B] opacity-10 blur-[120px] rounded-full pointer-events-none"></div>
-
-      <div className="container relative z-10 px-6 mx-auto">
+    <div className="py-32 bg-transparent overflow-hidden selection:bg-[#F87B1B] selection:text-white">
+      <div className="container px-6 mx-auto">
         <div className="flex flex-col items-end justify-between gap-6 pb-8 mb-20 border-b md:flex-row border-white/10">
           <motion.div
             initial={{ opacity: 0, x: -20 }}
@@ -101,7 +91,7 @@ const Skills = () => {
           ))}
         </div>
       </div>
-    </section>
+    </div>
   );
 };
 
@@ -128,7 +118,7 @@ const SpotlightCard = ({ skill, index }) => {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ delay: index * 0.05 }}
-      className="relative h-full rounded-2xl border border-white/10 bg-[#0f355f]/50 backdrop-blur-sm overflow-hidden group"
+      className="relative h-full overflow-hidden border rounded-2xl border-white/10 bg-white/5 backdrop-blur-sm group"
     >
       <div
         className="absolute transition duration-300 opacity-0 pointer-events-none -inset-px group-hover:opacity-100"
@@ -151,7 +141,7 @@ const SpotlightCard = ({ skill, index }) => {
           {skill.tags.map((tag, i) => (
             <span
               key={i}
-              className="text-xs font-medium px-3 py-1 rounded-full bg-[#0C2B4E] text-gray-300 border border-white/5 group-hover:border-[#F87B1B]/30 transition-colors"
+              className="text-xs font-medium px-3 py-1 rounded-full bg-white/5 text-gray-300 border border-white/5 group-hover:border-[#F87B1B]/30 transition-colors"
             >
               {tag}
             </span>
