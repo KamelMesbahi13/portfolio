@@ -39,7 +39,7 @@ const HomeContactUs = () => {
 
   const services = [
     "Custom Web Applications (MERN Stack)",
-    "WordPress Websites / Woocommerce Websites (E-commerce",
+    "WordPress Websites / Woocommerce Websites (E-commerce)",
     "Web Design",
     "UI/UX Design",
     "Social Media Design",
@@ -96,13 +96,13 @@ const HomeContactUs = () => {
             </div>
 
             <div className="relative z-10 flex flex-col items-center w-full mt-20 lg:mt-24">
-              <div className="relative w-full bg-white rounded-[2rem] p-8 shadow-2xl overflow-hidden min-h-[200px] flex flex-col justify-center group">
+              <div className="relative w-full bg-white rounded-[2rem] p-6 shadow-2xl overflow-hidden min-h-[200px] flex flex-col justify-center group">
                 <Quote
                   className="absolute w-24 h-24 text-gray-100 transition-transform duration-700 transform opacity-50 pointer-events-none -top-2 -right-2 rotate-12 group-hover:scale-110"
                   fill="currentColor"
                 />
 
-                <div className="absolute top-8 left-0 w-1.5 h-12 rounded-r-full bg-[#F87B1B]" />
+                <div className="absolute top-8 left-0 w-1.5 h-12 rounded-r-full bg-secondColor" />
 
                 <AnimatePresence mode="wait">
                   <motion.div
@@ -118,7 +118,7 @@ const HomeContactUs = () => {
                     </p>
 
                     <div className="flex items-center gap-3">
-                      <div className="w-8 h-0.5 bg-[#F87B1B]" />{" "}
+                      <div className="w-8 h-0.5 bg-secondColor" />{" "}
                       <div className="flex flex-col">
                         <span className="text-sm font-bold tracking-wide text-gray-900 uppercase">
                           {quotes[currentQuote].author}
@@ -162,7 +162,7 @@ const HomeContactUs = () => {
                   <input
                     type="text"
                     placeholder="John"
-                    className="w-full px-4 py-3 text-sm text-gray-900 transition-all border border-gray-200 outline-none rounded-xl focus:border-[#F87B1B] focus:ring-2 focus:ring-[#F87B1B]/20 bg-gray-50/50 hover:bg-gray-50"
+                    className="w-full px-4 py-3 text-sm text-gray-900 transition-all border border-gray-200 outline-none rounded-xl focus:border-secondColor focus:ring-2 focus:ring-secondColor/20 bg-gray-50/50 hover:bg-gray-50"
                   />
                 </div>
                 <div className="space-y-2">
@@ -172,7 +172,7 @@ const HomeContactUs = () => {
                   <input
                     type="text"
                     placeholder="Doe"
-                    className="w-full px-4 py-3 text-sm text-gray-900 transition-all border border-gray-200 outline-none rounded-xl focus:border-[#F87B1B] focus:ring-2 focus:ring-[#F87B1B]/20 bg-gray-50/50 hover:bg-gray-50"
+                    className="w-full px-4 py-3 text-sm text-gray-900 transition-all border border-gray-200 outline-none rounded-xl focus:border-secondColor focus:ring-2 focus:ring-secondColor/20 bg-gray-50/50 hover:bg-gray-50"
                   />
                 </div>
               </div>
@@ -185,7 +185,7 @@ const HomeContactUs = () => {
                   <input
                     type="email"
                     placeholder="john@example.com"
-                    className="w-full px-4 py-3 text-sm text-gray-900 transition-all border border-gray-200 outline-none rounded-xl focus:border-[#F87B1B] focus:ring-2 focus:ring-[#F87B1B]/20 bg-gray-50/50 hover:bg-gray-50"
+                    className="w-full px-4 py-3 text-sm text-gray-900 transition-all border border-gray-200 outline-none rounded-xl focus:border-secondColor focus:ring-2 focus:ring-secondColor/20 bg-gray-50/50 hover:bg-gray-50"
                   />
                 </div>
                 <div className="space-y-2">
@@ -195,7 +195,7 @@ const HomeContactUs = () => {
                   <input
                     type="tel"
                     placeholder="+1 (555) 000-0000"
-                    className="w-full px-4 py-3 text-sm text-gray-900 transition-all border border-gray-200 outline-none rounded-xl focus:border-[#F87B1B] focus:ring-2 focus:ring-[#F87B1B]/20 bg-gray-50/50 hover:bg-gray-50"
+                    className="w-full px-4 py-3 text-sm text-gray-900 transition-all border border-gray-200 outline-none rounded-xl focus:border-secondColor focus:ring-2 focus:ring-secondColor/20 bg-gray-50/50 hover:bg-gray-50"
                   />
                 </div>
               </div>
@@ -211,7 +211,7 @@ const HomeContactUs = () => {
                     className={`w-full px-4 py-3 text-left bg-gray-50/50 border rounded-xl flex items-center justify-between transition-all duration-200 outline-none hover:bg-gray-50
                       ${
                         isOpen
-                          ? "border-[#F87B1B] ring-2 ring-[#F87B1B]/20"
+                          ? "border-secondColor ring-2 ring-secondColor/20"
                           : "border-gray-200 hover:border-gray-300"
                       }
                     `}
@@ -247,11 +247,11 @@ const HomeContactUs = () => {
                               setSelectedService(service);
                               setIsOpen(false);
                             }}
-                            className="px-4 py-3 text-sm text-gray-700 cursor-pointer hover:bg-gray-50 hover:text-[#F87B1B] transition-colors flex items-center justify-between group"
+                            className="flex items-center justify-between px-4 py-3 text-sm text-gray-700 transition-colors cursor-pointer hover:bg-gray-50 hover:text-secondColor group"
                           >
                             {service}
                             {selectedService === service && (
-                              <Check className="w-4 h-4 text-[#F87B1B]" />
+                              <Check className="w-4 h-4 text-secondColor" />
                             )}
                           </li>
                         ))}
@@ -268,7 +268,7 @@ const HomeContactUs = () => {
                 <textarea
                   rows={4}
                   placeholder="Tell us a little about your project"
-                  className="w-full px-4 py-3 text-sm text-gray-900 transition-all border border-gray-200 outline-none resize-none rounded-xl focus:border-[#F87B1B] focus:ring-2 focus:ring-[#F87B1B]/20 bg-gray-50/50 hover:bg-gray-50"
+                  className="w-full px-4 py-3 text-sm text-gray-900 transition-all border border-gray-200 outline-none resize-none rounded-xl focus:border-secondColor focus:ring-2 focus:ring-secondColor/20 bg-gray-50/50 hover:bg-gray-50"
                 />
               </div>
 
