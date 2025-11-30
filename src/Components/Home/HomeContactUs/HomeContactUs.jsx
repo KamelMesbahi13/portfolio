@@ -13,7 +13,7 @@ const HomeContactUs = () => {
   };
 
   return (
-    <section className="flex items-center justify-center w-full min-h-screen p-4 font-sans bg-gray-50 md:p-8">
+    <section className="flex items-center justify-center w-full min-h-screen p-4 bg-gray-50 md:p-8">
       {/* Main Container mimicking the white outer border/padding */}
       <div className="bg-white p-3 md:p-4 rounded-[2.5rem] shadow-xl w-full max-w-[1400px] overflow-hidden">
         <div className="flex flex-col gap-4 lg:flex-row">
@@ -33,7 +33,7 @@ const HomeContactUs = () => {
                   <div className="w-4 h-4 bg-white rounded-full" />
                 </div>
                 <span className="text-lg font-semibold tracking-wide">
-                  Your Portfolio
+                  Kamel Mesbahi{" "}
                 </span>
               </div>
 
@@ -147,7 +147,7 @@ const HomeContactUs = () => {
                   <input
                     type="text"
                     placeholder="Enter your first name"
-                    className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#F87B1B] focus:ring-2 focus:ring-[#F87B1B]/20 outline-none transition-all bg-gray-50/50"
+                    className="w-full px-4 py-3 transition-all border border-gray-200 outline-none rounded-xl focus:border-secondColor focus:ring-2 focus:ring-secondColor/20 bg-gray-50/50"
                   />
                 </div>
                 <div className="space-y-2">
@@ -157,7 +157,7 @@ const HomeContactUs = () => {
                   <input
                     type="text"
                     placeholder="Enter your last name"
-                    className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#F87B1B] focus:ring-2 focus:ring-[#F87B1B]/20 outline-none transition-all bg-gray-50/50"
+                    className="w-full px-4 py-3 transition-all border border-gray-200 outline-none rounded-xl focus:border-secondColor focus:ring-2 focus:ring-secondColor/20 bg-gray-50/50"
                   />
                 </div>
               </div>
@@ -169,7 +169,7 @@ const HomeContactUs = () => {
                 <input
                   type="email"
                   placeholder="Enter your email"
-                  className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#F87B1B] focus:ring-2 focus:ring-[#F87B1B]/20 outline-none transition-all bg-gray-50/50"
+                  className="w-full px-4 py-3 transition-all border border-gray-200 outline-none rounded-xl focus:border-secondColor focus:ring-2 focus:ring-secondColor/20 bg-gray-50/50"
                 />
               </div>
 
@@ -180,7 +180,7 @@ const HomeContactUs = () => {
                 <textarea
                   rows={4}
                   placeholder="Tell us a little about your project"
-                  className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#F87B1B] focus:ring-2 focus:ring-[#F87B1B]/20 outline-none transition-all bg-gray-50/50 resize-none"
+                  className="w-full px-4 py-3 transition-all border border-gray-200 outline-none resize-none rounded-xl focus:border-secondColor focus:ring-2 focus:ring-secondColor/20 bg-gray-50/50"
                 />
               </div>
 
