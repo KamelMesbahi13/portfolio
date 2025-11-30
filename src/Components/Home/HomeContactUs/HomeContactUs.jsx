@@ -3,7 +3,6 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight, ChevronDown, Check, Quote } from "lucide-react";
 
-// Data for the Carousel
 const quotes = [
   {
     text: "Design is not just what it looks like and feels like. Design is how it works.",
@@ -28,11 +27,9 @@ const quotes = [
 ];
 
 const HomeContactUs = () => {
-  // Form States
   const [isOpen, setIsOpen] = useState(false);
   const [selectedService, setSelectedService] = useState(null);
 
-  // Carousel State
   const [currentQuote, setCurrentQuote] = useState(0);
 
   const colors = {
@@ -41,13 +38,13 @@ const HomeContactUs = () => {
   };
 
   const services = [
-    "Branding Design",
+    "Custom Web Applications (MERN Stack)",
+    "WordPress Websites / Woocommerce Websites (E-commerce",
     "Web Design",
     "UI/UX Design",
-    "App Design",
+    "Social Media Design",
   ];
 
-  // Automatic Carousel Logic
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentQuote((prev) => (prev + 1) % quotes.length);
@@ -99,7 +96,6 @@ const HomeContactUs = () => {
             </div>
 
             <div className="relative z-10 flex flex-col items-center w-full mt-20 lg:mt-24">
-              {/* The Modern Card */}
               <div className="relative w-full bg-white rounded-[2rem] p-8 shadow-2xl overflow-hidden min-h-[200px] flex flex-col justify-center group">
                 <Quote
                   className="absolute w-24 h-24 text-gray-100 transition-transform duration-700 transform opacity-50 pointer-events-none -top-2 -right-2 rotate-12 group-hover:scale-110"
