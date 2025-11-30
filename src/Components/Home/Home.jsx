@@ -4,6 +4,7 @@ import MyQualityServices from "./MyQualityServices/MyQualityServices";
 import Technologies from "./Technologies/Technologies";
 import HomeAbout from "./HomeAbout/HomeAbout";
 import Questions from "../Questions/Questions";
+import HomeContactUs from "../HomeContactUs/HomeContactUs";
 
 const Home = () => (
   <div>
@@ -13,6 +14,7 @@ const Home = () => (
     <RecentWork />
     <Technologies />
     <Questions />
+    <HomeContactUs />
   </div>
 );
 
