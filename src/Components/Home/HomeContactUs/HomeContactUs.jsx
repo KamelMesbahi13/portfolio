@@ -13,7 +13,7 @@ const HomeContactUs = () => {
   };
 
   return (
-    <section className="flex items-center justify-center w-full min-h-screen p-4 bg-gray-50 md:p-8">
+    <section className="flex items-center justify-center w-full p-4 bg-gray-50 md:p-8">
       {/* Main Container mimicking the white outer border/padding */}
       <div className="bg-white p-3 md:p-4 rounded-[2.5rem] shadow-xl w-full max-w-[1400px] overflow-hidden">
         <div className="flex flex-col gap-4 lg:flex-row">
