@@ -4,13 +4,9 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight, ChevronDown, Check } from "lucide-react";
 
 const HomeContactUs = () => {
-  const [contactMethod, setContactMethod] = useState("email");
-
-  // Dropdown State
   const [isOpen, setIsOpen] = useState(false);
   const [selectedService, setSelectedService] = useState(null);
 
-  // Your Brand Colors
   const colors = {
     main: "#0C2B4E",
     second: "#F87B1B",
@@ -24,19 +20,15 @@ const HomeContactUs = () => {
   ];
 
   return (
-    <section className="flex items-center justify-center w-full min-h-screen p-4 font-sans bg-gray-50 md:p-8">
-      {/* Main Container */}
+    <div className="container flex items-center justify-center w-full min-h-[80vh] py-4 md:py-8">
       <div className="bg-white p-3 md:p-4 rounded-[2.5rem] shadow-xl w-full max-w-[1400px] overflow-hidden">
         <div className="flex flex-col gap-4 lg:flex-row">
-          {/* LEFT PANEL (Dark Blue) */}
           <div
             className="w-full lg:w-[45%] rounded-[2rem] p-8 md:p-12 relative flex flex-col justify-between overflow-hidden"
             style={{ backgroundColor: colors.main }}
           >
-            {/* Background Gradient */}
             <div className="absolute top-0 left-0 w-full h-full pointer-events-none bg-gradient-to-br from-white/5 to-transparent" />
 
-            {/* Top Content */}
             <div className="relative z-10">
               <div className="flex items-center gap-3 mb-12 text-white">
                 <div className="flex items-center justify-center w-8 h-8 rounded-full bg-white/20 backdrop-blur-sm">
@@ -69,7 +61,6 @@ const HomeContactUs = () => {
               </motion.p>
             </div>
 
-            {/* Bottom Testimonial */}
             <div className="relative z-10 mt-16 lg:mt-24">
               <div className="absolute w-12 h-12 transform -translate-y-1/2 bg-white rounded-full top-1/2 -left-6" />
               <div className="absolute w-12 h-12 transform -translate-y-1/2 bg-white rounded-full top-1/2 -right-6" />
@@ -108,45 +99,8 @@ const HomeContactUs = () => {
             </div>
           </div>
 
-          {/* RIGHT PANEL (Form) */}
           <div className="w-full lg:w-[55%] bg-white p-6 md:p-12 flex flex-col justify-center">
-            {/* Tabs */}
-            <div className="relative inline-flex self-start w-full p-1 mb-8 bg-gray-100 rounded-full md:w-auto">
-              <button
-                onClick={() => setContactMethod("email")}
-                className={`relative px-6 py-3 text-sm font-medium rounded-full transition-colors duration-300 w-1/2 md:w-auto text-center z-10 ${
-                  contactMethod === "email" ? "text-gray-900" : "text-gray-500"
-                }`}
-              >
-                {contactMethod === "email" && (
-                  <motion.div
-                    layoutId="activeTab"
-                    className="absolute inset-0 bg-white rounded-full shadow-sm"
-                    transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                  />
-                )}
-                <span className="relative z-10">Contact via email</span>
-              </button>
-              <button
-                onClick={() => setContactMethod("video")}
-                className={`relative px-6 py-3 text-sm font-medium rounded-full transition-colors duration-300 w-1/2 md:w-auto text-center z-10 ${
-                  contactMethod === "video" ? "text-gray-900" : "text-gray-500"
-                }`}
-              >
-                {contactMethod === "video" && (
-                  <motion.div
-                    layoutId="activeTab"
-                    className="absolute inset-0 bg-white rounded-full shadow-sm"
-                    transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                  />
-                )}
-                <span className="relative z-10">Book a video call</span>
-              </button>
-            </div>
-
-            {/* Form */}
             <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
-              {/* Row 1: Names */}
               <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
                 <div className="space-y-2">
                   <label className="text-sm font-semibold text-gray-900">
@@ -170,7 +124,6 @@ const HomeContactUs = () => {
                 </div>
               </div>
 
-              {/* Row 2: Email & Phone (Updated) */}
               <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
                 <div className="space-y-2">
                   <label className="text-sm font-semibold text-gray-900">
@@ -194,7 +147,6 @@ const HomeContactUs = () => {
                 </div>
               </div>
 
-              {/* Row 3: Custom Dropdown (New) */}
               <div className="relative space-y-2">
                 <label className="text-sm font-semibold text-gray-900">
                   I'm interested in...
@@ -256,7 +208,6 @@ const HomeContactUs = () => {
                 </div>
               </div>
 
-              {/* Row 4: Message */}
               <div className="space-y-2">
                 <label className="text-sm font-semibold text-gray-900">
                   How can we help you?
@@ -268,7 +219,6 @@ const HomeContactUs = () => {
                 />
               </div>
 
-              {/* Submit Button */}
               <motion.button
                 whileHover={{ scale: 1.01 }}
                 whileTap={{ scale: 0.98 }}
@@ -289,7 +239,7 @@ const HomeContactUs = () => {
           </div>
         </div>
       </div>
-    </section>
+    </div>
   );
 };
 
