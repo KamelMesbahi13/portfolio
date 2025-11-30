@@ -3,8 +3,8 @@ import RecentWork from "./RecentWork/RecentWork";
 import MyQualityServices from "./MyQualityServices/MyQualityServices";
 import Technologies from "./Technologies/Technologies";
 import HomeAbout from "./HomeAbout/HomeAbout";
-import Questions from "../Questions/Questions";
-import HomeContactUs from "../HomeContactUs/HomeContactUs";
+import Questions from "./Questions/Questions";
+import HomeContactUs from "./HomeContactUs/HomeContactUs";
 
 const Home = () => (
   <div>
