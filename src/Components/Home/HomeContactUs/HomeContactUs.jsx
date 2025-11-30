@@ -45,19 +45,20 @@ const HomeContactUs = () => {
                 transition={{ duration: 0.6 }}
                 className="mb-6 text-4xl font-medium leading-tight text-white md:text-5xl"
               >
-                Request a call with <br />
-                <span style={{ color: colors.second }}>our experts.</span>
+                Turn Ideas Into
+                <br />
+                <span style={{ color: colors.second }}>Digital Reality.</span>
               </motion.h2>
 
               <motion.p
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.1 }}
-                className="max-w-md text-sm leading-relaxed text-gray-300 md:text-base"
+                className="max-w-md text-xs leading-relaxed text-gray-300 md:text-base"
               >
-                Ready to bring your vision to life? Our team is ready to assist
-                you in creating an unforgettable experience tailored
-                specifically to your needs.
+                Whether it’s a website, web app, or social media campaign, I
+                craft modern, high-performing digital experiences that make your
+                brand stand out.
               </motion.p>
             </div>
 
@@ -83,12 +84,12 @@ const HomeContactUs = () => {
                     ))}
                   </div>
                 </div>
-                <p className="mb-4 text-sm font-medium text-gray-800 md:text-base">
+                <p className="mb-4 text-xs font-medium text-gray-800 md:text-base">
                   "The attention to detail was beyond impressive. They made our
                   project unforgettable!"
                 </p>
                 <div className="flex flex-col items-center">
-                  <span className="text-sm font-bold text-gray-900">
+                  <span className="text-xs font-bold text-gray-800">
                     Fiona Jonna
                   </span>
                   <span className="text-xs text-gray-500">
@@ -103,52 +104,52 @@ const HomeContactUs = () => {
             <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
               <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
                 <div className="space-y-2">
-                  <label className="text-sm font-semibold text-gray-900">
+                  <label className="text-xs font-semibold text-gray-800">
                     Your first name
                   </label>
                   <input
                     type="text"
                     placeholder="Enter your first name"
-                    className="w-full px-4 py-3 transition-all border border-gray-200 outline-none rounded-xl focus:border-[#F87B1B] focus:ring-2 focus:ring-[#F87B1B]/20 bg-gray-50/50"
+                    className="w-full text-black text-sm px-4 py-3 transition-all border border-gray-200 outline-none rounded-xl focus:border-[#F87B1B] focus:ring-2 focus:ring-[#F87B1B]/20 bg-gray-50/50"
                   />
                 </div>
                 <div className="space-y-2">
-                  <label className="text-sm font-semibold text-gray-900">
+                  <label className="text-xs font-semibold text-gray-800">
                     Your last name
                   </label>
                   <input
                     type="text"
                     placeholder="Enter your last name"
-                    className="w-full px-4 py-3 transition-all border border-gray-200 outline-none rounded-xl focus:border-[#F87B1B] focus:ring-2 focus:ring-[#F87B1B]/20 bg-gray-50/50"
+                    className="w-full text-black text-sm px-4 py-3 transition-all border border-gray-200 outline-none rounded-xl focus:border-[#F87B1B] focus:ring-2 focus:ring-[#F87B1B]/20 bg-gray-50/50"
                   />
                 </div>
               </div>
 
               <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
                 <div className="space-y-2">
-                  <label className="text-sm font-semibold text-gray-900">
+                  <label className="text-xs font-semibold text-gray-800">
                     Email
                   </label>
                   <input
                     type="email"
                     placeholder="Enter your email"
-                    className="w-full px-4 py-3 transition-all border border-gray-200 outline-none rounded-xl focus:border-[#F87B1B] focus:ring-2 focus:ring-[#F87B1B]/20 bg-gray-50/50"
+                    className="w-full text-black text-sm px-4 py-3 transition-all border border-gray-200 outline-none rounded-xl focus:border-[#F87B1B] focus:ring-2 focus:ring-[#F87B1B]/20 bg-gray-50/50"
                   />
                 </div>
                 <div className="space-y-2">
-                  <label className="text-sm font-semibold text-gray-900">
+                  <label className="text-xs font-semibold text-gray-800">
                     Phone number
                   </label>
                   <input
                     type="tel"
                     placeholder="+1 (555) 000-0000"
-                    className="w-full px-4 py-3 transition-all border border-gray-200 outline-none rounded-xl focus:border-[#F87B1B] focus:ring-2 focus:ring-[#F87B1B]/20 bg-gray-50/50"
+                    className="w-full text-black text-sm px-4 py-3 transition-all border border-gray-200 outline-none rounded-xl focus:border-[#F87B1B] focus:ring-2 focus:ring-[#F87B1B]/20 bg-gray-50/50"
                   />
                 </div>
               </div>
 
               <div className="relative space-y-2">
-                <label className="text-sm font-semibold text-gray-900">
+                <label className="text-xs font-semibold text-gray-800">
                   I'm interested in...
                 </label>
                 <div className="relative">
@@ -165,7 +166,7 @@ const HomeContactUs = () => {
                   >
                     <span
                       className={
-                        selectedService ? "text-gray-900" : "text-gray-400"
+                        selectedService ? "text-gray-800" : "text-gray-400"
                       }
                     >
                       {selectedService || "— Please choose an option —"}
@@ -194,7 +195,7 @@ const HomeContactUs = () => {
                               setSelectedService(service);
                               setIsOpen(false);
                             }}
-                            className="px-4 py-3 text-sm text-gray-700 cursor-pointer hover:bg-gray-50 hover:text-[#F87B1B] transition-colors flex items-center justify-between group"
+                            className="px-4 py-3 text-xs text-gray-700 cursor-pointer hover:bg-gray-50 hover:text-[#F87B1B] transition-colors flex items-center justify-between group"
                           >
                             {service}
                             {selectedService === service && (
@@ -209,7 +210,7 @@ const HomeContactUs = () => {
               </div>
 
               <div className="space-y-2">
-                <label className="text-sm font-semibold text-gray-900">
+                <label className="text-xs font-semibold text-gray-800">
                   How can we help you?
                 </label>
                 <textarea
