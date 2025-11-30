@@ -29,7 +29,6 @@ const quotes = [
 const HomeContactUs = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedService, setSelectedService] = useState(null);
-
   const [currentQuote, setCurrentQuote] = useState(0);
 
   const colors = {
@@ -39,7 +38,7 @@ const HomeContactUs = () => {
 
   const services = [
     "Custom Web Applications (MERN Stack)",
-    "WordPress Websites / Woocommerce Websites (E-commerce)",
+    "WordPress / Woocommerce (E-commerce)",
     "Web Design",
     "UI/UX Design",
     "Social Media Design",
@@ -54,55 +53,60 @@ const HomeContactUs = () => {
   }, []);
 
   return (
-    <div className="container flex items-center justify-center w-full min-h-[80vh] py-8 md:py-12 font-sans">
-      <div className="bg-white p-3 md:p-4 rounded-[2.5rem] shadow-2xl w-full max-w-[1400px] overflow-hidden border border-gray-100">
-        <div className="flex flex-col gap-4 lg:flex-row">
+    <div className="container flex items-center justify-center w-full px-3 py-4 font-sans sm:py-6 md:py-12 sm:px-4">
+      <div className="bg-white p-2 sm:p-3 md:p-4 rounded-xl sm:rounded-2xl md:rounded-[2.5rem] shadow-2xl w-full max-w-[1400px] overflow-hidden border border-gray-100">
+        <div className="flex flex-col gap-2 sm:gap-3 md:gap-4 lg:flex-row">
+          {/* Left Panel */}
           <div
-            className="w-full lg:w-[45%] rounded-[2rem] p-8 md:p-12 relative flex flex-col justify-between overflow-hidden"
+            className="w-full lg:w-[45%] rounded-lg sm:rounded-xl md:rounded-[2rem] p-4 sm:p-6 md:p-8 lg:p-12 relative flex flex-col justify-between overflow-hidden"
             style={{ backgroundColor: colors.main }}
           >
             <div className="absolute top-0 left-0 w-full h-full pointer-events-none bg-gradient-to-br from-white/10 to-transparent" />
 
             <div className="relative z-10">
-              <div className="flex items-center gap-3 mb-10 text-white">
-                <div className="flex items-center justify-center w-10 h-10 border rounded-full bg-white/10 backdrop-blur-md border-white/20">
-                  <div className="w-5 h-5 bg-white rounded-full shadow-glow" />
+              {/* Logo Section */}
+              <div className="flex items-center gap-2 mb-4 text-white sm:gap-3 sm:mb-6 md:mb-10">
+                <div className="flex items-center justify-center border rounded-full w-7 h-7 sm:w-8 sm:h-8 md:w-10 md:h-10 bg-white/10 backdrop-blur-md border-white/20">
+                  <div className="w-3 h-3 bg-white rounded-full sm:w-4 sm:h-4 md:w-5 md:h-5 shadow-glow" />
                 </div>
-                <span className="text-lg font-semibold tracking-wide text-white/90">
+                <span className="text-sm font-semibold tracking-wide sm:text-base md:text-lg text-white/90">
                   Kamel Mesbahi
                 </span>
               </div>
 
+              {/* Heading */}
               <motion.h2
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6 }}
-                className="mb-6 text-4xl font-medium leading-tight text-white md:text-5xl"
+                className="mb-3 text-xl font-medium leading-tight text-white sm:mb-4 md:mb-6 sm:text-2xl md:text-4xl lg:text-5xl"
               >
                 Turn Ideas Into <br />
                 <span style={{ color: colors.second }}>Digital Reality.</span>
               </motion.h2>
 
+              {/* Description - Hidden on very small screens */}
               <motion.p
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.1 }}
-                className="max-w-md text-sm leading-relaxed text-gray-300/90"
+                className="hidden max-w-md text-xs leading-relaxed sm:block sm:text-sm text-gray-300/90"
               >
-                Whether it’s a website, web app, or social media campaign, I
+                Whether it's a website, web app, or social media campaign, I
                 craft modern, high-performing digital experiences that make your
                 brand stand out.
               </motion.p>
             </div>
 
-            <div className="relative z-10 flex flex-col items-center w-full mt-20 lg:mt-24">
-              <div className="relative w-full bg-white rounded-[2rem] p-6 shadow-2xl overflow-hidden min-h-[200px] flex flex-col justify-center group">
+            {/* Quote Section - Hidden on mobile, shown on sm+ */}
+            <div className="relative z-10 flex-col items-center hidden w-full mt-6 sm:flex sm:mt-8 md:mt-12 lg:mt-20">
+              <div className="relative w-full bg-white rounded-xl sm:rounded-2xl md:rounded-[2rem] p-3 sm:p-4 md:p-6 shadow-2xl overflow-hidden min-h-[140px] sm:min-h-[160px] md:min-h-[180px] flex flex-col justify-center group">
                 <Quote
-                  className="absolute w-24 h-24 text-gray-100 transition-transform duration-700 transform opacity-50 pointer-events-none -top-2 -right-2 rotate-12 group-hover:scale-110"
+                  className="absolute text-gray-100 transition-transform duration-700 transform opacity-50 pointer-events-none w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 -top-1 -right-1 rotate-12 group-hover:scale-110"
                   fill="currentColor"
                 />
 
-                <div className="absolute top-8 left-0 w-1.5 h-12 rounded-r-full bg-secondColor" />
+                <div className="absolute top-5 sm:top-6 md:top-8 left-0 w-1 sm:w-1.5 h-6 sm:h-8 md:h-10 rounded-r-full bg-secondColor" />
 
                 <AnimatePresence mode="wait">
                   <motion.div
@@ -111,19 +115,19 @@ const HomeContactUs = () => {
                     animate={{ opacity: 1, x: 0 }}
                     exit={{ opacity: 0, x: -10 }}
                     transition={{ duration: 0.4 }}
-                    className="relative z-10 px-4"
+                    className="relative z-10 px-2 sm:px-3 md:px-4"
                   >
-                    <p className="mb-6 text-base italic font-medium leading-relaxed text-gray-800">
+                    <p className="mb-3 text-xs italic font-medium leading-relaxed text-gray-800 sm:mb-4 md:mb-5 sm:text-sm md:text-base line-clamp-3">
                       "{quotes[currentQuote].text}"
                     </p>
 
-                    <div className="flex items-center gap-3">
-                      <div className="w-8 h-0.5 bg-secondColor" />{" "}
+                    <div className="flex items-center gap-2">
+                      <div className="w-4 sm:w-6 md:w-8 h-0.5 bg-secondColor" />
                       <div className="flex flex-col">
-                        <span className="text-sm font-bold tracking-wide text-gray-900 uppercase">
+                        <span className="text-[10px] sm:text-xs md:text-sm font-bold tracking-wide text-gray-900 uppercase">
                           {quotes[currentQuote].author}
                         </span>
-                        <span className="text-xs font-medium text-gray-500">
+                        <span className="text-[9px] sm:text-[10px] md:text-xs font-medium text-gray-500">
                           {quotes[currentQuote].role}
                         </span>
                       </div>
@@ -132,13 +136,14 @@ const HomeContactUs = () => {
                 </AnimatePresence>
               </div>
 
-              <div className="flex items-center justify-center gap-2 mt-6">
+              {/* Quote Indicators */}
+              <div className="flex items-center justify-center gap-1 sm:gap-1.5 md:gap-2 mt-3 sm:mt-4 md:mt-5">
                 {quotes.map((_, index) => (
                   <motion.div
                     key={index}
                     className="h-1 rounded-full cursor-pointer bg-white/30"
                     animate={{
-                      width: currentQuote === index ? 24 : 6,
+                      width: currentQuote === index ? 16 : 6,
                       backgroundColor:
                         currentQuote === index
                           ? "#F87B1B"
@@ -152,63 +157,70 @@ const HomeContactUs = () => {
             </div>
           </div>
 
-          <div className="w-full lg:w-[55%] bg-white p-6 md:p-12 flex flex-col justify-center">
-            <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
-              <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-                <div className="space-y-2">
-                  <label className="text-sm font-semibold text-gray-900">
-                    Your first name
+          {/* Right Panel - Form */}
+          <div className="w-full lg:w-[55%] bg-white p-3 sm:p-5 md:p-8 lg:p-12 flex flex-col justify-center">
+            <form
+              className="space-y-3 sm:space-y-4 md:space-y-5"
+              onSubmit={(e) => e.preventDefault()}
+            >
+              {/* Name Fields - Always 2 columns */}
+              <div className="grid grid-cols-2 gap-2 sm:gap-3 md:gap-5">
+                <div className="space-y-1 sm:space-y-1.5">
+                  <label className="text-[10px] sm:text-xs md:text-sm font-semibold text-gray-900">
+                    First name
                   </label>
                   <input
                     type="text"
                     placeholder="John"
-                    className="w-full px-4 py-3 text-sm text-gray-900 transition-all border border-gray-200 outline-none rounded-xl focus:border-secondColor focus:ring-2 focus:ring-secondColor/20 bg-gray-50/50 hover:bg-gray-50"
+                    className="w-full px-2 sm:px-3 md:px-4 py-2 sm:py-2.5 md:py-3 text-xs sm:text-sm text-gray-900 transition-all border border-gray-200 outline-none rounded-lg sm:rounded-xl focus:border-secondColor focus:ring-2 focus:ring-secondColor/20 bg-gray-50/50 hover:bg-gray-50"
                   />
                 </div>
-                <div className="space-y-2">
-                  <label className="text-sm font-semibold text-gray-900">
-                    Your last name
+                <div className="space-y-1 sm:space-y-1.5">
+                  <label className="text-[10px] sm:text-xs md:text-sm font-semibold text-gray-900">
+                    Last name
                   </label>
                   <input
                     type="text"
                     placeholder="Doe"
-                    className="w-full px-4 py-3 text-sm text-gray-900 transition-all border border-gray-200 outline-none rounded-xl focus:border-secondColor focus:ring-2 focus:ring-secondColor/20 bg-gray-50/50 hover:bg-gray-50"
+                    className="w-full px-2 sm:px-3 md:px-4 py-2 sm:py-2.5 md:py-3 text-xs sm:text-sm text-gray-900 transition-all border border-gray-200 outline-none rounded-lg sm:rounded-xl focus:border-secondColor focus:ring-2 focus:ring-secondColor/20 bg-gray-50/50 hover:bg-gray-50"
                   />
                 </div>
               </div>
 
-              <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-                <div className="space-y-2">
-                  <label className="text-sm font-semibold text-gray-900">
+              {/* Email & Phone Fields - Always 2 columns */}
+              <div className="grid grid-cols-2 gap-2 sm:gap-3 md:gap-5">
+                <div className="space-y-1 sm:space-y-1.5">
+                  <label className="text-[10px] sm:text-xs md:text-sm font-semibold text-gray-900">
                     Email
                   </label>
                   <input
                     type="email"
-                    placeholder="john@example.com"
-                    className="w-full px-4 py-3 text-sm text-gray-900 transition-all border border-gray-200 outline-none rounded-xl focus:border-secondColor focus:ring-2 focus:ring-secondColor/20 bg-gray-50/50 hover:bg-gray-50"
+                    placeholder="john@email.com"
+                    className="w-full px-2 sm:px-3 md:px-4 py-2 sm:py-2.5 md:py-3 text-xs sm:text-sm text-gray-900 transition-all border border-gray-200 outline-none rounded-lg sm:rounded-xl focus:border-secondColor focus:ring-2 focus:ring-secondColor/20 bg-gray-50/50 hover:bg-gray-50"
                   />
                 </div>
-                <div className="space-y-2">
-                  <label className="text-sm font-semibold text-gray-900">
-                    Phone number
+                <div className="space-y-1 sm:space-y-1.5">
+                  <label className="text-[10px] sm:text-xs md:text-sm font-semibold text-gray-900">
+                    Phone
                   </label>
                   <input
                     type="tel"
-                    placeholder="+1 (555) 000-0000"
-                    className="w-full px-4 py-3 text-sm text-gray-900 transition-all border border-gray-200 outline-none rounded-xl focus:border-secondColor focus:ring-2 focus:ring-secondColor/20 bg-gray-50/50 hover:bg-gray-50"
+                    placeholder="+1 555 000-0000"
+                    className="w-full px-2 sm:px-3 md:px-4 py-2 sm:py-2.5 md:py-3 text-xs sm:text-sm text-gray-900 transition-all border border-gray-200 outline-none rounded-lg sm:rounded-xl focus:border-secondColor focus:ring-2 focus:ring-secondColor/20 bg-gray-50/50 hover:bg-gray-50"
                   />
                 </div>
               </div>
 
-              <div className="relative space-y-2">
-                <label className="text-sm font-semibold text-gray-900">
+              {/* Service Dropdown */}
+              <div className="relative space-y-1 sm:space-y-1.5">
+                <label className="text-[10px] sm:text-xs md:text-sm font-semibold text-gray-900">
                   I'm interested in...
                 </label>
                 <div className="relative">
                   <button
                     type="button"
                     onClick={() => setIsOpen(!isOpen)}
-                    className={`w-full px-4 py-3 text-left bg-gray-50/50 border rounded-xl flex items-center justify-between transition-all duration-200 outline-none hover:bg-gray-50
+                    className={`w-full px-2 sm:px-3 md:px-4 py-2 sm:py-2.5 md:py-3 text-left bg-gray-50/50 border rounded-lg sm:rounded-xl flex items-center justify-between transition-all duration-200 outline-none hover:bg-gray-50
                       ${
                         isOpen
                           ? "border-secondColor ring-2 ring-secondColor/20"
@@ -217,17 +229,18 @@ const HomeContactUs = () => {
                     `}
                   >
                     <span
-                      className={`text-sm ${
+                      className={`text-xs sm:text-sm truncate pr-2 ${
                         selectedService ? "text-gray-900" : "text-gray-400"
                       }`}
                     >
-                      {selectedService || "— Please choose an option —"}
+                      {selectedService || "— Choose an option —"}
                     </span>
                     <motion.div
                       animate={{ rotate: isOpen ? 180 : 0 }}
                       transition={{ duration: 0.2 }}
+                      className="flex-shrink-0"
                     >
-                      <ChevronDown className="w-5 h-5 text-gray-400" />
+                      <ChevronDown className="w-4 h-4 text-gray-400" />
                     </motion.div>
                   </button>
 
@@ -238,7 +251,7 @@ const HomeContactUs = () => {
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -10 }}
                         transition={{ duration: 0.2 }}
-                        className="absolute z-50 w-full mt-2 overflow-hidden bg-white border border-gray-100 shadow-xl rounded-xl"
+                        className="absolute z-50 w-full mt-1 overflow-hidden overflow-y-auto bg-white border border-gray-100 rounded-lg shadow-xl sm:mt-2 sm:rounded-xl max-h-48 sm:max-h-60"
                       >
                         {services.map((service) => (
                           <li
@@ -247,11 +260,11 @@ const HomeContactUs = () => {
                               setSelectedService(service);
                               setIsOpen(false);
                             }}
-                            className="flex items-center justify-between px-4 py-3 text-sm text-gray-700 transition-colors cursor-pointer hover:bg-gray-50 hover:text-secondColor group"
+                            className="flex items-center justify-between px-2 sm:px-3 md:px-4 py-2 sm:py-2.5 md:py-3 text-xs sm:text-sm text-gray-700 transition-colors cursor-pointer hover:bg-gray-50 hover:text-secondColor group"
                           >
-                            {service}
+                            <span className="pr-2 line-clamp-1">{service}</span>
                             {selectedService === service && (
-                              <Check className="w-4 h-4 text-secondColor" />
+                              <Check className="flex-shrink-0 w-3 h-3 sm:w-4 sm:h-4 text-secondColor" />
                             )}
                           </li>
                         ))}
@@ -261,29 +274,32 @@ const HomeContactUs = () => {
                 </div>
               </div>
 
-              <div className="space-y-2">
-                <label className="text-sm font-semibold text-gray-900">
+              {/* Message Field */}
+              <div className="space-y-1 sm:space-y-1.5">
+                <label className="text-[10px] sm:text-xs md:text-sm font-semibold text-gray-900">
                   How can we help you?
                 </label>
                 <textarea
-                  rows={4}
-                  placeholder="Tell us a little about your project"
-                  className="w-full px-4 py-3 text-sm text-gray-900 transition-all border border-gray-200 outline-none resize-none rounded-xl focus:border-secondColor focus:ring-2 focus:ring-secondColor/20 bg-gray-50/50 hover:bg-gray-50"
+                  rows={2}
+                  placeholder="Tell us about your project..."
+                  className="w-full px-2 sm:px-3 md:px-4 py-2 sm:py-2.5 md:py-3 text-xs sm:text-sm text-gray-900 transition-all border border-gray-200 outline-none resize-none rounded-lg sm:rounded-xl focus:border-secondColor focus:ring-2 focus:ring-secondColor/20 bg-gray-50/50 hover:bg-gray-50 sm:rows-3 md:rows-4"
                 />
               </div>
 
+              {/* Submit Button */}
               <motion.button
                 whileHover={{ scale: 1.01 }}
                 whileTap={{ scale: 0.98 }}
-                className="flex items-center justify-center w-full gap-2 py-4 mt-4 text-base font-medium text-white transition-all shadow-lg rounded-xl hover:shadow-xl hover:shadow-orange-500/20"
+                className="flex items-center justify-center w-full gap-1.5 sm:gap-2 py-2.5 sm:py-3 md:py-4 text-xs sm:text-sm md:text-base font-medium text-white transition-all shadow-lg rounded-lg sm:rounded-xl hover:shadow-xl hover:shadow-orange-500/20"
                 style={{ backgroundColor: colors.main }}
               >
                 Send message
-                <ArrowRight className="w-4 h-4" />
+                <ArrowRight className="w-3 h-3 sm:w-3.5 sm:h-3.5 md:w-4 md:h-4" />
               </motion.button>
 
-              <p className="mt-4 text-xs text-center text-gray-400">
-                By clicking on "Send message" button, you agree to our{" "}
+              {/* Privacy Policy */}
+              <p className="text-[9px] sm:text-[10px] md:text-xs text-center text-gray-400">
+                By clicking "Send message", you agree to our{" "}
                 <a
                   href="#"
                   className="underline transition-colors hover:text-gray-600"
