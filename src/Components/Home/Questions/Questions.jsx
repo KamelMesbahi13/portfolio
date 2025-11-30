@@ -1,7 +1,7 @@
 import * as Accordion from "@radix-ui/react-accordion";
 // eslint-disable-next-line no-unused-vars
-import { motion, AnimatePresence, useInView } from "framer-motion";
-import { useState, useRef } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { useState } from "react";
 
 const faqData = [
   {
@@ -42,226 +42,206 @@ const faqData = [
   },
 ];
 
-// Animation variants
-const headerVariants = {
-  hidden: { opacity: 0, y: 40 },
-  visible: { opacity: 1, y: 0 },
-};
+// --- Icons (Styled for Dark Mode) ---
 
-const dividerVariants = {
-  hidden: { scaleX: 0, opacity: 0 },
-  visible: { scaleX: 1, opacity: 1 },
-};
+const PlusIcon = () => (
+  <svg
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      d="M12 5V19M5 12H19"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  </svg>
+);
 
-const itemVariants = {
-  hidden: { opacity: 0, y: 60 },
-  visible: { opacity: 1, y: 0 },
-};
+const CloseIcon = () => (
+  <svg
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      d="M18 6L6 18M6 6L18 18"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  </svg>
+);
 
-const FAQItem = ({ item, isOpen, index, isInView }) => {
+const StarIcon = () => (
+  <svg
+    width="20"
+    height="20"
+    viewBox="0 0 24 24"
+    fill="white"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" />
+  </svg>
+);
+
+// --- Components ---
+
+const FAQItem = ({ item, isOpen }) => {
   return (
-    <motion.div
-      initial="hidden"
-      animate={isInView ? "visible" : "hidden"}
-      variants={itemVariants}
-      transition={{
-        duration: 0.6,
-        delay: index * 0.1,
-        ease: [0.25, 0.46, 0.45, 0.94],
-      }}
-    >
-      <Accordion.Item value={item.id} className="relative">
-        <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.02] backdrop-blur-sm">
-          <motion.div
-            className="absolute inset-0 bg-mainColor"
-            animate={{
-              opacity: isOpen ? 0.25 : 0,
-            }}
-            transition={{ duration: 0.4 }}
-          />
+    <Accordion.Item value={item.id} className="mb-4">
+      <div
+        className={`group overflow-hidden rounded-xl border transition-all duration-300 ${
+          isOpen
+            ? "border-white/10 bg-white/[0.08]" // Slightly lighter when open
+            : "border-white/5 bg-white/[0.03] hover:bg-white/[0.06]" // Dark glass when closed
+        }`}
+      >
+        <Accordion.Header>
+          <Accordion.Trigger className="flex items-center justify-between w-full px-6 py-5 text-left sm:px-8">
+            <span className="text-base font-medium text-white/90 md:text-lg lg:text-[17px] leading-snug">
+              {item.question}
+            </span>
+            <div className="ml-4 transition-colors shrink-0 text-white/50 group-hover:text-white">
+              <motion.div
+                initial={false}
+                animate={{ rotate: isOpen ? 90 : 0 }}
+                transition={{ duration: 0.2 }}
+                className={`flex h-8 w-8 items-center justify-center rounded-lg border ${
+                  isOpen ? "border-white/20 bg-white/10" : "border-transparent"
+                }`}
+              >
+                {isOpen ? <CloseIcon /> : <PlusIcon />}
+              </motion.div>
+            </div>
+          </Accordion.Trigger>
+        </Accordion.Header>
 
-          <Accordion.Header>
-            <Accordion.Trigger className="relative w-full px-6 text-left cursor-pointer py-7 sm:px-8 sm:py-8">
-              <div className="flex items-center justify-between gap-6">
-                <div className="flex-1 space-y-3">
-                  <div className="flex items-center gap-4">
-                    <motion.span
-                      animate={{
-                        color: isOpen
-                          ? "rgba(255,255,255,0.9)"
-                          : "rgba(255,255,255,0.4)",
-                      }}
-                      transition={{ duration: 0.3 }}
-                      className="text-xs font-bold tracking-[0.3em]"
-                    >
-                      {item.id.padStart(2, "0")}
-                    </motion.span>
-                    <motion.div
-                      className="flex-1 h-px bg-gradient-to-r from-secondColor/50 to-transparent"
-                      animate={{
-                        scaleX: isOpen ? 1 : 0.6,
-                        opacity: isOpen ? 0.6 : 0.3,
-                      }}
-                      transition={{ duration: 0.4 }}
-                      style={{ originX: 0 }}
-                    />
-                  </div>
-
-                  <h3 className="text-lg font-bold text-white md:text-xl lg:text-2xl">
-                    {item.question}
-                  </h3>
+        <AnimatePresence initial={false}>
+          {isOpen && (
+            <Accordion.Content forceMount asChild>
+              <motion.div
+                initial={{ height: 0, opacity: 0 }}
+                animate={{ height: "auto", opacity: 1 }}
+                exit={{ height: 0, opacity: 0 }}
+                transition={{ duration: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }}
+              >
+                <div className="px-6 pb-6 sm:px-8 text-white/60 text-sm leading-relaxed md:text-[15px]">
+                  {item.answer}
                 </div>
+              </motion.div>
+            </Accordion.Content>
+          )}
+        </AnimatePresence>
+      </div>
+    </Accordion.Item>
+  );
+};
 
-                <div className="shrink-0">
-                  <motion.div
-                    className="flex items-center justify-center w-10 h-10 border rounded-full md:h-12 md:w-12 border-white/20 bg-white/5 backdrop-blur-sm"
-                    animate={{
-                      borderColor: isOpen
-                        ? "rgba(248, 123, 27, 0.6)"
-                        : "rgba(255,255,255,0.15)",
-                      backgroundColor: isOpen
-                        ? "rgba(248, 123, 27, 0.2)"
-                        : "rgba(255,255,255,0.05)",
-                    }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    <motion.svg
-                      width="14"
-                      height="14"
-                      viewBox="0 0 14 14"
-                      fill="none"
-                      className="text-white"
-                      animate={{ rotate: isOpen ? 45 : 0 }}
-                      transition={{ duration: 0.2 }}
-                    >
-                      <path
-                        d="M7 1V13M1 7H13"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                      />
-                    </motion.svg>
-                  </motion.div>
-                </div>
-              </div>
-            </Accordion.Trigger>
-          </Accordion.Header>
+const Sidebar = () => {
+  return (
+    <div className="h-auto rounded-3xl border border-white/10 bg-white/[0.02] p-8 backdrop-blur-sm">
+      {/* The Purple/Pink Glow Box */}
+      <div className="relative flex items-center justify-center mb-6 shadow-lg h-14 w-14 rounded-xl bg-gradient-to-br from-purple-600 to-blue-600 shadow-purple-500/20">
+        <StarIcon />
+      </div>
 
-          {/* Content */}
-          <AnimatePresence initial={false}>
-            {isOpen && (
-              <Accordion.Content forceMount asChild>
-                <motion.div
-                  initial={{ height: 0, opacity: 0 }}
-                  animate={{ height: "auto", opacity: 1 }}
-                  exit={{ height: 0, opacity: 0 }}
-                  transition={{
-                    height: { duration: 0.4, ease: [0.32, 0.72, 0, 1] },
-                    opacity: { duration: 0.3, delay: isOpen ? 0.1 : 0 },
-                  }}
-                  className="overflow-hidden"
-                >
-                  <div className="px-6 pb-8 sm:px-8">
-                    {/* Answer */}
-                    <motion.p
-                      initial={{ opacity: 0, y: 10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.3, delay: 0.15 }}
-                      className="text-sm leading-relaxed md:text-base text-white/80"
-                    >
-                      {item.answer}
-                    </motion.p>
-                  </div>
-                </motion.div>
-              </Accordion.Content>
-            )}
-          </AnimatePresence>
-        </div>
-      </Accordion.Item>
-    </motion.div>
+      <h3 className="mb-3 text-xl font-bold text-white">
+        Still have any Questions?
+      </h3>
+
+      <p className="mb-8 text-[15px] leading-relaxed text-white/60">
+        Let's collaborate to create an exceptional website that sets you apart
+        from the competition. Contact me today to discuss your web design needs.
+      </p>
+
+      <button className="w-full sm:w-auto rounded-xl bg-[#6D28D9] px-8 py-3.5 text-sm font-semibold text-white transition-all hover:scale-[1.02] hover:bg-[#5B21B6] hover:shadow-lg hover:shadow-purple-500/25 active:scale-95">
+        Contact Me
+      </button>
+    </div>
   );
 };
 
 const FAQAccordion = () => {
-  const [openItem, setOpenItem] = useState(null);
-
-  // Refs for scroll animations
-  const headerRef = useRef(null);
-  const accordionRef = useRef(null);
-
-  // InView hooks
-  const headerInView = useInView(headerRef, { once: true, margin: "-100px" });
-  const accordionInView = useInView(accordionRef, {
-    once: true,
-    margin: "-50px",
-  });
+  const [openItem, setOpenItem] = useState("1");
 
   return (
-    <div className="container py-20">
-      <div className="max-w-3xl mx-auto">
-        {/* Header Section */}
-        <div ref={headerRef} className="mb-12 text-center">
+    // Main Dark Background
+    <section className="min-h-screen px-4 py-20 text-white md:px-8">
+      <div className="mx-auto max-w-7xl">
+        {/* Page Header */}
+        <div className="mb-16 text-center">
           <motion.h1
-            initial="hidden"
-            animate={headerInView ? "visible" : "hidden"}
-            variants={headerVariants}
-            transition={{
-              duration: 0.7,
-              ease: [0.25, 0.46, 0.45, 0.94],
-            }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="mb-3 text-3xl font-bold md:text-4xl lg:text-5xl"
           >
             Frequently Asked Questions
           </motion.h1>
-
           <motion.p
-            initial="hidden"
-            animate={headerInView ? "visible" : "hidden"}
-            variants={headerVariants}
-            transition={{
-              duration: 0.7,
-              delay: 0.15,
-              ease: [0.25, 0.46, 0.45, 0.94],
-            }}
-            className="max-w-4xl mx-auto mt-4 text-base md:text-lg text-white/70"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.1 }}
+            className="text-lg text-white/50"
           >
-            Find answers to common questions about our services
+            Here are answers to some common questions
           </motion.p>
-
-          <motion.div
-            initial="hidden"
-            animate={headerInView ? "visible" : "hidden"}
-            variants={dividerVariants}
-            transition={{
-              duration: 0.8,
-              delay: 0.3,
-              ease: [0.25, 0.46, 0.45, 0.94],
-            }}
-            className="h-px max-w-xs mx-auto mt-8 bg-gradient-to-r from-transparent via-secondColor/50 to-transparent"
-          />
         </div>
 
-        {/* FAQ Accordion */}
-        <div ref={accordionRef}>
-          <Accordion.Root
-            type="single"
-            collapsible
-            value={openItem}
-            onValueChange={setOpenItem}
-            className="space-y-4"
+        {/* Grid Layout: 8 Columns FAQ | 4 Columns Sidebar */}
+        <div className="grid gap-8 lg:grid-cols-12 lg:gap-8">
+          {/* Left Column: Accordion List */}
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2 }}
+            className="lg:col-span-8"
           >
-            {faqData.map((item, index) => (
-              <FAQItem
-                key={item.id}
-                item={item}
-                isOpen={openItem === item.id}
-                index={index}
-                isInView={accordionInView}
-              />
-            ))}
-          </Accordion.Root>
+            {/* We remove the white background container from the light mode version 
+                and just let the glass cards sit on the dark background directly, 
+                or we can wrap them in a large faint glass container. 
+                I'll wrap them in a large faint glass container to match the image layout exactly. */}
+            <div className="rounded-3xl border border-white/[0.05] bg-white/[0.01] p-6 sm:p-8">
+              <Accordion.Root
+                type="single"
+                collapsible
+                value={openItem}
+                onValueChange={setOpenItem}
+              >
+                {faqData.map((item) => (
+                  <FAQItem
+                    key={item.id}
+                    item={item}
+                    isOpen={openItem === item.id}
+                  />
+                ))}
+              </Accordion.Root>
+            </div>
+          </motion.div>
+
+          {/* Right Column: CTA Sidebar */}
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.3 }}
+            className="lg:col-span-4"
+          >
+            <Sidebar />
+          </motion.div>
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 
