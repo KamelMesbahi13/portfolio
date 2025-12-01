@@ -1,8 +1,9 @@
-/* eslint-disable no-unused-vars */
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, memo, useCallback } from "react";
+// eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
 
-const services = [
+// ✅ Move services outside component (created once)
+const SERVICES = [
   {
     id: "01",
     title: "Full-Stack Web Development",
@@ -19,7 +20,6 @@ const services = [
   {
     id: "02",
     title: "WordPress Development",
-    tagline: "Building professional websites with WordPress & WooCommerce.",
     summary:
       "I design and customize WordPress and WooCommerce websites that are modern, fast, and easy to manage. I also develop custom plugins to add unique features and improve functionality.",
     details: [
@@ -30,11 +30,9 @@ const services = [
       "Training and long-term client support",
     ],
   },
-
   {
     id: "03",
     title: "Website Maintenance & Optimization",
-    tagline: "Keeping your website fast, secure, and up-to-date.",
     summary:
       "I offer ongoing support to ensure your website stays optimized, secure, and aligned with your business goals.",
     details: [
@@ -84,7 +82,6 @@ const services = [
   {
     id: "07",
     title: "Social Media Design & Content Creation",
-    tagline: "Making your brand shine across social platforms.",
     summary:
       "I design engaging social media posts, stories, and ad creatives that match your brand's identity and help attract the right audience.",
     details: [
@@ -96,7 +93,44 @@ const services = [
   },
 ];
 
-// Custom hook for individual element reveal
+// ✅ Move animation variants outside (created once)
+const listItemVariants = {
+  hidden: {
+    opacity: 0,
+    x: -8,
+    transition: {
+      duration: 0.3,
+      ease: "easeInOut",
+    },
+  },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: {
+      type: "spring",
+      stiffness: 300,
+      damping: 24,
+    },
+  },
+};
+
+const staggerContainerVariants = {
+  visible: {
+    transition: {
+      staggerChildren: 0.08,
+      delayChildren: 0.15,
+    },
+  },
+  hidden: {
+    transition: {
+      staggerChildren: 0.06,
+      staggerDirection: -1,
+      delayChildren: 0,
+    },
+  },
+};
+
+// ✅ Custom hook for reveal (unchanged)
 const useReveal = (threshold = 0.2) => {
   const ref = useRef(null);
   const [isVisible, setIsVisible] = useState(false);
@@ -123,11 +157,17 @@ const useReveal = (threshold = 0.2) => {
   return { ref, isVisible };
 };
 
-const ServiceCard = ({ service, index, isOpen, onToggle }) => {
+// ✅ Memoize ServiceCard
+// eslint-disable-next-line no-unused-vars
+const ServiceCard = memo(({ service, index, isOpen, onToggle }) => {
   const [isHovered, setIsHovered] = useState(false);
   const { ref, isVisible } = useReveal(0.15);
   const isActive = isHovered || isOpen;
   const isHoveredAndOpen = isHovered && isOpen;
+
+  // ✅ Memoize handlers
+  const handleMouseEnter = useCallback(() => setIsHovered(true), []);
+  const handleMouseLeave = useCallback(() => setIsHovered(false), []);
 
   return (
     <motion.li
@@ -139,8 +179,8 @@ const ServiceCard = ({ service, index, isOpen, onToggle }) => {
         ease: [0.22, 1, 0.36, 1],
         delay: 0.1,
       }}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
       className="relative"
     >
       <motion.div
@@ -159,8 +199,7 @@ const ServiceCard = ({ service, index, isOpen, onToggle }) => {
         />
 
         <motion.div
-          className="absolute inset-0"
-          style={{ backgroundColor: "#0C2B4E" }}
+          className="absolute inset-0 bg-[#0C2B4E]"
           animate={{
             opacity: isOpen ? (isHoveredAndOpen ? 0.4 : 0.25) : 0,
           }}
@@ -321,45 +360,13 @@ const ServiceCard = ({ service, index, isOpen, onToggle }) => {
             <motion.ul
               initial="hidden"
               animate={isOpen ? "visible" : "hidden"}
-              variants={{
-                visible: {
-                  transition: {
-                    staggerChildren: 0.08,
-                    delayChildren: 0.15,
-                  },
-                },
-                hidden: {
-                  transition: {
-                    staggerChildren: 0.06,
-                    staggerDirection: -1,
-                    delayChildren: 0,
-                  },
-                },
-              }}
+              variants={staggerContainerVariants}
               className="space-y-3 md:grid md:grid-cols-2 md:gap-x-8 md:gap-y-3 md:space-y-0"
             >
               {service.details.map((detail, idx) => (
                 <motion.li
                   key={idx}
-                  variants={{
-                    hidden: {
-                      opacity: 0,
-                      x: -8,
-                      transition: {
-                        duration: 0.3,
-                        ease: "easeInOut",
-                      },
-                    },
-                    visible: {
-                      opacity: 1,
-                      x: 0,
-                      transition: {
-                        type: "spring",
-                        stiffness: 300,
-                        damping: 24,
-                      },
-                    },
-                  }}
+                  variants={listItemVariants}
                   className="flex items-start gap-3 text-white/90"
                 >
                   <span className="mt-1.5 block h-1.5 w-1.5 shrink-0 rounded-full bg-secondColor" />
@@ -381,11 +388,19 @@ const ServiceCard = ({ service, index, isOpen, onToggle }) => {
       </motion.div>
     </motion.li>
   );
-};
+});
 
+ServiceCard.displayName = "ServiceCard";
+
+// ✅ Main component
 const MyQualityServices = () => {
   const [open, setOpen] = useState(null);
   const { ref, isVisible } = useReveal(0.1);
+
+  // ✅ Memoize toggle handler
+  const handleToggle = useCallback((index) => {
+    setOpen((current) => (current === index ? null : index));
+  }, []);
 
   return (
     <section id="services" className="relative pt-20 text-white md:pt-28">
@@ -417,13 +432,13 @@ const MyQualityServices = () => {
         </div>
 
         <ul className="mt-12 space-y-6 md:mt-16">
-          {services.map((service, i) => (
+          {SERVICES.map((service, i) => (
             <ServiceCard
               key={service.id}
               service={service}
               index={i}
               isOpen={open === i}
-              onToggle={() => setOpen(open === i ? null : i)}
+              onToggle={() => handleToggle(i)}
             />
           ))}
         </ul>
@@ -432,4 +447,4 @@ const MyQualityServices = () => {
   );
 };
 
-export default MyQualityServices;
+export default memo(MyQualityServices);
