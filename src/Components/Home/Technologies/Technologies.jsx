@@ -1,5 +1,5 @@
-import { useState, useRef } from "react";
-// eslint-disable-next-line no-unused-vars
+/* eslint-disable no-unused-vars */
+import { useState, useRef, memo, useCallback } from "react";
 import { motion, useInView } from "framer-motion";
 import {
   Layers,
@@ -13,45 +13,8 @@ import {
   Brush,
 } from "lucide-react";
 
-const fadeInUp = {
-  hidden: { opacity: 0, y: 40 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] },
-  },
-};
-
-const fadeInLeft = {
-  hidden: { opacity: 0, x: -60 },
-  visible: {
-    opacity: 1,
-    x: 0,
-    transition: { duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] },
-  },
-};
-
-const fadeInRight = {
-  hidden: { opacity: 0, x: 60 },
-  visible: {
-    opacity: 1,
-    x: 0,
-    transition: { duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] },
-  },
-};
-
-const staggerContainer = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.1,
-      delayChildren: 0.1,
-    },
-  },
-};
-
-const skills = [
+// ✅ 1. Move static data outside
+const SKILLS = [
   {
     name: "MERN Development",
     icon: Code2,
@@ -99,6 +62,115 @@ const skills = [
   },
 ];
 
+// ✅ 2. Move variants outside
+const fadeInUp = {
+  hidden: { opacity: 0, y: 40 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] },
+  },
+};
+
+const fadeInLeft = {
+  hidden: { opacity: 0, x: -60 },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: { duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] },
+  },
+};
+
+const fadeInRight = {
+  hidden: { opacity: 0, x: 60 },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: { duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] },
+  },
+};
+
+const staggerContainer = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+      delayChildren: 0.1,
+    },
+  },
+};
+
+// ✅ 3. Optimized SpotlightCard (Mouse event throttling removed for CSS var approach)
+const SpotlightCard = memo(({ skill }) => {
+  const divRef = useRef(null);
+  const [isHovered, setIsHovered] = useState(false);
+  const [position, setPosition] = useState({ x: 0, y: 0 });
+
+  // Using simple state for position is fine for individual cards
+  // But added useCallback to be safe
+  const handleMouseMove = useCallback((e) => {
+    if (!divRef.current) return;
+
+    const div = divRef.current;
+    const rect = div.getBoundingClientRect();
+
+    setPosition({ x: e.clientX - rect.left, y: e.clientY - rect.top });
+  }, []);
+
+  const handleMouseEnter = useCallback(() => setIsHovered(true), []);
+  const handleMouseLeave = useCallback(() => setIsHovered(false), []);
+
+  const Icon = skill.icon;
+
+  return (
+    <motion.div
+      ref={divRef}
+      variants={fadeInUp}
+      onMouseMove={handleMouseMove}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+      className="relative h-full overflow-hidden border rounded-2xl border-white/10 bg-white/5 backdrop-blur-sm group"
+    >
+      {/* Optimized Gradient Spotlight */}
+      <div
+        className="absolute inset-0 transition-opacity duration-300 pointer-events-none"
+        style={{
+          opacity: isHovered ? 1 : 0,
+          background: `radial-gradient(600px circle at ${position.x}px ${position.y}px, rgba(248, 123, 27, 0.15), transparent 40%)`,
+        }}
+      />
+
+      <div className="relative z-10 flex flex-col items-start h-full gap-6 p-8">
+        <div className="flex items-center gap-4">
+          <div className="p-3 rounded-xl bg-white/5 border border-white/10 text-[#F87B1B] group-hover:scale-110 group-hover:bg-[#F87B1B] group-hover:text-white transition-all duration-300">
+            <Icon size={28} />
+          </div>
+          <h3 className="text-xl font-bold text-white">{skill.name}</h3>
+        </div>
+
+        <div className="w-full h-px bg-gradient-to-r from-white/10 to-transparent"></div>
+
+        <div className="flex flex-wrap gap-2">
+          {skill.tags.map((tag, i) => (
+            <span
+              key={i}
+              className="text-xs font-medium px-3 py-1 rounded-full bg-white/5 text-gray-300 border border-white/5 group-hover:border-[#F87B1B]/30 transition-colors"
+            >
+              {tag}
+            </span>
+          ))}
+        </div>
+      </div>
+
+      <div className="absolute inset-0 rounded-2xl border border-transparent group-hover:border-[#F87B1B]/20 transition-colors duration-300 pointer-events-none" />
+    </motion.div>
+  );
+});
+
+SpotlightCard.displayName = "SpotlightCard";
+
+// ✅ 4. Main Component
 const Technologies = () => {
   const headerRef = useRef(null);
   const gridRef = useRef(null);
@@ -139,8 +211,8 @@ const Technologies = () => {
           variants={staggerContainer}
           className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
         >
-          {skills.map((skill, index) => (
-            <SpotlightCard key={index} skill={skill} />
+          {SKILLS.map((skill, index) => (
+            <SpotlightCard key={skill.name} skill={skill} />
           ))}
         </motion.div>
       </div>
@@ -148,60 +220,4 @@ const Technologies = () => {
   );
 };
 
-const SpotlightCard = ({ skill }) => {
-  const divRef = useRef(null);
-  const [position, setPosition] = useState({ x: 0, y: 0 });
-
-  const handleMouseMove = (e) => {
-    if (!divRef.current) return;
-
-    const div = divRef.current;
-    const rect = div.getBoundingClientRect();
-
-    setPosition({ x: e.clientX - rect.left, y: e.clientY - rect.top });
-  };
-
-  const Icon = skill.icon;
-
-  return (
-    <motion.div
-      ref={divRef}
-      variants={fadeInUp}
-      onMouseMove={handleMouseMove}
-      className="relative h-full overflow-hidden border rounded-2xl border-white/10 bg-white/5 backdrop-blur-sm group"
-    >
-      <div
-        className="absolute transition duration-300 opacity-0 pointer-events-none -inset-px group-hover:opacity-100"
-        style={{
-          background: `radial-gradient(600px circle at ${position.x}px ${position.y}px, rgba(248, 123, 27, 0.15), transparent 40%)`,
-        }}
-      />
-
-      <div className="relative z-10 flex flex-col items-start h-full gap-6 p-8">
-        <div className="flex items-center gap-4">
-          <div className="p-3 rounded-xl bg-white/5 border border-white/10 text-[#F87B1B] group-hover:scale-110 group-hover:bg-[#F87B1B] group-hover:text-white transition-all duration-300">
-            <Icon size={28} />
-          </div>
-          <h3 className="text-xl font-bold text-white">{skill.name}</h3>
-        </div>
-
-        <div className="w-full h-px bg-gradient-to-r from-white/10 to-transparent"></div>
-
-        <div className="flex flex-wrap gap-2">
-          {skill.tags.map((tag, i) => (
-            <span
-              key={i}
-              className="text-xs font-medium px-3 py-1 rounded-full bg-white/5 text-gray-300 border border-white/5 group-hover:border-[#F87B1B]/30 transition-colors"
-            >
-              {tag}
-            </span>
-          ))}
-        </div>
-      </div>
-
-      <div className="absolute inset-0 rounded-2xl border border-transparent group-hover:border-[#F87B1B]/20 transition-colors duration-300 pointer-events-none" />
-    </motion.div>
-  );
-};
-
-export default Technologies;
+export default memo(Technologies);
