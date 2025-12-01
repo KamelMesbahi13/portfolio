@@ -142,7 +142,7 @@ const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="relative mt-20 overflow-hidden bg-[#0C2B4E] text-white">
+    <footer className="relative mt-20 overflow-hidden text-white">
       {/* Decorative gradient background */}
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#F87B1B]/5 to-transparent pointer-events-none" />
 
@@ -228,29 +228,13 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* Bottom Bar */}
         <div className="flex flex-col items-center justify-between gap-4 pt-8 md:flex-row">
-          {/* Copyright */}
           <p className="text-sm text-white/50">
             © {currentYear} Kamel Mesbahi. All rights reserved.
           </p>
-
-          {/* Legal Links */}
-          <div className="flex gap-6">
-            <FooterLink href="/privacy">Privacy Policy</FooterLink>
-            <FooterLink href="/terms">Terms of Service</FooterLink>
-          </div>
-
-          {/* Made with badge */}
-          <div className="flex items-center gap-2 text-sm text-white/50">
-            <span>Made with</span>
-            <span className="text-[#F87B1B] animate-pulse">❤</span>
-            <span>in Algeria</span>
-          </div>
         </div>
       </div>
 
-      {/* Bottom accent line */}
       <div className="h-1 bg-gradient-to-r from-transparent via-[#F87B1B] to-transparent" />
     </footer>
   );
