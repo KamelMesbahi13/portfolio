@@ -14,7 +14,7 @@ const faqData = [
     id: "2",
     question: "How long does it take to build a website?",
     answer:
-      "It depends on the project. A modern one-page or business website can take 3–7 days. A full e-commerce store usually takes 1–3 weeks. Custom MERN applications vary based on features. I always deliver fast while keeping quality at the highest level.",
+      "It depends on the project. A modern one-page or business website can take 1–4 days. A full e-commerce store usually takes 1–3 weeks. Custom MERN applications vary based on features. I always deliver fast while keeping quality at the highest level.",
   },
   {
     id: "3",
