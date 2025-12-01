@@ -77,3 +77,117 @@ body {
   background-attachment: fixed;
   height: 50rem;
 }
+
+/* Add these custom animations */
+@keyframes orbit {
+  0% {
+    transform: translate(-30px, 0);
+  }
+  14% {
+    transform: translate(-60px, 0);
+  }
+  28% {
+    transform: translate(-60px, 30px);
+  }
+  42% {
+    transform: translate(-30px, 60px);
+  }
+  56% {
+    transform: translate(0, 60px);
+  }
+  70% {
+    transform: translate(0, 30px);
+  }
+  100% {
+    transform: translate(-30px, 0);
+  }
+}
+
+@keyframes expand {
+  from {
+    width: 0;
+  }
+  to {
+    width: 60px;
+  }
+}
+
+/* Utility classes */
+.animate-orbit {
+  animation: orbit 4s linear infinite;
+}
+
+.animate-spin-slow {
+  animation: spin 5s linear infinite;
+}
+
+.animate-expand {
+  animation: expand 0.8s ease-out forwards;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.6s ease-out;
+}
+
+.animate-slideInLeft {
+  animation: slideInLeft 0.6s ease-out;
+}
+
+.animate-slideInRight {
+  animation: slideInRight 0.6s ease-out 0.2s both;
+}
+
+.animate-fadeInUp {
+  animation: fadeInUp 0.5s ease-out both;
+}
