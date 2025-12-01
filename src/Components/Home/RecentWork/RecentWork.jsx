@@ -1,10 +1,10 @@
 /* eslint-disable no-unused-vars */
 import { useState, useEffect, useRef } from "react";
 import { motion, useInView } from "framer-motion";
-import projectNumOne from "../../../../src/assets/zidaneproject.jpeg";
-import projectNumTwo from "../../../../src/assets/migrationproject.jpeg";
-import projectNumThree from "../../../../src/assets/toolsproject.jpeg";
-import projectNumFour from "../../../../src/assets/hoggarproject.jpeg";
+import projectNumOne from "../../../../src/assets/zidaneproject.webp";
+import projectNumTwo from "../../../../src/assets/migrationproject.webp";
+import projectNumThree from "../../../../src/assets/toolsproject.webp";
+import projectNumFour from "../../../../src/assets/hoggarproject.webp";
 
 const RecentWork = () => {
   const [selectedCard, setSelectedCard] = useState(null);
