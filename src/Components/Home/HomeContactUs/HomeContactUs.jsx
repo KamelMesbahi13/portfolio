@@ -312,7 +312,7 @@ const HomeContactUs = () => {
 
   return (
     <div className="container flex items-center justify-center w-full py-4 sm:py-6 md:py-12">
-      <div className=" p-2 sm:p-3 md:p-4 rounded-xl sm:rounded-2xl md:rounded-[2.5rem] shadow-2xl w-full max-w-[1400px] overflow-hidden">
+      <div className=" p-2 sm:py-3 md:py-4 rounded-xl sm:rounded-2xl md:rounded-[2.5rem] shadow-2xl w-full max-w-[1400px] overflow-hidden">
         <div className="flex flex-col gap-2 sm:gap-3 md:gap-4 lg:flex-row">
           {/* Left Panel */}
           <div className="w-full lg:w-[45%] rounded-lg bg-mainColor sm:rounded-xl md:rounded-[2rem] p-4 sm:p-6 md:p-8 lg:p-12 relative flex flex-col justify-between overflow-hidden">
