@@ -340,7 +340,7 @@ const HomeContactUs = () => {
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.1 }}
-                className="hidden max-w-md text-sm leading-relaxed sm:block text-gray-300/90"
+                className="max-w-md text-sm leading-relaxed sm:block text-gray-300/90"
               >
                 Whether it's a website, web app, or social media campaign, I
                 craft modern, high-performing digital experiences that make your
