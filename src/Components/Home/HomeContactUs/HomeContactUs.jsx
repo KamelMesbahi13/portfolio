@@ -311,16 +311,12 @@ const HomeContactUs = () => {
   };
 
   return (
-    <div className="container flex items-center justify-center w-full px-3 py-4 font-sans sm:py-6 md:py-12 sm:px-4">
-      <div className="bg-white p-2 sm:p-3 md:p-4 rounded-xl sm:rounded-2xl md:rounded-[2.5rem] shadow-2xl w-full max-w-[1400px] overflow-hidden border border-gray-100">
+    <div className="container flex items-center justify-center w-full py-4 sm:py-6 md:py-12">
+      <div className=" p-2 sm:p-3 md:p-4 rounded-xl sm:rounded-2xl md:rounded-[2.5rem] shadow-2xl w-full max-w-[1400px] overflow-hidden">
         <div className="flex flex-col gap-2 sm:gap-3 md:gap-4 lg:flex-row">
           {/* Left Panel */}
-          <div
-            className="w-full lg:w-[45%] rounded-lg sm:rounded-xl md:rounded-[2rem] p-4 sm:p-6 md:p-8 lg:p-12 relative flex flex-col justify-between overflow-hidden"
-            style={{ backgroundColor: colors.main }}
-          >
+          <div className="w-full lg:w-[45%] rounded-lg bg-mainColor sm:rounded-xl md:rounded-[2rem] p-4 sm:p-6 md:p-8 lg:p-12 relative flex flex-col justify-between overflow-hidden">
             <div className="absolute top-0 left-0 w-full h-full pointer-events-none bg-gradient-to-br from-white/10 to-transparent" />
-
             <div className="relative z-10">
               <div className="flex items-center gap-2 mb-4 text-white sm:gap-3 sm:mb-6 md:mb-10">
                 <div className="flex items-center justify-center border rounded-full w-7 h-7 sm:w-8 sm:h-8 md:w-10 md:h-10 bg-white/10 backdrop-blur-md border-white/20">
@@ -805,17 +801,6 @@ const HomeContactUs = () => {
                   </>
                 )}
               </motion.button>
-
-              {/* Privacy Policy */}
-              <p className="text-[9px] sm:text-[10px] md:text-xs text-center text-gray-400">
-                By clicking "Send message", you agree to our{" "}
-                <a
-                  href="#"
-                  className="underline transition-colors hover:text-gray-600"
-                >
-                  Privacy Policy
-                </a>
-              </p>
             </form>
           </div>
         </div>
