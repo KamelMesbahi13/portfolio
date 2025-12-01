@@ -1,94 +1,91 @@
 import * as Accordion from "@radix-ui/react-accordion";
 // eslint-disable-next-line no-unused-vars
 import { motion, AnimatePresence, useInView } from "framer-motion";
-import { useState, useRef } from "react";
+import { useState, useRef, memo } from "react";
 
-const faqData = [
+// ✅ 1. Move Data Constant Outside
+const FAQ_DATA = [
   {
     id: "1",
     question: "What services do you offer?",
     answer:
-      "I build high-quality digital solutions including modern MERN websites, custom WordPress & WooCommerce stores, branding and logo design, social media content creation, and complete marketing services. From design to development to ads — I handle everything your business needs to grow online.",
+      "I build high-quality digital solutions including modern MERN websites, custom WordPress & WooCommerce stores, branding and logo design, social media content creation, and complete marketing services.",
   },
   {
     id: "2",
     question: "How long does it take to build a website?",
     answer:
-      "It depends on the project. A modern one-page or business website can take 1–4 days. A full e-commerce store usually takes 1–3 weeks. Custom MERN applications vary based on features. I always deliver fast while keeping quality at the highest level.",
+      "It depends on the project. A modern one-page or business website can take 1–4 days. A full e-commerce store usually takes 1–3 weeks. Custom MERN applications vary based on features.",
   },
   {
     id: "3",
     question: "How much do your services cost?",
     answer:
-      "Pricing depends on the project type. Business websites start at affordable rates, e-commerce stores and custom systems have flexible pricing, and branding/social media packages are tailored to fit your needs. I always give a clear, transparent quote before starting.",
+      "Pricing depends on the project type. Business websites start at affordable rates, e-commerce stores and custom systems have flexible pricing. I always give a clear, transparent quote before starting.",
   },
   {
     id: "4",
     question: "Do you provide support after the project is done?",
     answer:
-      "Absolutely. I offer ongoing support, maintenance, updates, hosting help, content changes, security, and performance optimization. You can choose a monthly package or one-time support — whatever works best for you.",
+      "Absolutely. I offer ongoing support, maintenance, updates, hosting help, content changes, security, and performance optimization.",
   },
   {
     id: "5",
     question: "Can you also manage my social media?",
     answer:
-      "Yes, I create professional content, graphics, videos, and post strategies that help your brand grow. I handle everything from design to captions to posting — so you focus on your business.",
+      "Yes, I create professional content, graphics, videos, and post strategies that help your brand grow. I handle everything from design to captions to posting.",
   },
   {
     id: "6",
     question: "How do we start working together?",
     answer:
-      "Very simple — send me a message, book a free consultation, or share your project idea. I will guide you, explain everything clearly, and help you choose the best solution for your goals and budget.",
+      "Very simple — send me a message, book a free consultation, or share your project idea. I will guide you and help you choose the best solution for your goals and budget.",
   },
 ];
 
-// Animation Variants
-const fadeInUp = {
-  hidden: { opacity: 0, y: 40 },
-  visible: { opacity: 1, y: 0 },
-};
-
-const fadeInLeft = {
-  hidden: { opacity: 0, x: -60 },
-  visible: { opacity: 1, x: 0 },
-};
-
-const fadeInRight = {
-  hidden: { opacity: 0, x: 60 },
-  visible: { opacity: 1, x: 0 },
-};
-
-const scaleIn = {
-  hidden: { opacity: 0, scale: 0.8 },
-  visible: { opacity: 1, scale: 1 },
-};
-
-const staggerContainer = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.1,
-      delayChildren: 0.1,
+// ✅ 2. Move Variants Outside
+const ANIMATIONS = {
+  fadeInUp: {
+    hidden: { opacity: 0, y: 40 },
+    visible: { opacity: 1, y: 0 },
+  },
+  fadeInLeft: {
+    hidden: { opacity: 0, x: -60 },
+    visible: { opacity: 1, x: 0 },
+  },
+  fadeInRight: {
+    hidden: { opacity: 0, x: 60 },
+    visible: { opacity: 1, x: 0 },
+  },
+  scaleIn: {
+    hidden: { opacity: 0, scale: 0.8 },
+    visible: { opacity: 1, scale: 1 },
+  },
+  staggerContainer: {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+        delayChildren: 0.1,
+      },
     },
   },
 };
 
+// ✅ 3. Simple Icons (No need for memo if they are static and outside)
 const PlusIcon = () => (
   <svg
     width="24"
     height="24"
     viewBox="0 0 24 24"
     fill="none"
-    xmlns="http://www.w3.org/2000/svg"
+    stroke="currentColor"
+    strokeWidth="1.5"
+    strokeLinecap="round"
+    strokeLinejoin="round"
   >
-    <path
-      d="M12 5V19M5 12H19"
-      stroke="currentColor"
-      strokeWidth="1.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
+    <path d="M12 5V19M5 12H19" />
   </svg>
 );
 
@@ -98,36 +95,28 @@ const CloseIcon = () => (
     height="24"
     viewBox="0 0 24 24"
     fill="none"
-    xmlns="http://www.w3.org/2000/svg"
+    stroke="currentColor"
+    strokeWidth="1.5"
+    strokeLinecap="round"
+    strokeLinejoin="round"
   >
-    <path
-      d="M18 6L6 18M6 6L18 18"
-      stroke="currentColor"
-      strokeWidth="1.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
+    <path d="M18 6L6 18M6 6L18 18" />
   </svg>
 );
 
 const StarIcon = () => (
-  <svg
-    width="20"
-    height="20"
-    viewBox="0 0 24 24"
-    fill="white"
-    xmlns="http://www.w3.org/2000/svg"
-  >
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
     <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" />
   </svg>
 );
 
-const FAQItem = ({ item, isOpen, index, isInView }) => {
+// ✅ 4. Memoized FAQ Item
+const FAQItem = memo(({ item, isOpen, index, isInView }) => {
   return (
     <motion.div
       initial="hidden"
       animate={isInView ? "visible" : "hidden"}
-      variants={fadeInUp}
+      variants={ANIMATIONS.fadeInUp}
       transition={{
         duration: 0.5,
         delay: index * 0.1,
@@ -184,14 +173,17 @@ const FAQItem = ({ item, isOpen, index, isInView }) => {
       </Accordion.Item>
     </motion.div>
   );
-};
+});
 
-const Sidebar = ({ isInView }) => {
+FAQItem.displayName = "FAQItem";
+
+// ✅ 5. Memoized Sidebar
+const Sidebar = memo(({ isInView }) => {
   return (
     <motion.div
       initial="hidden"
       animate={isInView ? "visible" : "hidden"}
-      variants={fadeInRight}
+      variants={ANIMATIONS.fadeInRight}
       transition={{
         duration: 0.6,
         delay: 0.3,
@@ -244,18 +236,19 @@ const Sidebar = ({ isInView }) => {
       </motion.button>
     </motion.div>
   );
-};
+});
 
+Sidebar.displayName = "Sidebar";
+
+// ✅ 6. Main Component
 const FAQAccordion = () => {
   const [openItem, setOpenItem] = useState("1");
 
-  // Refs for scroll detection
   const sectionRef = useRef(null);
   const headerRef = useRef(null);
   const faqListRef = useRef(null);
   const sidebarRef = useRef(null);
 
-  // InView hooks
   const headerInView = useInView(headerRef, { once: true, margin: "-100px" });
   const faqListInView = useInView(faqListRef, { once: true, margin: "-50px" });
   const sidebarInView = useInView(sidebarRef, { once: true, margin: "-50px" });
@@ -271,17 +264,17 @@ const FAQAccordion = () => {
           ref={headerRef}
           initial="hidden"
           animate={headerInView ? "visible" : "hidden"}
-          variants={staggerContainer}
+          variants={ANIMATIONS.staggerContainer}
           className="mb-16 text-center"
         >
           <motion.h1
-            variants={fadeInUp}
+            variants={ANIMATIONS.fadeInUp}
             transition={{ duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] }}
           >
             Frequently Asked Questions
           </motion.h1>
           <motion.p
-            variants={fadeInUp}
+            variants={ANIMATIONS.fadeInUp}
             transition={{ duration: 0.5, delay: 0.1 }}
             className="text-lg text-white/50"
           >
@@ -306,7 +299,7 @@ const FAQAccordion = () => {
             ref={faqListRef}
             initial="hidden"
             animate={faqListInView ? "visible" : "hidden"}
-            variants={fadeInLeft}
+            variants={ANIMATIONS.fadeInLeft}
             transition={{
               duration: 0.6,
               ease: [0.25, 0.46, 0.45, 0.94],
@@ -316,7 +309,7 @@ const FAQAccordion = () => {
             <motion.div
               initial="hidden"
               animate={faqListInView ? "visible" : "hidden"}
-              variants={scaleIn}
+              variants={ANIMATIONS.scaleIn}
               transition={{
                 duration: 0.5,
                 delay: 0.2,
@@ -330,7 +323,7 @@ const FAQAccordion = () => {
                 value={openItem}
                 onValueChange={setOpenItem}
               >
-                {faqData.map((item, index) => (
+                {FAQ_DATA.map((item, index) => (
                   <FAQItem
                     key={item.id}
                     item={item}
@@ -352,4 +345,4 @@ const FAQAccordion = () => {
   );
 };
 
-export default FAQAccordion;
+export default memo(FAQAccordion);
