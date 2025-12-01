@@ -1,6 +1,4 @@
-/* eslint-disable no-unused-vars */
-import { useState, useRef, memo, useCallback } from "react";
-import { motion, useInView } from "framer-motion";
+import { useState, useRef, useEffect, memo } from "react";
 import {
   Layers,
   Code2,
@@ -13,7 +11,7 @@ import {
   Brush,
 } from "lucide-react";
 
-// ✅ 1. Move static data outside
+// ✅ Static data outside
 const SKILLS = [
   {
     name: "MERN Development",
@@ -62,100 +60,68 @@ const SKILLS = [
   },
 ];
 
-// ✅ 2. Move variants outside
-const fadeInUp = {
-  hidden: { opacity: 0, y: 40 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] },
-  },
-};
-
-const fadeInLeft = {
-  hidden: { opacity: 0, x: -60 },
-  visible: {
-    opacity: 1,
-    x: 0,
-    transition: { duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] },
-  },
-};
-
-const fadeInRight = {
-  hidden: { opacity: 0, x: 60 },
-  visible: {
-    opacity: 1,
-    x: 0,
-    transition: { duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] },
-  },
-};
-
-const staggerContainer = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.1,
-      delayChildren: 0.1,
-    },
-  },
-};
-
-// ✅ 3. Optimized SpotlightCard (Mouse event throttling removed for CSS var approach)
-const SpotlightCard = memo(({ skill }) => {
-  const divRef = useRef(null);
-  const [isHovered, setIsHovered] = useState(false);
-  const [position, setPosition] = useState({ x: 0, y: 0 });
-
-  // Using simple state for position is fine for individual cards
-  // But added useCallback to be safe
-  const handleMouseMove = useCallback((e) => {
-    if (!divRef.current) return;
-
-    const div = divRef.current;
-    const rect = div.getBoundingClientRect();
-
-    setPosition({ x: e.clientX - rect.left, y: e.clientY - rect.top });
-  }, []);
-
-  const handleMouseEnter = useCallback(() => setIsHovered(true), []);
-  const handleMouseLeave = useCallback(() => setIsHovered(false), []);
-
+// ✅ Lightweight SkillCard - Pure CSS transitions
+const SkillCard = memo(({ skill, index, isVisible }) => {
   const Icon = skill.icon;
 
   return (
-    <motion.div
-      ref={divRef}
-      variants={fadeInUp}
-      onMouseMove={handleMouseMove}
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
-      className="relative h-full overflow-hidden border rounded-2xl border-white/10 bg-white/5 backdrop-blur-sm group"
+    <div
+      className={`
+        relative h-full overflow-hidden rounded-2xl border border-white/10 
+        bg-white/[0.03] group
+        transition-all duration-700 ease-out
+        hover:bg-white/[0.08] hover:border-white/20 hover:scale-[1.02]
+        ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"}
+      `}
+      style={{ transitionDelay: `${index * 75}ms` }}
     >
-      {/* Optimized Gradient Spotlight */}
+      {/* Simple hover glow - no dynamic position tracking */}
       <div
-        className="absolute inset-0 transition-opacity duration-300 pointer-events-none"
-        style={{
-          opacity: isHovered ? 1 : 0,
-          background: `radial-gradient(600px circle at ${position.x}px ${position.y}px, rgba(248, 123, 27, 0.15), transparent 40%)`,
-        }}
+        className="
+          absolute inset-0 opacity-0 group-hover:opacity-100 
+          transition-opacity duration-300 pointer-events-none
+          bg-gradient-to-br from-[#F87B1B]/10 via-transparent to-transparent
+        "
       />
 
-      <div className="relative z-10 flex flex-col items-start h-full gap-6 p-8">
+      <div className="relative z-10 flex flex-col items-start h-full gap-6 p-6 md:p-8">
+        {/* Icon and Title */}
         <div className="flex items-center gap-4">
-          <div className="p-3 rounded-xl bg-white/5 border border-white/10 text-[#F87B1B] group-hover:scale-110 group-hover:bg-[#F87B1B] group-hover:text-white transition-all duration-300">
+          <div
+            className="
+              p-3 rounded-xl bg-white/5 border border-white/10 text-[#F87B1B] 
+              transition-all duration-300
+              group-hover:scale-110 group-hover:bg-[#F87B1B] group-hover:text-white
+              group-hover:shadow-lg group-hover:shadow-[#F87B1B]/20
+            "
+          >
             <Icon size={28} />
           </div>
-          <h3 className="text-xl font-bold text-white">{skill.name}</h3>
+          <h3 className="text-lg font-bold text-white md:text-xl">
+            {skill.name}
+          </h3>
         </div>
 
-        <div className="w-full h-px bg-gradient-to-r from-white/10 to-transparent"></div>
+        {/* Divider */}
+        <div
+          className="
+            w-full h-px bg-gradient-to-r from-white/10 to-transparent
+            transition-all duration-300
+            group-hover:from-[#F87B1B]/30
+          "
+        />
 
+        {/* Tags */}
         <div className="flex flex-wrap gap-2">
           {skill.tags.map((tag, i) => (
             <span
               key={i}
-              className="text-xs font-medium px-3 py-1 rounded-full bg-white/5 text-gray-300 border border-white/5 group-hover:border-[#F87B1B]/30 transition-colors"
+              className="
+                text-xs font-medium px-3 py-1 rounded-full 
+                bg-white/5 text-gray-300 border border-white/5 
+                transition-all duration-300
+                group-hover:border-[#F87B1B]/30 group-hover:bg-white/10
+              "
             >
               {tag}
             </span>
@@ -163,58 +129,91 @@ const SpotlightCard = memo(({ skill }) => {
         </div>
       </div>
 
-      <div className="absolute inset-0 rounded-2xl border border-transparent group-hover:border-[#F87B1B]/20 transition-colors duration-300 pointer-events-none" />
-    </motion.div>
+      {/* Border glow on hover */}
+      <div
+        className="
+          absolute inset-0 rounded-2xl border border-transparent 
+          pointer-events-none transition-colors duration-300
+          group-hover:border-[#F87B1B]/20
+        "
+      />
+    </div>
   );
 });
 
-SpotlightCard.displayName = "SpotlightCard";
+SkillCard.displayName = "SkillCard";
 
-// ✅ 4. Main Component
+// ✅ Main Component - Single IntersectionObserver
 const Technologies = () => {
-  const headerRef = useRef(null);
-  const gridRef = useRef(null);
+  const [isVisible, setIsVisible] = useState(false);
+  const sectionRef = useRef(null);
 
-  const headerInView = useInView(headerRef, { once: true, margin: "-50px" });
-  const gridInView = useInView(gridRef, { once: true, margin: "-50px" });
+  // Single observer for entire section
+  useEffect(() => {
+    const el = sectionRef.current;
+    if (!el) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <div className="py-12 overflow-hidden bg-transparent md:py-20">
-      <div className="container px-6 mx-auto">
+      <div ref={sectionRef} className="container px-6 mx-auto">
+        {/* Header */}
         <div
-          ref={headerRef}
-          className="flex flex-col items-start justify-between gap-6 pb-12 mb-12 border-b md:flex-row md:items-end md:pb-20 border-white/10"
+          className={`
+            flex flex-col items-start justify-between gap-6 pb-12 mb-12 
+            border-b md:flex-row md:items-end md:pb-20 border-white/10
+            transition-all duration-700
+            ${
+              isVisible
+                ? "opacity-100 translate-y-0"
+                : "opacity-0 translate-y-8"
+            }
+          `}
         >
-          <motion.div
-            initial="hidden"
-            animate={headerInView ? "visible" : "hidden"}
-            variants={fadeInLeft}
-          >
-            <h1>Skills & Technologies</h1>
-          </motion.div>
+          <h1 className="text-3xl font-bold text-white md:text-4xl lg:text-5xl">
+            Skills & Technologies
+          </h1>
 
-          <motion.p
-            initial="hidden"
-            animate={headerInView ? "visible" : "hidden"}
-            variants={fadeInRight}
-            className="max-w-md text-lg text-white/70"
+          <p
+            className={`
+              max-w-md text-lg text-white/70
+              transition-all duration-700 delay-100
+              ${
+                isVisible
+                  ? "opacity-100 translate-x-0"
+                  : "opacity-0 translate-x-8"
+              }
+            `}
           >
             A blend of development, design, and digital creativity to craft
             modern and high-impact web experiences.
-          </motion.p>
+          </p>
         </div>
 
-        <motion.div
-          ref={gridRef}
-          initial="hidden"
-          animate={gridInView ? "visible" : "hidden"}
-          variants={staggerContainer}
-          className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
-        >
+        {/* Skills Grid */}
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {SKILLS.map((skill, index) => (
-            <SpotlightCard key={skill.name} skill={skill} />
+            <SkillCard
+              key={skill.name}
+              skill={skill}
+              index={index}
+              isVisible={isVisible}
+            />
           ))}
-        </motion.div>
+        </div>
       </div>
     </div>
   );
