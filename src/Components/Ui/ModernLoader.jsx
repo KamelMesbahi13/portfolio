@@ -5,14 +5,12 @@ const ModernLoader = () => {
   return (
     <div className="flex items-center justify-center min-h-screen">
       <div className="relative flex items-center justify-center">
-        {/* Outer Ring */}
         <motion.div
           className="absolute w-24 h-24 border-4 border-transparent border-t-[#F87B1B] rounded-full"
           animate={{ rotate: 360 }}
           transition={{ duration: 1.5, repeat: Infinity, ease: "linear" }}
         />
 
-        {/* Middle Ring */}
         <motion.div
           className="absolute w-16 h-16 border-4 border-transparent rounded-full border-l-white/20 border-r-white/20"
           animate={{ rotate: -360 }}
