@@ -308,7 +308,7 @@ const HomeContactUs = () => {
   };
 
   return (
-    <div className="container flex items-center justify-center w-full py-8 sm:py-12">
+    <div className="container flex items-center justify-center w-full py-12 sm:py-20">
       <div className="bg-white p-0 rounded-2xl sm:rounded-2xl md:rounded-[2.5rem] shadow-2xl w-full max-w-[1400px] overflow-hidden">
         <div className="flex flex-col gap-0 lg:flex-row">
           <div

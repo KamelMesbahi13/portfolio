@@ -283,7 +283,6 @@ const RecentWork = () => {
           />
         </div>
 
-        {/* Projects Grid */}
         <div
           ref={gridRef}
           className="grid grid-cols-1 gap-5 mt-7 md:mt-12 md:grid-cols-2"

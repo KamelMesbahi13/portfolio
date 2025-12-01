@@ -168,7 +168,7 @@ const FAQAccordion = () => {
   const [openItem, setOpenItem] = useState("1");
 
   return (
-    <div className="container min-h-screen px-4 py-20 text-white md:px-8">
+    <div className="container min-h-screen px-4 py-12 text-white md:py-20 md:px-8">
       <div className="mx-auto max-w-7xl">
         <div className="mb-16 text-center">
           <motion.h1
@@ -188,6 +188,15 @@ const FAQAccordion = () => {
           >
             Here are answers to some common questions
           </motion.p>
+          <motion.div
+            initial="hidden"
+            transition={{
+              duration: 0.8,
+              delay: 0.3,
+              ease: [0.25, 0.46, 0.45, 0.94],
+            }}
+            className="h-px max-w-xs mx-auto mt-8 bg-gradient-to-r from-transparent via-secondColor/50 to-transparent"
+          />
         </div>
 
         {/* Grid Layout: 8 Columns FAQ | 4 Columns Sidebar */}
