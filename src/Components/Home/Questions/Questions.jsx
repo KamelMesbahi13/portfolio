@@ -528,17 +528,8 @@ const FAQAccordion = () => {
           <motion.h1
             variants={fadeInUp}
             transition={{ duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] }}
-            className="mb-3 text-3xl font-bold md:text-4xl lg:text-5xl"
           >
-            Frequently Asked{" "}
-            <motion.span
-              className="text-[#6D28D9] inline-block"
-              initial={{ opacity: 0, y: 20 }}
-              animate={headerInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ delay: 0.4, duration: 0.5 }}
-            >
-              Questions
-            </motion.span>
+            Frequently Asked Questions
           </motion.h1>
           <motion.p
             variants={fadeInUp}
