@@ -1,15 +1,6 @@
 import { useEffect, useRef, useState, memo } from "react";
-import {
-  // eslint-disable-next-line no-unused-vars
-  motion,
-  useMotionValue,
-  useTransform,
-  animate,
-  useInView,
-  AnimatePresence,
-} from "framer-motion";
 
-// ✅ Move static data outside
+// ✅ Static data outside
 const ROLES = ["DEVELOPER", "DESIGNER", "FREELANCER"];
 const STATS = [
   { value: 4, label1: "YEARS OF", label2: "EXPERIENCE" },
@@ -17,103 +8,162 @@ const STATS = [
   { value: 25, label1: "SATISFIED", label2: "CLIENTS" },
 ];
 
-// ✅ Memoize Counter component
-const Counter = memo(({ from = 0, to, duration = 2 }) => {
-  const count = useMotionValue(from);
-  const rounded = useTransform(count, Math.floor);
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
+// ✅ Lightweight Counter - Pure JS, no Framer Motion
+const Counter = memo(({ to, isVisible }) => {
+  const [count, setCount] = useState(0);
+  const hasAnimated = useRef(false);
 
   useEffect(() => {
-    if (isInView) {
-      const controls = animate(count, to, {
-        duration,
-        ease: "easeOut",
-      });
-      return controls.stop;
-    }
-  }, [isInView, count, to, duration]);
+    if (!isVisible || hasAnimated.current) return;
+    hasAnimated.current = true;
 
-  return <motion.span ref={ref}>{rounded}</motion.span>;
+    const duration = 2000; // 2 seconds
+    const startTime = performance.now();
+
+    const animate = (currentTime) => {
+      const elapsed = currentTime - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+
+      // Ease out function
+      const easeOut = 1 - Math.pow(1 - progress, 3);
+      const currentValue = Math.floor(easeOut * to);
+
+      setCount(currentValue);
+
+      if (progress < 1) {
+        requestAnimationFrame(animate);
+      }
+    };
+
+    requestAnimationFrame(animate);
+  }, [isVisible, to]);
+
+  return <span>{count}</span>;
 });
 
 Counter.displayName = "Counter";
 
-// ✅ TypewriterText - EXACT SAME as original but memoized
+// ✅ Lightweight TypewriterText - CSS transitions instead of blur filter
 const TypewriterText = memo(({ words, interval = 2500, className = "" }) => {
   const [index, setIndex] = useState(0);
+  const [isAnimating, setIsAnimating] = useState(false);
 
   useEffect(() => {
     const timer = setInterval(() => {
-      setIndex((current) => (current + 1) % words.length);
+      setIsAnimating(true);
+
+      setTimeout(() => {
+        setIndex((current) => (current + 1) % words.length);
+        setIsAnimating(false);
+      }, 300); // Half of transition duration
     }, interval);
+
     return () => clearInterval(timer);
   }, [words.length, interval]);
 
   return (
-    <AnimatePresence mode="wait">
-      <motion.span
-        key={words[index]}
-        initial={{ opacity: 0, y: 20, filter: "blur(10px)" }}
-        animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-        exit={{ opacity: 0, y: -20, filter: "blur(10px)" }}
-        transition={{
-          duration: 0.6,
-          ease: [0.25, 0.46, 0.45, 0.94],
-        }}
-        className={className}
-      >
-        {words[index]}
-      </motion.span>
-    </AnimatePresence>
+    <span
+      className={`
+        inline-block transition-all duration-300 ease-out
+        ${
+          isAnimating
+            ? "opacity-0 translate-y-4 scale-95"
+            : "opacity-100 translate-y-0 scale-100"
+        }
+        ${className}
+      `}
+    >
+      {words[index]}
+    </span>
   );
 });
 
 TypewriterText.displayName = "TypewriterText";
 
-// ✅ Memoize StatCard component
-const StatCard = memo(({ stat, index }) => {
+// ✅ Lightweight StatCard - CSS only
+const StatCard = memo(({ stat, index, isVisible }) => {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, delay: index * 0.1 }}
+    <div
+      className={`
+        transition-all duration-700 ease-out
+        ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}
+      `}
+      style={{ transitionDelay: `${400 + index * 100}ms` }}
     >
       <div className="mb-2 text-4xl font-extrabold text-white md:text-5xl lg:text-7xl">
         <p>
-          +<Counter to={stat.value} />
+          +<Counter to={stat.value} isVisible={isVisible} />
         </p>
       </div>
       <div className="text-xs font-medium tracking-wide text-gray-500 uppercase lg:text-sm">
         <p>{stat.label1}</p>
         <p>{stat.label2}</p>
       </div>
-    </motion.div>
+    </div>
   );
 });
 
 StatCard.displayName = "StatCard";
 
-// ✅ Main component
+// ✅ Main component - Single IntersectionObserver
 const HeroFirstContent = () => {
+  const [isVisible, setIsVisible] = useState(false);
+  const sectionRef = useRef(null);
+
+  // Single observer for entire hero section
+  useEffect(() => {
+    const el = sectionRef.current;
+    if (!el) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <div className="space-y-4 md:container">
+    <div ref={sectionRef} className="space-y-4 md:container">
       <div>
         <div className="mb-3 md:mb-4">
           <div className="flex flex-col -space-y-4 leading-none">
-            <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6 }}
-              className="text-[2.5rem] md:text-6xl lg:text-6xl xl:text-[6rem] font-black tracking-tighter"
+            {/* WEB Title */}
+            <div
+              className={`
+                text-[2.5rem] md:text-6xl lg:text-6xl xl:text-[6rem] 
+                font-black tracking-tighter
+                transition-all duration-700 ease-out
+                ${
+                  isVisible
+                    ? "opacity-100 translate-x-0"
+                    : "opacity-0 -translate-x-8"
+                }
+              `}
             >
               <p className="text-white">WEB</p>
-            </motion.div>
-            <motion.div
-              initial={{ opacity: 0, x: 30 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="text-[2.5rem] md:!-mt-[40px] !-mt-[17px] md:text-6xl lg:text-6xl xl:text-[6rem] font-black tracking-tighter"
+            </div>
+
+            {/* Typewriter Role */}
+            <div
+              className={`
+                text-[2.5rem] md:!-mt-[40px] !-mt-[17px] 
+                md:text-6xl lg:text-6xl xl:text-[6rem] 
+                font-black tracking-tighter
+                transition-all duration-700 ease-out
+                ${
+                  isVisible
+                    ? "opacity-100 translate-x-0"
+                    : "opacity-0 translate-x-8"
+                }
+              `}
+              style={{ transitionDelay: "200ms" }}
             >
               <p className="text-mainColor">
                 <TypewriterText
@@ -122,25 +172,34 @@ const HeroFirstContent = () => {
                   className="inline-block"
                 />
               </p>
-            </motion.div>
+            </div>
           </div>
         </div>
 
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 0.4 }}
+        {/* Description */}
+        <div
+          className={`
+            transition-all duration-700 ease-out
+            ${isVisible ? "opacity-100" : "opacity-0"}
+          `}
+          style={{ transitionDelay: "400ms" }}
         >
           <p className="max-w-xl text-base leading-relaxed text-gray-400 lg:text-lg">
             Full-stack MERN developer dedicated to crafting efficient, scalable,
             and visually appealing web solutions that bring ideas to life.
           </p>
-        </motion.div>
+        </div>
       </div>
 
+      {/* Stats Grid */}
       <div className="grid grid-cols-3 gap-6 pt-0 md:pt-0 lg:gap-12">
         {STATS.map((stat, index) => (
-          <StatCard key={stat.label1} stat={stat} index={index} />
+          <StatCard
+            key={stat.label1}
+            stat={stat}
+            index={index}
+            isVisible={isVisible}
+          />
         ))}
       </div>
     </div>

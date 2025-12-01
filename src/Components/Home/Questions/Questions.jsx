@@ -1,9 +1,9 @@
 import * as Accordion from "@radix-ui/react-accordion";
 // eslint-disable-next-line no-unused-vars
-import { motion, AnimatePresence, useInView } from "framer-motion";
-import { useState, useRef, memo } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { useState, useRef, useEffect, memo, useCallback } from "react";
 
-// ✅ 1. Move Data Constant Outside
+// ✅ Static FAQ Data
 const FAQ_DATA = [
   {
     id: "1",
@@ -43,37 +43,7 @@ const FAQ_DATA = [
   },
 ];
 
-// ✅ 2. Move Variants Outside
-const ANIMATIONS = {
-  fadeInUp: {
-    hidden: { opacity: 0, y: 40 },
-    visible: { opacity: 1, y: 0 },
-  },
-  fadeInLeft: {
-    hidden: { opacity: 0, x: -60 },
-    visible: { opacity: 1, x: 0 },
-  },
-  fadeInRight: {
-    hidden: { opacity: 0, x: 60 },
-    visible: { opacity: 1, x: 0 },
-  },
-  scaleIn: {
-    hidden: { opacity: 0, scale: 0.8 },
-    visible: { opacity: 1, scale: 1 },
-  },
-  staggerContainer: {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.1,
-      },
-    },
-  },
-};
-
-// ✅ 3. Simple Icons (No need for memo if they are static and outside)
+// ✅ Simple Static Icons
 const PlusIcon = () => (
   <svg
     width="24"
@@ -110,49 +80,57 @@ const StarIcon = () => (
   </svg>
 );
 
-// ✅ 4. Memoized FAQ Item
-const FAQItem = memo(({ item, isOpen, index, isInView }) => {
+// ✅ Lightweight FAQ Item - CSS transitions + minimal motion
+const FAQItem = memo(({ item, isOpen, index, isVisible }) => {
   return (
-    <motion.div
-      initial="hidden"
-      animate={isInView ? "visible" : "hidden"}
-      variants={ANIMATIONS.fadeInUp}
-      transition={{
-        duration: 0.5,
-        delay: index * 0.1,
-        ease: [0.25, 0.46, 0.45, 0.94],
-      }}
+    <div
+      className={`
+        transition-all duration-500 ease-out
+        ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}
+      `}
+      style={{ transitionDelay: `${index * 75}ms` }}
     >
       <Accordion.Item value={item.id} className="mb-4">
         <div
-          className={`group overflow-hidden rounded-xl border transition-all duration-300 ${
-            isOpen
-              ? "border-white/10 bg-white/[0.08]"
-              : "border-white/5 bg-white/[0.03] hover:bg-white/[0.06]"
-          }`}
+          className={`
+            group overflow-hidden rounded-xl border transition-all duration-300
+            ${
+              isOpen
+                ? "border-white/15 bg-white/[0.08]"
+                : "border-white/5 bg-white/[0.03] hover:bg-white/[0.06]"
+            }
+          `}
         >
           <Accordion.Header>
             <Accordion.Trigger className="flex items-center justify-between w-full px-6 py-5 text-left sm:px-8">
               <span className="text-base font-medium text-white/90 md:text-lg lg:text-[17px] leading-snug">
                 {item.question}
               </span>
-              <div className="ml-4 transition-colors shrink-0 text-white/50 group-hover:text-white">
-                <motion.div
-                  initial={false}
-                  animate={{ rotate: isOpen ? 90 : 0 }}
-                  transition={{ duration: 0.2 }}
-                  className={`flex h-8 w-8 items-center justify-center rounded-lg border ${
-                    isOpen
-                      ? "border-white/20 bg-white/10"
-                      : "border-transparent"
-                  }`}
+              <div className="ml-4 transition-colors duration-300 shrink-0 text-white/50 group-hover:text-white">
+                <div
+                  className={`
+                    flex h-8 w-8 items-center justify-center rounded-lg border 
+                    transition-all duration-300
+                    ${
+                      isOpen
+                        ? "border-white/20 bg-white/10 rotate-0"
+                        : "border-transparent rotate-0"
+                    }
+                  `}
                 >
-                  {isOpen ? <CloseIcon /> : <PlusIcon />}
-                </motion.div>
+                  <div
+                    className={`transition-transform duration-300 ${
+                      isOpen ? "rotate-45" : "rotate-0"
+                    }`}
+                  >
+                    {isOpen ? <CloseIcon /> : <PlusIcon />}
+                  </div>
+                </div>
               </div>
             </Accordion.Trigger>
           </Accordion.Header>
 
+          {/* Only AnimatePresence for accordion - this is essential */}
           <AnimatePresence initial={false}>
             {isOpen && (
               <Accordion.Content forceMount asChild>
@@ -160,7 +138,8 @@ const FAQItem = memo(({ item, isOpen, index, isInView }) => {
                   initial={{ height: 0, opacity: 0 }}
                   animate={{ height: "auto", opacity: 1 }}
                   exit={{ height: 0, opacity: 0 }}
-                  transition={{ duration: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }}
+                  transition={{ duration: 0.3, ease: "easeInOut" }}
+                  className="overflow-hidden"
                 >
                   <div className="px-6 pb-6 sm:px-8 text-white/60 text-sm leading-relaxed md:text-[15px]">
                     {item.answer}
@@ -171,87 +150,109 @@ const FAQItem = memo(({ item, isOpen, index, isInView }) => {
           </AnimatePresence>
         </div>
       </Accordion.Item>
-    </motion.div>
+    </div>
   );
 });
 
 FAQItem.displayName = "FAQItem";
 
-// ✅ 5. Memoized Sidebar
-const Sidebar = memo(({ isInView }) => {
+// ✅ Lightweight Sidebar - Pure CSS animations
+const Sidebar = memo(({ isVisible }) => {
   return (
-    <motion.div
-      initial="hidden"
-      animate={isInView ? "visible" : "hidden"}
-      variants={ANIMATIONS.fadeInRight}
-      transition={{
-        duration: 0.6,
-        delay: 0.3,
-        ease: [0.25, 0.46, 0.45, 0.94],
-      }}
-      className="h-auto rounded-3xl border border-white/10 bg-white/[0.02] p-8 backdrop-blur-sm"
+    <div
+      className={`
+        h-auto rounded-3xl border border-white/10 bg-white/[0.03] p-8
+        transition-all duration-700 ease-out
+        ${isVisible ? "opacity-100 translate-x-0" : "opacity-0 translate-x-12"}
+      `}
+      style={{ transitionDelay: "200ms" }}
     >
-      <motion.div
-        initial={{ scale: 0, rotate: -180 }}
-        animate={isInView ? { scale: 1, rotate: 0 } : {}}
-        transition={{
-          delay: 0.5,
-          type: "spring",
-          stiffness: 200,
-          damping: 15,
-        }}
-        className="relative flex items-center justify-center mb-6 shadow-lg h-14 w-14 rounded-xl bg-gradient-to-br from-purple-600 to-blue-600 shadow-purple-500/20"
+      {/* Star Icon - CSS animation instead of spring */}
+      <div
+        className={`
+          relative flex items-center justify-center mb-6 shadow-lg h-14 w-14 
+          rounded-xl bg-gradient-to-br from-purple-600 to-blue-600 shadow-purple-500/20
+          transition-all duration-500 ease-out
+          ${isVisible ? "scale-100 rotate-0" : "scale-0 -rotate-180"}
+        `}
+        style={{ transitionDelay: "400ms" }}
       >
         <StarIcon />
-      </motion.div>
+      </div>
 
-      <motion.h3
-        initial={{ opacity: 0, y: 20 }}
-        animate={isInView ? { opacity: 1, y: 0 } : {}}
-        transition={{ delay: 0.6, duration: 0.5 }}
-        className="mb-3 text-xl font-bold text-white"
+      {/* Title */}
+      <h3
+        className={`
+          mb-3 text-xl font-bold text-white
+          transition-all duration-500 ease-out
+          ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}
+        `}
+        style={{ transitionDelay: "500ms" }}
       >
         Still have any Questions?
-      </motion.h3>
+      </h3>
 
-      <motion.p
-        initial={{ opacity: 0, y: 20 }}
-        animate={isInView ? { opacity: 1, y: 0 } : {}}
-        transition={{ delay: 0.7, duration: 0.5 }}
-        className="mb-8 text-[15px] leading-relaxed text-white/60"
+      {/* Description */}
+      <p
+        className={`
+          mb-8 text-[15px] leading-relaxed text-white/60
+          transition-all duration-500 ease-out
+          ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}
+        `}
+        style={{ transitionDelay: "600ms" }}
       >
         Let's collaborate to create an exceptional website that sets you apart
         from the competition. Contact me today to discuss your web design needs.
-      </motion.p>
+      </p>
 
-      <motion.button
-        initial={{ opacity: 0, y: 20 }}
-        animate={isInView ? { opacity: 1, y: 0 } : {}}
-        transition={{ delay: 0.8, duration: 0.5 }}
-        whileHover={{ scale: 1.02 }}
-        whileTap={{ scale: 0.95 }}
-        className="w-full sm:w-auto rounded-xl bg-[#6D28D9] px-8 py-3.5 text-sm font-semibold text-white transition-all hover:bg-[#5B21B6] hover:shadow-lg hover:shadow-purple-500/25"
+      {/* Button */}
+      <button
+        className={`
+          w-full sm:w-auto rounded-xl bg-[#6D28D9] px-8 py-3.5 
+          text-sm font-semibold text-white 
+          transition-all duration-300 ease-out
+          hover:bg-[#5B21B6] hover:shadow-lg hover:shadow-purple-500/25
+          hover:scale-[1.02] active:scale-[0.98]
+          ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}
+        `}
+        style={{ transitionDelay: "700ms" }}
       >
         Contact Me
-      </motion.button>
-    </motion.div>
+      </button>
+    </div>
   );
 });
 
 Sidebar.displayName = "Sidebar";
 
-// ✅ 6. Main Component
+// ✅ Main Component - Single IntersectionObserver
 const FAQAccordion = () => {
   const [openItem, setOpenItem] = useState("1");
-
+  const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef(null);
-  const headerRef = useRef(null);
-  const faqListRef = useRef(null);
-  const sidebarRef = useRef(null);
 
-  const headerInView = useInView(headerRef, { once: true, margin: "-100px" });
-  const faqListInView = useInView(faqListRef, { once: true, margin: "-50px" });
-  const sidebarInView = useInView(sidebarRef, { once: true, margin: "-50px" });
+  // Single observer for entire section
+  useEffect(() => {
+    const el = sectionRef.current;
+    if (!el) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  const handleValueChange = useCallback((value) => {
+    setOpenItem(value);
+  }, []);
 
   return (
     <div
@@ -260,68 +261,58 @@ const FAQAccordion = () => {
     >
       <div className="mx-auto max-w-7xl">
         {/* Header Section */}
-        <motion.div
-          ref={headerRef}
-          initial="hidden"
-          animate={headerInView ? "visible" : "hidden"}
-          variants={ANIMATIONS.staggerContainer}
-          className="mb-16 text-center"
+        <div
+          className={`
+            mb-16 text-center transition-all duration-700 ease-out
+            ${
+              isVisible
+                ? "opacity-100 translate-y-0"
+                : "opacity-0 translate-y-8"
+            }
+          `}
         >
-          <motion.h1
-            variants={ANIMATIONS.fadeInUp}
-            transition={{ duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] }}
-          >
+          <h1 className="text-3xl font-bold md:text-4xl lg:text-5xl">
             Frequently Asked Questions
-          </motion.h1>
-          <motion.p
-            variants={ANIMATIONS.fadeInUp}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="text-lg text-white/50"
+          </h1>
+          <p
+            className={`
+              text-lg text-white/50 mt-4 transition-all duration-700 ease-out
+              ${isVisible ? "opacity-100" : "opacity-0"}
+            `}
+            style={{ transitionDelay: "100ms" }}
           >
             Here are answers to some common questions
-          </motion.p>
-          <motion.div
-            initial={{ scaleX: 0 }}
-            animate={headerInView ? { scaleX: 1 } : {}}
-            transition={{
-              duration: 0.8,
-              delay: 0.5,
-              ease: [0.25, 0.46, 0.45, 0.94],
-            }}
-            className="h-px max-w-xs mx-auto mt-8 origin-center bg-gradient-to-r from-transparent via-secondColor/50 to-transparent"
+          </p>
+          <div
+            className={`
+              h-px max-w-xs mx-auto mt-8 origin-center 
+              bg-gradient-to-r from-transparent via-secondColor/50 to-transparent
+              transition-all duration-700 ease-out
+              ${isVisible ? "scale-x-100 opacity-100" : "scale-x-0 opacity-0"}
+            `}
+            style={{ transitionDelay: "200ms" }}
           />
-        </motion.div>
+        </div>
 
         {/* Grid Layout */}
         <div className="grid gap-8 lg:grid-cols-12 lg:gap-8">
           {/* Left Column: Accordion List */}
-          <motion.div
-            ref={faqListRef}
-            initial="hidden"
-            animate={faqListInView ? "visible" : "hidden"}
-            variants={ANIMATIONS.fadeInLeft}
-            transition={{
-              duration: 0.6,
-              ease: [0.25, 0.46, 0.45, 0.94],
-            }}
-            className="lg:col-span-8"
+          <div
+            className={`
+              lg:col-span-8 transition-all duration-700 ease-out
+              ${
+                isVisible
+                  ? "opacity-100 translate-x-0"
+                  : "opacity-0 -translate-x-8"
+              }
+            `}
           >
-            <motion.div
-              initial="hidden"
-              animate={faqListInView ? "visible" : "hidden"}
-              variants={ANIMATIONS.scaleIn}
-              transition={{
-                duration: 0.5,
-                delay: 0.2,
-                ease: [0.25, 0.46, 0.45, 0.94],
-              }}
-              className="rounded-3xl border border-white/[0.05] bg-white/[0.01] p-6 sm:p-8"
-            >
+            <div className="rounded-3xl border border-white/[0.05] bg-white/[0.01] p-6 sm:p-8">
               <Accordion.Root
                 type="single"
                 collapsible
                 value={openItem}
-                onValueChange={setOpenItem}
+                onValueChange={handleValueChange}
               >
                 {FAQ_DATA.map((item, index) => (
                   <FAQItem
@@ -329,15 +320,16 @@ const FAQAccordion = () => {
                     item={item}
                     isOpen={openItem === item.id}
                     index={index}
-                    isInView={faqListInView}
+                    isVisible={isVisible}
                   />
                 ))}
               </Accordion.Root>
-            </motion.div>
-          </motion.div>
+            </div>
+          </div>
 
-          <div ref={sidebarRef} className="lg:col-span-4">
-            <Sidebar isInView={sidebarInView} />
+          {/* Right Column: Sidebar */}
+          <div className="lg:col-span-4">
+            <Sidebar isVisible={isVisible} />
           </div>
         </div>
       </div>
