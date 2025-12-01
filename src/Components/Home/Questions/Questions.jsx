@@ -42,8 +42,6 @@ const faqData = [
   },
 ];
 
-// --- Icons (Styled for Dark Mode) ---
-
 const PlusIcon = () => (
   <svg
     width="24"
@@ -91,8 +89,6 @@ const StarIcon = () => (
     <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" />
   </svg>
 );
-
-// --- Components ---
 
 const FAQItem = ({ item, isOpen }) => {
   return (
@@ -148,7 +144,6 @@ const FAQItem = ({ item, isOpen }) => {
 const Sidebar = () => {
   return (
     <div className="h-auto rounded-3xl border border-white/10 bg-white/[0.02] p-8 backdrop-blur-sm">
-      {/* The Purple/Pink Glow Box */}
       <div className="relative flex items-center justify-center mb-6 shadow-lg h-14 w-14 rounded-xl bg-gradient-to-br from-purple-600 to-blue-600 shadow-purple-500/20">
         <StarIcon />
       </div>
@@ -173,10 +168,8 @@ const FAQAccordion = () => {
   const [openItem, setOpenItem] = useState("1");
 
   return (
-    // Main Dark Background
-    <section className="min-h-screen px-4 py-20 text-white md:px-8">
+    <div className="container min-h-screen px-4 py-20 text-white md:px-8">
       <div className="mx-auto max-w-7xl">
-        {/* Page Header */}
         <div className="mb-16 text-center">
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
@@ -241,7 +234,7 @@ const FAQAccordion = () => {
           </motion.div>
         </div>
       </div>
-    </section>
+    </div>
   );
 };
 
