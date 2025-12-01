@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 
-import mypic from "../../../assets/mypic.png";
+import mypic from "../../../assets/mypic.webp";
 import { motion } from "framer-motion";
 import { Github, Linkedin, Instagram, Facebook } from "lucide-react";
 

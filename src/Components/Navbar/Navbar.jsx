@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Home, Folder, Briefcase, Wrench, Mail } from "lucide-react";
-import Logo from "../../assets/kmLogowhite.png";
+import Logo from "../../assets/kmLogowhite.webp";
 
 export default function AnimatedNavbar() {
   const [hoveredIndex, setHoveredIndex] = useState(null);

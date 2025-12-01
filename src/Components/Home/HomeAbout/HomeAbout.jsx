@@ -1,7 +1,7 @@
 // eslint-disable-next-line no-unused-vars
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
-import MyPic from "../../../assets/mypictwo.png";
+import MyPic from "../../../assets/mypictwo.webp";
 
 import {
   ArrowRight,
