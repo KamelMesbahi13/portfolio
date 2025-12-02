@@ -90,12 +90,12 @@ const StatCard = memo(({ stat, index, isVisible }) => {
       `}
       style={{ transitionDelay: `${400 + index * 100}ms` }}
     >
-      <div className="mb-2 text-4xl font-extrabold text-white md:text-5xl lg:text-7xl">
-        <p>
+      <div>
+        <p className="mb-2 text-4xl font-extrabold text-textColorWhite dark:text-white md:text-5xl lg:text-7xl">
           +<Counter to={stat.value} isVisible={isVisible} />
         </p>
       </div>
-      <div className="text-xs font-medium tracking-wide text-gray-500 uppercase lg:text-sm">
+      <div className="text-xs font-medium tracking-wide uppercase dark:text-textColorDark lg:text-sm">
         <p>{stat.label1}</p>
         <p>{stat.label2}</p>
       </div>
@@ -176,7 +176,6 @@ const HeroFirstContent = () => {
           </div>
         </div>
 
-        {/* Description */}
         <div
           className={`
             transition-all duration-700 ease-out
@@ -184,14 +183,13 @@ const HeroFirstContent = () => {
           `}
           style={{ transitionDelay: "400ms" }}
         >
-          <p className="max-w-xl text-base leading-relaxed text-gray-400 lg:text-lg">
+          <p className="max-w-xl text-base leading-relaxed dark:text-gray-400 lg:text-lg">
             Full-stack MERN developer dedicated to crafting efficient, scalable,
             and visually appealing web solutions that bring ideas to life.
           </p>
         </div>
       </div>
 
-      {/* Stats Grid */}
       <div className="grid grid-cols-3 gap-6 pt-0 md:pt-0 lg:gap-12">
         {STATS.map((stat, index) => (
           <StatCard
