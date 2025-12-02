@@ -147,7 +147,7 @@ const HeroFirstContent = () => {
                 }
               `}
             >
-              <p className="text-white">WEB</p>
+              <p className="text-secondColor dark:text-white">WEB</p>{" "}
             </div>
 
             {/* Typewriter Role */}

@@ -3,30 +3,31 @@ import { createContext, useContext, useEffect, useState } from "react";
 
 const ThemeContext = createContext();
 
-export const ThemeProvider = ({ children }) => {
-  const [isDarkMode, setIsDarkMode] = useState(false);
-
-  useEffect(() => {
-    // Check localStorage on mount
+// Check theme BEFORE React loads
+const getInitialTheme = () => {
+  if (typeof window !== "undefined") {
     const savedTheme = localStorage.getItem("theme");
-    if (savedTheme === "dark") {
-      setIsDarkMode(true);
+    return savedTheme === "dark";
+  }
+  return false; // Default to light mode
+};
+
+export const ThemeProvider = ({ children }) => {
+  const [isDarkMode, setIsDarkMode] = useState(getInitialTheme);
+
+  // Apply theme on mount and when it changes
+  useEffect(() => {
+    if (isDarkMode) {
       document.documentElement.classList.add("dark");
     } else {
       document.documentElement.classList.remove("dark");
     }
-  }, []);
+  }, [isDarkMode]);
 
   const toggleTheme = () => {
     setIsDarkMode((prev) => {
       const newTheme = !prev;
-      if (newTheme) {
-        document.documentElement.classList.add("dark");
-        localStorage.setItem("theme", "dark");
-      } else {
-        document.documentElement.classList.remove("dark");
-        localStorage.setItem("theme", "light");
-      }
+      localStorage.setItem("theme", newTheme ? "dark" : "light");
       return newTheme;
     });
   };
