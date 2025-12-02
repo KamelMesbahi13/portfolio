@@ -1,7 +1,7 @@
 import { useState, memo } from "react";
-import { Home, Folder, Briefcase, Wrench, Mail } from "lucide-react";
+import { Home, Folder, Briefcase, Wrench, Mail, Sun, Moon } from "lucide-react";
 import Logo from "../../assets/kmLogowhite.webp";
-import ThemeToggle from "../Ui/ThemeToggle";
+import { useTheme } from "../Functions/ThemeContext";
 
 const navItems = [
   { icon: Home, label: "Home", id: "home" },
@@ -22,7 +22,7 @@ const NavItem = memo(({ item, isHovered, onMouseEnter, onMouseLeave }) => {
     >
       <button className="p-2 transition-all duration-300 rounded-lg group">
         <Icon
-          className="w-5 h-5 text-gray-400 transition-colors duration-300 group-hover:text-white"
+          className="w-5 h-5 text-gray-400 transition-colors duration-300 group-hover:text-white dark:group-hover:text-white group-hover:dark:text-white"
           strokeWidth={1.5}
         />
       </button>
@@ -34,7 +34,7 @@ const NavItem = memo(({ item, isHovered, onMouseEnter, onMouseLeave }) => {
             : "opacity-0 -translate-y-2 pointer-events-none"
         }`}
       >
-        <span className="px-2 py-1 text-white bg-[#2A2725] rounded-md">
+        <span className="px-2 py-1 text-white rounded-md bg-[#2A2725] dark:bg-[#2A2725] dark:text-white">
           {item.label}
         </span>
       </div>
@@ -44,14 +44,41 @@ const NavItem = memo(({ item, isHovered, onMouseEnter, onMouseLeave }) => {
 
 NavItem.displayName = "NavItem";
 
+const ThemeToggle = () => {
+  const { isDarkMode, toggleTheme } = useTheme();
+
+  return (
+    <div className="pl-4 border-l border-gray-300 dark:border-gray-700">
+      <button
+        onClick={toggleTheme}
+        className="p-2 transition-all duration-300 rounded-lg group hover:bg-gray-200 dark:hover:bg-gray-700"
+        aria-label="Toggle theme"
+      >
+        {isDarkMode ? (
+          <Sun
+            className="w-5 h-5 text-gray-400 transition-colors duration-300 group-hover:text-yellow-500"
+            strokeWidth={1.5}
+          />
+        ) : (
+          <Moon
+            className="w-5 h-5 text-gray-600 transition-colors duration-300 group-hover:text-blue-600"
+            strokeWidth={1.5}
+          />
+        )}
+      </button>
+    </div>
+  );
+};
+
 export default function AnimatedNavbar() {
   const [hoveredIndex, setHoveredIndex] = useState(null);
 
   return (
-    <div className="fixed z-50 flex items-start justify-center w-full pt-8">
-      <nav className="px-6 py-3 bg-[#1C1A19] shadow-lg rounded-2xl">
-        <div className="flex items-center gap-2 md:gap-6">
-          <div className="pr-4 border-r border-gray-700">
+    <div className="flex items-start justify-center pt-8">
+      <nav className="px-6 py-3 bg-white dark:bg-[#1C1A19] shadow-lg rounded-2xl transition-colors duration-300">
+        <div className="flex items-center gap-2 md:gap-4">
+          {/* Logo */}
+          <div className="pr-4 border-r border-gray-300 dark:border-gray-700">
             <img
               src={Logo}
               alt="KM Logo"
@@ -62,6 +89,7 @@ export default function AnimatedNavbar() {
             />
           </div>
 
+          {/* Nav Items */}
           {navItems.map((item, index) => (
             <NavItem
               key={item.id}
@@ -71,9 +99,9 @@ export default function AnimatedNavbar() {
               onMouseLeave={() => setHoveredIndex(null)}
             />
           ))}
-          <div className="pl-4 border-l border-gray-700">
-            <ThemeToggle />
-          </div>
+
+          {/* Theme Toggle */}
+          <ThemeToggle />
         </div>
       </nav>
     </div>

@@ -1,6 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
+  darkMode: "class", // 👈 Add this line
   theme: {
     extend: {
       colors: {
@@ -8,11 +9,8 @@ export default {
         secondColor: "#F87B1B",
         white: "#ffffff",
         red: "#ff0f0f",
-        "bg-primary": "var(--bg-primary)",
-        "bg-secondary": "var(--bg-secondary)",
-        "text-primary": "var(--text-primary)",
-        "text-secondary": "var(--text-secondary)",
-        "border-color": "var(--border-color)",
+        darkBg: "#151312",
+        lightBg: "#f5f5f7",
       },
     },
   },

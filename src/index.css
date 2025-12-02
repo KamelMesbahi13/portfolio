@@ -2,38 +2,17 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --bg-primary: #ffffff;
-  --bg-secondary: #f9fafb;
-  --text-primary: #111827;
-  --text-secondary: #6b7280;
-  --border-color: #e5e7eb;
-  --card-bg: #ffffff;
-  --card-hover: #f3f4f6;
-}
-
-/* ✅ Dark Mode */
-.dark {
-  --bg-primary: #0c2b4e;
-  --bg-secondary: #0a1f3a;
-  --text-primary: #ffffff;
-  --text-secondary: #9ca3af;
-  --border-color: rgba(255, 255, 255, 0.1);
-  --card-bg: rgba(255, 255, 255, 0.03);
-  --card-hover: rgba(255, 255, 255, 0.08);
-}
-
 @layer components {
   h1 {
-    @apply mb-0 text-4xl font-bold md:font-bold heading-gradient md:text-6xl;
+    @apply mb-0 text-4xl font-bold text-gray-900 md:font-bold heading-gradient md:text-6xl dark:text-white;
   }
 
   h2 {
-    @apply text-base font-semibold md:font-bold md:text-2xl;
+    @apply text-base font-semibold text-gray-900 md:font-bold md:text-2xl dark:text-white;
   }
 
   h6 {
-    @apply text-lg font-bold md:text-xl;
+    @apply text-lg font-bold text-gray-900 md:text-xl dark:text-white;
   }
 
   .heading-gradient {
@@ -63,15 +42,6 @@
   }
 }
 
-/* animation keyframes */
-@keyframes gradient-move {
-  0% {
-    background-position: 0% center;
-  }
-  100% {
-    background-position: 200% center;
-  }
-}
 .darkveil-canvas {
   width: 100%;
   height: 100%;
@@ -87,18 +57,15 @@
 
 body {
   font-family: "Montserrat", sans-serif;
+  background-color: #f5f5f7;
+  transition: background-color 0.3s ease;
+}
+
+body.dark,
+:root.dark body {
   background-color: #151312;
-  color: white;
 }
 
-.backone {
-  background-image: url(../src/assets/backone.jpeg);
-  background-size: cover;
-  background-attachment: fixed;
-  height: 50rem;
-}
-
-/* Add these custom animations */
 @keyframes orbit {
   0% {
     transform: translate(-30px, 0);
