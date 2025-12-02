@@ -74,7 +74,7 @@ export default function AnimatedNavbar() {
   const [hoveredIndex, setHoveredIndex] = useState(null);
 
   return (
-    <div className="flex items-start justify-center pt-8">
+    <div className="fixed z-50 flex items-start justify-center w-full pt-8">
       <nav className="px-6 py-3 bg-white dark:bg-[#1C1A19] shadow-lg rounded-2xl transition-colors duration-300">
         <div className="flex items-center gap-2 md:gap-4">
           {/* Logo */}
