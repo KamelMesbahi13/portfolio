@@ -1,6 +1,7 @@
 import { useState, memo } from "react";
 import { Home, Folder, Briefcase, Wrench, Mail } from "lucide-react";
 import Logo from "../../assets/kmLogowhite.webp";
+import ThemeToggle from "../Ui/ThemeToggle";
 
 const navItems = [
   { icon: Home, label: "Home", id: "home" },
@@ -70,6 +71,9 @@ export default function AnimatedNavbar() {
               onMouseLeave={() => setHoveredIndex(null)}
             />
           ))}
+          <div className="pl-4 border-l border-gray-700">
+            <ThemeToggle />
+          </div>
         </div>
       </nav>
     </div>

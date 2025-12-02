@@ -2,6 +2,27 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --bg-primary: #ffffff;
+  --bg-secondary: #f9fafb;
+  --text-primary: #111827;
+  --text-secondary: #6b7280;
+  --border-color: #e5e7eb;
+  --card-bg: #ffffff;
+  --card-hover: #f3f4f6;
+}
+
+/* ✅ Dark Mode */
+.dark {
+  --bg-primary: #0c2b4e;
+  --bg-secondary: #0a1f3a;
+  --text-primary: #ffffff;
+  --text-secondary: #9ca3af;
+  --border-color: rgba(255, 255, 255, 0.1);
+  --card-bg: rgba(255, 255, 255, 0.03);
+  --card-hover: rgba(255, 255, 255, 0.08);
+}
+
 @layer components {
   h1 {
     @apply mb-0 text-4xl font-bold md:font-bold heading-gradient md:text-6xl;
