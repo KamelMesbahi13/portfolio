@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { memo } from "react";
 import mypic from "../../../assets/mypic.webp";
 import { Github, Linkedin, Instagram, Facebook, Download } from "lucide-react";
