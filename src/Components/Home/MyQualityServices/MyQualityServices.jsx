@@ -2,7 +2,6 @@
 import { useState, useRef, useEffect, memo, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
-// ✅ Services data (unchanged)
 const SERVICES = [
   {
     id: "01",
