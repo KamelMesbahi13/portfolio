@@ -141,7 +141,7 @@ const FAQItem = memo(({ item, isOpen, index, isVisible }) => {
                   transition={{ duration: 0.3, ease: "easeInOut" }}
                   className="overflow-hidden"
                 >
-                  <div className="px-6 pb-6 sm:px-8 text-textColorWhite/70 dark:text-white/60 text-sm leading-relaxed md:text-[15px]">
+                  <div className="px-6 pb-6 sm:px-8 text-textColorWhite/70 dark:text-white/70 text-sm leading-relaxed md:text-[15px]">
                     {item.answer}
                   </div>
                 </motion.div>

@@ -146,7 +146,7 @@ const ProjectCard = memo(({ project, onClick }) => {
           <p className="text-xs font-semibold tracking-[0.1em] opacity-80 mb-3">
             {project.category}
           </p>
-          <h2 className="max-w-md text-xl font-bold leading-tight md:text-4xl">
+          <h2 className="max-w-md text-xl font-bold leading-tight text-white md:text-4xl">
             {project.title}
           </h2>
         </motion.div>
@@ -206,7 +206,7 @@ const RecentWork = () => {
             initial={{ opacity: 0, y: 40 }}
             animate={headerInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.7, delay: 0.15 }}
-            className="max-w-3xl mx-auto mt-4 text-base md:text-lg text-white/70"
+            className="max-w-3xl mx-auto mt-4 text-base md:text-lg text-textColorWhite/70 dark:text-textColorDark"
           >
             I deliver modern, high-quality digital solutions that help
             businesses grow and stand out online.

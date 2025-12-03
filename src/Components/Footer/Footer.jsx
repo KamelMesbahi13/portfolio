@@ -1,5 +1,3 @@
-
-
 import { memo } from "react";
 import {
   Github,
@@ -76,7 +74,7 @@ const SocialIcon = memo(({ social }) => {
         hover:scale-110 active:scale-95
         border-mainColor/30 bg-mainColor/10 text-mainColor
         hover:bg-[#F87B1B] hover:border-[#F87B1B] hover:text-white
-        dark:border-white/10 dark:bg-white/5 dark:text-white/60 dark:hover:text-white
+        dark:border-white/10 dark:bg-white/5 dark:text-white/70 dark:hover:text-white
       "
     >
       <Icon size={18} />
@@ -96,7 +94,7 @@ const FooterLink = memo(({ href, children, external = false }) => {
       className="
         group flex items-center gap-1 text-sm transition-colors duration-300
         text-textColorWhite/70 hover:text-[#F87B1B]
-        dark:text-white/60 dark:hover:text-[#F87B1B]
+        dark:text-white/70 dark:hover:text-[#F87B1B]
       "
     >
       <span>{children}</span>
@@ -121,7 +119,7 @@ const ContactItem = memo(({ icon: Icon, text, href }) => {
       className="
         flex items-center gap-3 text-sm transition-colors duration-300
         text-textColorWhite/70 hover:text-[#F87B1B]
-        dark:text-white/60 dark:hover:text-[#F87B1B]
+        dark:text-white/70 dark:hover:text-[#F87B1B]
         group
       "
     >
@@ -178,13 +176,13 @@ const Footer = () => {
                 <h3 className="text-xl font-bold text-textColorWhite dark:text-white">
                   Kamel Mesbahi
                 </h3>
-                <p className="text-xs text-textColorWhite/60 dark:text-white/50">
+                <p className="text-xs text-textColorWhite/70 dark:text-white/50">
                   Full-Stack Developer
                 </p>
               </div>
             </div>
 
-            <p className="text-sm leading-relaxed text-textColorWhite/70 dark:text-white/60">
+            <p className="text-sm leading-relaxed text-textColorWhite/70 dark:text-white/70">
               Crafting modern web experiences with the MERN stack. Turning ideas
               into scalable digital solutions.
             </p>
@@ -199,7 +197,7 @@ const Footer = () => {
 
           {/* Column 2: Quick Links */}
           <div>
-            <h4 className="mb-4 text-sm font-bold tracking-wider uppercase text-textColorWhite dark:text-white/90">
+            <h4 className="mb-4 text-sm font-bold tracking-wider uppercase text-textColorWhite/70 dark:text-white/90">
               Quick Links
             </h4>
             <ul className="space-y-3">
@@ -245,7 +243,7 @@ const Footer = () => {
         </div>
 
         <div className="flex flex-col items-center justify-between gap-4 pt-8 md:flex-row">
-          <p className="text-sm text-textColorWhite/60 dark:text-white/50">
+          <p className="text-sm text-textColorWhite/70 dark:text-white/50">
             © {currentYear} Kamel Mesbahi. All rights reserved.
           </p>
         </div>
