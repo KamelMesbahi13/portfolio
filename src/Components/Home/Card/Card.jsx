@@ -1,8 +1,7 @@
 import { memo } from "react";
 import mypic from "../../../assets/mypic.webp";
-import { Github, Linkedin, Instagram, Facebook } from "lucide-react";
+import { Github, Linkedin, Instagram, Facebook, Download } from "lucide-react";
 
-// ✅ Static social links outside
 const SOCIAL_LINKS = [
   { icon: Github, href: "https://github.com/yourusername", label: "GitHub" },
   {
@@ -22,8 +21,8 @@ const SOCIAL_LINKS = [
   },
 ];
 
-// ✅ Lightweight Social Icon - Pure CSS
-const SocialIcon = memo(({ social, index }) => {
+// ✅ Premium "Tech Glow" Social Icon
+const SocialIcon = memo(({ social }) => {
   const Icon = social.icon;
 
   return (
@@ -32,90 +31,95 @@ const SocialIcon = memo(({ social, index }) => {
       target="_blank"
       rel="noopener noreferrer"
       aria-label={social.label}
-      className={`
-        relative flex items-center justify-center w-10 h-10 
-        text-gray-700 rounded-full shadow-md 
-        bg-gradient-to-br from-gray-100 to-gray-200 
-        hover:from-mainColor hover:to-secondColor hover:text-white hover:shadow-xl
-        hover:-translate-y-1 active:scale-95
-        transition-all duration-300 ease-out
-        group/icon
-        opacity-0 animate-fadeInUp
-      `}
-      style={{
-        animationDelay: `${500 + index * 100}ms`,
-        animationFillMode: "forwards",
-      }}
+      className="relative outline-none group"
     >
-      <Icon className="w-5 h-5 transition-transform duration-300 group-hover/icon:scale-110" />
-
-      {/* Tooltip */}
-      <span className="absolute px-2 py-1 text-xs font-medium text-white transition-opacity duration-200 bg-gray-800 rounded-md opacity-0 pointer-events-none -top-10 group-hover/icon:opacity-100 whitespace-nowrap">
-        {social.label}
-      </span>
+      <div
+        className="
+        flex items-center justify-center w-12 h-12 
+        rounded-full bg-gray-50 text-gray-500 border border-gray-200
+        transition-all duration-300 ease-[cubic-bezier(0.25,0.8,0.25,1)]
+        
+        /* Hover Effects: confined strictly to this element */
+        hover:bg-white
+        hover:border-mainColor/50
+        hover:text-mainColor 
+        hover:-translate-y-1.5 
+        hover:shadow-[0_8px_20px_-6px_rgba(0,0,0,0.2)]
+        hover:shadow-mainColor/20
+      "
+      >
+        <Icon
+          size={20}
+          className="transition-transform duration-300 group-hover:scale-110"
+        />
+      </div>
     </a>
   );
 });
 
 SocialIcon.displayName = "SocialIcon";
 
-// ✅ Main Card - Pure CSS animations
 const Card = () => {
   return (
-    <div className="w-full mb-4 lg:sticky md:mb-0 lg:top-32 h-fit">
-      <div className="relative p-6 bg-white shadow-2xl opacity-0 rounded-3xl group animate-fadeInScale">
-        {/* Gradient border on hover */}
-        <div className="absolute inset-0 transition-opacity duration-500 opacity-0 pointer-events-none rounded-3xl bg-gradient-to-br from-mainColor/20 via-secondColor/10 to-transparent group-hover:opacity-100" />
-
-        {/* Profile Image Section */}
-        <div className="relative mb-6">
-          <div className="relative overflow-hidden bg-secondColor aspect-square rounded-2xl">
+    <div className="w-full lg:sticky lg:top-32 h-fit">
+      <div className="relative p-6 bg-white shadow-2xl rounded-3xl ring-1 ring-gray-100/50">
+        <div className="relative mx-auto mb-6 w-full max-w-[300px] group">
+          <div className="relative aspect-square rounded-2xl overflow-hidden border-[3px] border-white shadow-lg">
             <img
               src={mypic}
-              alt="Mesbahi Kamel Profile"
-              className="object-cover w-full h-full transition-transform duration-500 group-hover:scale-105"
+              alt="Mesbahi Kamel"
+              className="object-cover w-full h-full transition-all duration-700 ease-in-out grayscale group-hover:grayscale-0 group-hover:scale-105"
               loading="eager"
-              width="400"
-              height="400"
             />
           </div>
 
-          {/* Orbiting dot - CSS animation */}
-          <div
-            className="absolute w-3 h-3 rounded-full shadow-lg bg-secondColor animate-orbit"
-            style={{ left: "-12px", bottom: "-12px" }}
-          />
+          <div className="absolute bottom-4 right-4 px-3 py-1.5 bg-white/90 backdrop-blur-md border border-white/20 rounded-full shadow-sm flex items-center gap-2">
+            <div className="relative flex items-center justify-center w-2 h-2">
+              <span className="absolute inline-flex w-full h-full bg-green-500 rounded-full opacity-75 animate-ping"></span>
+              <span className="relative inline-flex w-2 h-2 bg-green-500 rounded-full"></span>
+            </div>
+            <span className="text-[10px] font-bold uppercase tracking-wider text-gray-800">
+              Open to Work
+            </span>
+          </div>
         </div>
 
-        {/* Rotating circle - CSS animation */}
-        <div
-          className="absolute w-16 h-16 border-2 border-dashed rounded-full border-secondColor opacity-60 animate-spin-slow"
-          style={{ top: "10px", right: "0px" }}
-        />
+        <div className="text-left">
+          <div className="mb-2">
+            <h2 className="text-3xl font-bold leading-none text-textColorWhite dark:text-textColorWhite">
+              Mesbahi
+            </h2>
+            <h2 className="text-3xl font-bold leading-tight text-textColorWhite dark:text-textColorWhite">
+              Kamel
+            </h2>
+          </div>
 
-        {/* Name Section */}
-        <div className="relative mb-2">
-          <p className="text-2xl font-semibold text-black md:text-4xl">
-            Mesbahi Kamel
+          <p className="mb-4 text-sm font-medium text-mainColor">
+            Software Engineer
           </p>
 
-          {/* Underline with CSS animation */}
-          <div className="h-0.5 bg-gradient-to-r from-mainColor to-secondColor rounded-full mt-1 w-[60px] animate-expand" />
-        </div>
+          <p className="mb-8 text-sm leading-relaxed text-gray-600">
+            Turning complex ideas into clean, pixel-perfect builds.
+          </p>
 
-        {/* Description */}
-        <p className="mb-6 text-sm leading-relaxed text-black/70 md:text-base">
-          A Software Engineer who has developed countless innovative solutions.
-        </p>
+          {/* Contact Button: Clean Black */}
+          <a
+            href="#contact"
+            className="flex items-center justify-center w-full gap-2 py-4 text-sm font-bold tracking-wider text-white uppercase transition-all duration-300 bg-black shadow-lg rounded-xl hover:-translate-y-1 hover:shadow-xl active:scale-95"
+          >
+            <Download size={18} />
+            Download my CV
+          </a>
 
-        {/* Divider */}
-        <div className="h-px mb-4 bg-gradient-to-r from-transparent via-secondColor to-transparent" />
+          {/* Divider */}
+          <div className="w-full h-px mb-8 bg-gray-100" />
 
-        {/* Social Icons */}
-        <div className="flex items-center justify-center gap-3">
-          {SOCIAL_LINKS.map((social, index) => (
-            <SocialIcon key={social.label} social={social} index={index} />
-          ))}
+          {/* Social Icons */}
+          <div className="flex items-center justify-center gap-5">
+            {SOCIAL_LINKS.map((social, index) => (
+              <SocialIcon key={social.label} social={social} />
+            ))}
+          </div>
         </div>
       </div>
     </div>
