@@ -1,265 +1,271 @@
-import React, { useState, useRef, useEffect } from "react";
-import { Lightbulb, Zap, Palette, ArrowUpRight } from "lucide-react";
+/* eslint-disable no-unused-vars */
+import { useRef, useEffect, useState, memo } from "react";
+import MyPic from "../../../assets/mypictwo.webp";
+import {
+  ArrowRight,
+  Check,
+  TrendingDown,
+  BrainCircuit,
+  Puzzle,
+} from "lucide-react";
 
-const AboutSection = () => {
+// ✅ Static data outside
+const PARAGRAPHS = [
+  {
+    id: 1,
+    content:
+      "You need a developer who can build fast, modern, and scalable web solutions tailored to your business.",
+  },
+  {
+    id: 2,
+    content:
+      "You feel stuck with a website that's slow, outdated, or impossible to manage.",
+  },
+  {
+    id: 3,
+    content:
+      "You're losing clients because your online presence doesn't look professional or convert well.",
+  },
+];
+
+const FEATURES = [
+  {
+    icon: TrendingDown,
+    title: "Website Not Performing",
+    description:
+      "Your website isn't bringing results — it's slow, poorly designed, or not user-friendly, and it's hurting your business.",
+  },
+  {
+    icon: BrainCircuit,
+    title: "Tech Overload",
+    description:
+      "Managing your website, design, content, and social media alone is draining — you need someone who can handle the technical work professionally.",
+  },
+  {
+    icon: Puzzle,
+    title: "No Clear Digital Strategy",
+    description:
+      "You're unsure how to structure your site, improve the design, or scale it with the right tech — every change feels risky and time-consuming.",
+  },
+];
+
+// ✅ Lightweight FeatureItem - CSS only
+const FeatureItem = memo(
+  ({ icon: Icon, title, description, index, isVisible }) => {
+    return (
+      <div
+        className={`
+        flex flex-col gap-3 group
+        transition-all duration-700 ease-out
+        ${isVisible ? "opacity-100 translate-x-0" : "opacity-0 translate-x-12"}
+      `}
+        style={{ transitionDelay: `${index * 150}ms` }}
+      >
+        <div className="w-12 h-12 rounded-full border border-[#2a2826] dark:bg-[#0C2B4E]/30 flex items-center justify-center mb-2 transition-all duration-300 hover:scale-110 hover:rotate-6 hover:border-[#F87B1B]">
+          <Icon className="text-[#F87B1B] transition-transform duration-300 group-hover:rotate-[-6deg] group-hover:scale-110" />
+        </div>
+        <h3 className="text-xl font-bold text-textColorWhite dark:text-white">
+          {title}
+        </h3>
+        <p className="text-sm leading-relaxed text-textColorWhite dark:text-textColorDark">
+          {description}
+        </p>
+      </div>
+    );
+  }
+);
+
+FeatureItem.displayName = "FeatureItem";
+
+// ✅ Lightweight CheckItem - CSS only
+const CheckItem = memo(({ item, index, isVisible }) => {
+  return (
+    <li
+      className={`
+        flex items-start gap-4
+        transition-all duration-500 ease-out
+        ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}
+      `}
+      style={{ transitionDelay: `${600 + index * 100}ms` }}
+    >
+      <div
+        className={`
+          mt-1 min-w-[24px] h-6 w-6 rounded-full bg-[#0C2B4E] 
+          flex items-center justify-center border border-gray-700 
+          cursor-pointer
+          transition-all duration-500 ease-out
+          hover:scale-125 hover:bg-[#F87B1B] hover:border-[#F87B1B]
+          ${isVisible ? "scale-100 rotate-0" : "scale-0 -rotate-180"}
+        `}
+        style={{ transitionDelay: `${600 + index * 150}ms` }}
+      >
+        <Check size={14} className="text-white" />
+      </div>
+      <p className="text-sm leading-relaxed textColorWhite dark:text-textColorDark">
+        {item.content}
+      </p>
+    </li>
+  );
+});
+
+CheckItem.displayName = "CheckItem";
+
+// ✅ Lightweight Image Component - No blur effects
+const HeroImage = memo(({ isVisible }) => {
+  return (
+    <div
+      className={`
+        relative h-full min-h-[400px] lg:min-h-[600px] w-full
+        transition-all duration-700 ease-out
+        ${isVisible ? "opacity-100 scale-100" : "opacity-0 scale-95"}
+      `}
+      style={{ transitionDelay: "300ms" }}
+    >
+      {/* Simplified hover effect - no blur */}
+      <div className="relative w-full h-full overflow-hidden group rounded-3xl">
+        {/* Simple glow - no blur */}
+        <div className="absolute -inset-1 rounded-3xl bg-gradient-to-r from-[#F87B1B]/0 via-[#F87B1B]/20 to-[#F87B1B]/0 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+
+        {/* Image */}
+        <div className="relative w-full h-full overflow-hidden rounded-3xl">
+          <img
+            src={MyPic}
+            alt="Mesbahi Kamel"
+            className="absolute inset-0 object-cover w-full h-full transition-transform duration-700 shadow-2xl rounded-3xl group-hover:scale-105"
+            loading="lazy"
+            width="600"
+            height="800"
+          />
+
+          {/* Overlay */}
+          <div className="absolute inset-0 rounded-3xl bg-gradient-to-t from-[#151312]/40 to-transparent pointer-events-none transition-opacity duration-500 group-hover:opacity-20" />
+        </div>
+
+        {/* Corner accents */}
+        <div className="absolute -bottom-2 -right-2 w-24 h-24 border-r-4 border-b-4 border-[#F87B1B] rounded-br-3xl opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+        <div className="absolute -top-2 -left-2 w-24 h-24 border-l-4 border-t-4 border-[#F87B1B] rounded-tl-3xl opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+      </div>
+    </div>
+  );
+});
+
+HeroImage.displayName = "HeroImage";
+
+// ✅ Main component - Single IntersectionObserver
+const HomeAbout = () => {
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef(null);
 
-  // IntersectionObserver setup
+  // Single observer for entire section
   useEffect(() => {
-    const currentRef = sectionRef.current;
+    const el = sectionRef.current;
+    if (!el) return;
 
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
           setIsVisible(true);
-          // Once visible, stop observing
-          observer.unobserve(entry.target);
+          observer.disconnect();
         }
       },
-      {
-        threshold: 0.15,
-        rootMargin: "0px 0px -100px 0px",
-      }
+      { threshold: 0.1 }
     );
 
-    if (currentRef) {
-      observer.observe(currentRef);
-    }
-
-    return () => {
-      if (currentRef) {
-        observer.unobserve(currentRef);
-      }
-    };
+    observer.observe(el);
+    return () => observer.disconnect();
   }, []);
 
-  // Expertise/Features data
-  const expertiseItems = [
-    {
-      id: 1,
-      icon: Lightbulb,
-      title: "Strategic Development",
-      description:
-        "Architecting scalable solutions with modern frameworks and clean code principles that stand the test of time.",
-    },
-    {
-      id: 2,
-      icon: Zap,
-      title: "Performance Optimization",
-      description:
-        "Building lightning-fast applications with optimized bundles, lazy loading, and efficient state management.",
-    },
-    {
-      id: 3,
-      icon: Palette,
-      title: "Design Excellence",
-      description:
-        "Crafting pixel-perfect interfaces with meticulous attention to detail, animation, and user experience.",
-    },
-  ];
-
   return (
-    <section
+    <div
       ref={sectionRef}
-      className="min-h-screen px-6 py-20 overflow-hidden transition-colors duration-500 bg-lightBg dark:bg-darkBg lg:py-32 md:px-12 lg:px-20 xl:px-32"
+      className="container w-full mt-12 overflow-hidden md:mt-20"
     >
-      <div className="mx-auto max-w-7xl">
-        {/* ========== Header Section ========== */}
-        <header
-          className={`mb-16 lg:mb-24 max-w-4xl transition-all duration-700 ease-out
-            ${
-              isVisible
-                ? "opacity-100 translate-y-0"
-                : "opacity-0 translate-y-12"
-            }`}
-        >
-          <p
-            className={`text-secondColor font-medium tracking-widest uppercase text-sm mb-6
-              transition-all duration-500 delay-100
-              ${
-                isVisible
-                  ? "opacity-100 translate-y-0"
-                  : "opacity-0 translate-y-4"
-              }`}
-          >
-            About Me
-          </p>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-[1.1] tracking-tight">
-            <span className="text-textColorDark">Transforming ideas into </span>
-            <span className="text-textColorWhite dark:text-white">
-              exceptional digital experiences
-            </span>
-            <span className="text-textColorDark">
-              {" "}
-              through innovative design & development.
-            </span>
-          </h2>
-        </header>
-
-        {/* ========== Main Grid Layout ========== */}
-        <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-12 xl:gap-16">
-          {/* ===== Left Column - Expertise List (5 columns) ===== */}
-          <div className="flex flex-col gap-5 lg:col-span-5">
-            {expertiseItems.map((item, index) => {
-              const IconComponent = item.icon;
-              return (
-                <article
-                  key={item.id}
-                  className={`group relative p-6 lg:p-7 rounded-2xl 
-                    bg-white dark:bg-white/5 
-                    border border-gray-100 dark:border-white/10
-                    hover:border-secondColor/30 dark:hover:border-secondColor/30
-                    hover:shadow-xl hover:shadow-secondColor/5
-                    dark:hover:shadow-secondColor/10
-                    cursor-pointer
-                    transition-all duration-500 ease-out
-                    ${
-                      isVisible
-                        ? "opacity-100 translate-y-0"
-                        : "opacity-0 translate-y-10"
-                    }`}
-                  style={{
-                    transitionDelay: isVisible
-                      ? `${(index + 1) * 150}ms`
-                      : "0ms",
-                  }}
-                >
-                  {/* Card Content */}
-                  <div className="flex items-start gap-4">
-                    {/* Icon Container */}
-                    <div
-                      className="flex-shrink-0 p-3.5 rounded-xl 
-                        bg-secondColor/10 dark:bg-secondColor/20 
-                        text-secondColor
-                        group-hover:bg-secondColor group-hover:text-white
-                        transition-all duration-300"
-                    >
-                      <IconComponent size={22} strokeWidth={1.75} />
-                    </div>
-
-                    {/* Text Content */}
-                    <div className="flex-1 min-w-0">
-                      <div className="flex items-center justify-between gap-2 mb-2">
-                        <h3 className="text-lg font-semibold transition-colors duration-300 text-textColorWhite dark:text-white group-hover:text-mainColor dark:group-hover:text-secondColor">
-                          {item.title}
-                        </h3>
-                        <ArrowUpRight
-                          size={18}
-                          className="flex-shrink-0 transition-all duration-300 -translate-x-2 translate-y-2 opacity-0 text-textColorDark group-hover:opacity-100 group-hover:translate-x-0 group-hover:translate-y-0"
-                        />
-                      </div>
-                      <p className="text-sm leading-relaxed text-textColorDark dark:text-textColorDark lg:text-base">
-                        {item.description}
-                      </p>
-                    </div>
-                  </div>
-
-                  {/* Hover Accent Line */}
-                  <div
-                    className="absolute bottom-0 left-6 right-6 h-0.5 
-                      bg-gradient-to-r from-secondColor to-mainColor
-                      scale-x-0 group-hover:scale-x-100
-                      origin-left transition-transform duration-500"
-                  />
-                </article>
-              );
-            })}
-
-            {/* Stats Row */}
-            <div
-              className={`grid grid-cols-3 gap-4 mt-4 transition-all duration-700 ease-out
+      <div>
+        <div className="grid items-center grid-cols-1 gap-12 lg:grid-cols-3">
+          {/* Left Column */}
+          <div className="space-y-8">
+            {/* Title */}
+            <h2
+              className={`
+                text-4xl font-bold leading-tight text-textColorWhite dark:text-white lg:text-5xl
+                transition-all duration-700 ease-out
                 ${
                   isVisible
-                    ? "opacity-100 translate-y-0"
-                    : "opacity-0 translate-y-10"
-                }`}
-              style={{ transitionDelay: isVisible ? "600ms" : "0ms" }}
+                    ? "opacity-100 translate-x-0"
+                    : "opacity-0 -translate-x-12"
+                }
+              `}
             >
-              {[
-                { value: "5+", label: "Years Exp." },
-                { value: "50+", label: "Projects" },
-                { value: "30+", label: "Clients" },
-              ].map((stat, idx) => (
-                <div
-                  key={idx}
-                  className="p-4 text-center bg-white border border-gray-100 rounded-xl dark:bg-white/5 dark:border-white/10"
-                >
-                  <p className="text-2xl font-bold lg:text-3xl text-mainColor dark:text-secondColor">
-                    {stat.value}
-                  </p>
-                  <p className="mt-1 text-xs lg:text-sm text-textColorDark">
-                    {stat.label}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* ===== Right Column - Portrait Image (7 columns) ===== */}
-          <div
-            className={`lg:col-span-7 transition-all duration-1000 ease-out
-              ${
-                isVisible
-                  ? "opacity-100 translate-y-0"
-                  : "opacity-0 translate-y-20"
-              }`}
-            style={{ transitionDelay: isVisible ? "400ms" : "0ms" }}
-          >
-            <div className="relative h-[450px] sm:h-[550px] lg:h-[680px] xl:h-[720px] group">
-              {/* Main Image Container */}
-              <div className="relative w-full h-full overflow-hidden rounded-[2.5rem]">
-                <img
-                  src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&q=80"
-                  alt="Professional portrait"
-                  className="object-cover object-center w-full h-full transition-all duration-700 ease-out scale-100 grayscale group-hover:grayscale-0 group-hover:scale-105"
-                />
-
-                {/* Gradient Overlay */}
-                <div className="absolute inset-0 transition-opacity duration-500 bg-gradient-to-t from-mainColor/40 via-transparent to-transparent opacity-60 group-hover:opacity-30" />
-
-                {/* Bottom Info Card */}
-                <div className="absolute p-5 transition-all duration-500 ease-out translate-y-4 border opacity-0 bottom-6 left-6 right-6 rounded-2xl bg-white/90 dark:bg-darkBg/90 backdrop-blur-md border-white/20 dark:border-white/10 group-hover:translate-y-0 group-hover:opacity-100">
-                  <p className="text-lg font-semibold text-textColorWhite dark:text-white">
-                    John Doe
-                  </p>
-                  <p className="text-sm text-textColorDark">
-                    Senior Frontend Developer & UI Designer
-                  </p>
-                </div>
-              </div>
-
-              {/* Decorative Elements */}
-              <div
-                className="absolute -z-10 -top-4 -right-4 w-full h-full 
-                  rounded-[2.5rem] border-2 border-secondColor/20 dark:border-secondColor/30
-                  group-hover:border-secondColor/40
-                  transition-colors duration-500"
-              />
-
-              {/* Floating Badge */}
-              <div
-                className={`absolute -left-4 lg:-left-6 top-1/4 
-                  px-4 py-2 rounded-full 
-                  bg-secondColor text-white 
-                  text-sm font-medium
-                  shadow-lg shadow-secondColor/30
+              Struggling to Fix or Improve{" "}
+              <span
+                className={`
+                  text-[#F87B1B] inline-block
                   transition-all duration-700 ease-out
                   ${
                     isVisible
-                      ? "opacity-100 translate-x-0"
-                      : "opacity-0 -translate-x-8"
-                  }`}
-                style={{ transitionDelay: isVisible ? "800ms" : "0ms" }}
+                      ? "opacity-100 translate-y-0"
+                      : "opacity-0 translate-y-4"
+                  }
+                `}
+                style={{ transitionDelay: "400ms" }}
               >
-                Available for Work
-              </div>
+                Your Website?
+              </span>
+            </h2>
+
+            {/* Button - CSS hover instead of whileHover */}
+            <div
+              className={`
+                transition-all duration-700 ease-out
+                ${
+                  isVisible
+                    ? "opacity-100 translate-y-0"
+                    : "opacity-0 translate-y-8"
+                }
+              `}
+              style={{ transitionDelay: "200ms" }}
+            >
+              <button className="group bg-[#F87B1B] hover:bg-[#e06a10] transition-all duration-300 text-white font-semibold rounded-full pl-6 pr-2 py-2 flex items-center gap-3 shadow-lg shadow-orange-900/20 hover:scale-[1.02] active:scale-[0.98]">
+                <span>Let's Find</span>
+                <div className="bg-white text-[#F87B1B] rounded-full p-2 transition-transform duration-300 group-hover:translate-x-1">
+                  <ArrowRight size={18} strokeWidth={3} />
+                </div>
+              </button>
             </div>
+
+            {/* Check List */}
+            <ul className="mt-4 space-y-6">
+              {PARAGRAPHS.map((item, index) => (
+                <CheckItem
+                  key={item.id}
+                  item={item}
+                  index={index}
+                  isVisible={isVisible}
+                />
+              ))}
+            </ul>
+          </div>
+
+          {/* Center - Image */}
+          <HeroImage isVisible={isVisible} />
+
+          {/* Right Column - Features */}
+          <div className="space-y-10 lg:pl-4">
+            {FEATURES.map((feature, index) => (
+              <FeatureItem
+                key={feature.title}
+                icon={feature.icon}
+                title={feature.title}
+                description={feature.description}
+                index={index}
+                isVisible={isVisible}
+              />
+            ))}
           </div>
         </div>
       </div>
-    </section>
+    </div>
   );
 };
 
-export default AboutSection;
+export default memo(HomeAbout);
