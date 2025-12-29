@@ -20,9 +20,9 @@ const NavItem = memo(({ item, isHovered, onMouseEnter, onMouseLeave }) => {
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
     >
-      <button className="p-2 transition-all duration-300 rounded-lg group">
+      <button className="p-1.5 sm:p-2 transition-all duration-300 rounded-lg group">
         <Icon
-          className="w-5 h-5 text-gray-400 transition-colors duration-300 group-hover:text-gray-900 dark:group-hover:text-white"
+          className="w-4 h-4 text-gray-400 transition-colors duration-300 sm:w-5 sm:h-5 group-hover:text-gray-900 dark:group-hover:text-white"
           strokeWidth={1.5}
         />
       </button>
@@ -46,20 +46,20 @@ NavItem.displayName = "NavItem";
 const ThemeToggle = () => {
   const { isDarkMode, toggleTheme } = useTheme();
   return (
-    <div className="pl-4 border-l border-gray-300 dark:border-gray-700">
+    <div className="pl-2 border-l border-gray-300 sm:pl-4 dark:border-gray-700">
       <button
         onClick={toggleTheme}
-        className="p-2 transition-all duration-300 rounded-lg group hover:bg-gray-200 dark:hover:bg-gray-700"
+        className="p-1.5 sm:p-2 transition-all duration-300 rounded-lg group hover:bg-gray-200 dark:hover:bg-gray-700"
         aria-label="Toggle theme"
       >
         {isDarkMode ? (
           <Sun
-            className="w-5 h-5 text-gray-400 transition-colors duration-300 group-hover:text-yellow-500"
+            className="w-4 h-4 text-gray-400 transition-colors duration-300 sm:w-5 sm:h-5 group-hover:text-yellow-500"
             strokeWidth={1.5}
           />
         ) : (
           <Moon
-            className="w-5 h-5 text-gray-600 transition-colors duration-300 group-hover:text-blue-600"
+            className="w-4 h-4 text-gray-600 transition-colors duration-300 sm:w-5 sm:h-5 group-hover:text-blue-600"
             strokeWidth={1.5}
           />
         )}
@@ -73,15 +73,15 @@ export default function AnimatedNavbar() {
   const { isDarkMode } = useTheme();
 
   return (
-    <div className="fixed z-50 flex items-start justify-center w-full pt-8">
-      <nav className="px-6 py-3 bg-white dark:bg-[#1C1A19] shadow-lg rounded-2xl transition-colors duration-300">
-        <div className="flex items-center gap-2 md:gap-4">
-          {/* Logo - Changes based on theme */}
-          <div className="pr-4 border-r border-gray-300 dark:border-gray-700">
+    <div className="fixed z-50 flex items-start justify-center w-full px-2 pt-4 sm:pt-8 sm:px-0">
+      <nav className="px-3 sm:px-6 py-2 sm:py-3 bg-white dark:bg-[#1C1A19] shadow-lg rounded-xl sm:rounded-2xl transition-colors duration-300">
+        <div className="flex items-center gap-1 sm:gap-2 md:gap-4">
+          {/* Logo */}
+          <div className="pr-2 border-r border-gray-300 sm:pr-4 dark:border-gray-700">
             <img
               src={isDarkMode ? LogoWhite : Logo}
               alt="KM Logo"
-              className="w-auto h-8 transition-opacity duration-300 md:h-10"
+              className="w-auto h-6 transition-opacity duration-300 sm:h-8 md:h-10"
               width="40"
               height="40"
               loading="eager"
