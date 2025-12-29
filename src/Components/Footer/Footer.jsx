@@ -50,10 +50,10 @@ const FOOTER_LINKS = {
   contact: [
     {
       icon: Mail,
-      text: "contact@kamelmesbahi.com",
-      href: "mailto:contact@kamelmesbahi.com",
+      text: "elkamel.mesbahi@gmail.com",
+      href: "mailto:elkamel.mesbahi@gmail.com",
     },
-    { icon: Phone, text: "+213 XXX XXX XXX", href: "tel:+213XXXXXXXXX" },
+    { icon: Phone, text: "+213 540 425 969", href: "tel:+213 540 425 969" },
     { icon: MapPin, text: "Algeria", href: "#" },
   ],
 };
