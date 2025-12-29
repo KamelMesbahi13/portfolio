@@ -22,7 +22,7 @@ const NavItem = memo(({ item, isHovered, onMouseEnter, onMouseLeave }) => {
     >
       <button className="p-2 transition-all duration-300 rounded-lg group">
         <Icon
-          className="w-5 h-5 text-gray-400 transition-colors duration-300 group-hover:text-white dark:group-hover:text-white group-hover:dark:text-white"
+          className="w-5 h-5 text-gray-400 transition-colors duration-300 group-hover:text-gray-900 dark:group-hover:text-white"
           strokeWidth={1.5}
         />
       </button>
