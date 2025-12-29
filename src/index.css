@@ -265,3 +265,164 @@ body.dark,
 .animate-fadeInUp {
   animation: fadeInUp 0.4s ease-out;
 }
+
+@keyframes vertical-scroll {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-50%);
+  }
+}
+
+.animate-vertical-scroll {
+  animation: vertical-scroll 45s linear infinite;
+}
+
+.animate-vertical-scroll:hover {
+  animation-play-state: paused;
+}
+
+/* ========== MODAL ANIMATIONS ========== */
+
+/* Backdrop Fade In */
+@keyframes backdropFade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.animate-backdrop {
+  animation: backdropFade 0.3s ease-out forwards;
+}
+
+/* Modal Enter Animation */
+@keyframes modalEnter {
+  0% {
+    opacity: 0;
+    transform: scale(0.9) translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.animate-modal-enter {
+  animation: modalEnter 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+/* Modal Exit Animation */
+@keyframes modalExit {
+  from {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.95) translateY(20px);
+  }
+}
+
+.animate-modal-exit {
+  animation: modalExit 0.2s ease-in forwards;
+}
+
+/* Stagger Animation for List Items */
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.animate-slide-in {
+  animation: slideInLeft 0.3s ease-out forwards;
+}
+
+/* Icon Pulse */
+@keyframes iconPulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+.animate-icon-pulse:hover {
+  animation: iconPulse 1s ease-in-out infinite;
+}
+
+/* ========== CUSTOM SCROLLBAR ========== */
+
+.modal-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.modal-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+  border-radius: 10px;
+}
+
+.modal-scrollbar::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #f87b1b 0%, #f59e0b 100%);
+  border-radius: 10px;
+}
+
+.modal-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #ea580c 0%, #f87b1b 100%);
+}
+
+/* Firefox Scrollbar */
+.modal-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: #f87b1b transparent;
+}
+
+/* ========== GLASS MORPHISM ========== */
+
+.glass-effect {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+.dark .glass-effect {
+  background: rgba(24, 24, 27, 0.9);
+}
+
+/* ========== GRADIENT TEXT ========== */
+
+.gradient-text {
+  background: linear-gradient(135deg, #f87b1b 0%, #f59e0b 50%, #f87b1b 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ========== BUTTON HOVER EFFECTS ========== */
+
+.btn-glow:hover {
+  box-shadow: 0 0 30px rgba(248, 123, 27, 0.4);
+}
+
+.btn-lift {
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.btn-lift:hover {
+  transform: translateY(-2px);
+}
+
+.btn-lift:active {
+  transform: translateY(0);
+}
