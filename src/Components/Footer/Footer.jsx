@@ -197,7 +197,7 @@ const Footer = () => {
 
           {/* Column 2: Quick Links */}
           <div>
-            <h4 className="mb-4 text-sm font-bold tracking-wider uppercase text-textColorWhite/70 dark:text-white/90">
+            <h4 className="mb-4 text-sm font-bold tracking-wider uppercase text-textColorWhite dark:text-white/90">
               Quick Links
             </h4>
             <ul className="space-y-3">
