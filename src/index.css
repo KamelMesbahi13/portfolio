@@ -40,6 +40,9 @@
       background-position: 200% 50%;
     }
   }
+  .anim-item {
+    @apply transition-all duration-700 ease-out;
+  }
 }
 
 .darkveil-canvas {
@@ -59,6 +62,7 @@ body {
   font-family: "Montserrat", sans-serif;
   background-color: #f5f5f7;
   transition: background-color 0.3s ease;
+  height: 2000vh !important;
 }
 
 body.dark,
@@ -425,4 +429,34 @@ body.dark,
 
 .btn-lift:active {
   transform: translateY(0);
+}
+
+.anim-hidden-up {
+  opacity: 0;
+  transform: translateY(2rem);
+}
+
+.anim-hidden-right {
+  opacity: 0;
+  transform: translateX(2rem);
+}
+
+/* Active State (Visible) */
+.anim-visible {
+  opacity: 1;
+  transform: translate(0, 0);
+}
+
+/* Delays */
+.delay-200 {
+  transition-delay: 200ms;
+}
+.delay-400 {
+  transition-delay: 400ms;
+}
+.delay-550 {
+  transition-delay: 550ms;
+}
+.delay-700 {
+  transition-delay: 700ms;
 }
