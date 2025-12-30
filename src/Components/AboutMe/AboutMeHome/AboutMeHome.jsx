@@ -11,7 +11,7 @@ import {
   X,
   CheckCircle2,
 } from "lucide-react";
-import mypicabout from "../../assets/mypicabout.png";
+import mypicabout from "../../../assets/mypicabout.png";
 
 const services = [
   {
