@@ -1,45 +1,57 @@
 import { useState, memo } from "react";
-import { Home, Folder, Briefcase, Wrench, Mail, Sun, Moon } from "lucide-react";
+import { useNavigate, useLocation } from "react-router-dom";
+import { Home, Folder, User, Wrench, Mail, Sun, Moon } from "lucide-react";
 import LogoWhite from "../../assets/kmLogowhite.webp";
 import Logo from "../../assets/kmLogo.webp";
 import { useTheme } from "../Functions/ThemeContext";
 
 const navItems = [
-  { icon: Home, label: "Home", id: "home" },
-  { icon: Folder, label: "Projects", id: "projects" },
-  { icon: Briefcase, label: "Experience", id: "experience" },
-  { icon: Wrench, label: "Tools", id: "tools" },
-  { icon: Mail, label: "Contact Us", id: "contact" },
+  { icon: Home, label: "Home", id: "home", path: "/" },
+  { icon: Folder, label: "Projects", id: "projects", path: null },
+  { icon: User, label: "About Me", id: "aboutme", path: "/aboutme" },
+  { icon: Wrench, label: "Tools", id: "tools", path: null },
+  { icon: Mail, label: "Contact Us", id: "contact", path: null },
 ];
 
-const NavItem = memo(({ item, isHovered, onMouseEnter, onMouseLeave }) => {
-  const Icon = item.icon;
-  return (
-    <div
-      className="relative flex flex-col items-center"
-      onMouseEnter={onMouseEnter}
-      onMouseLeave={onMouseLeave}
-    >
-      <button className="p-2 transition-all duration-300 rounded-lg group">
-        <Icon
-          className="w-5 h-5 text-gray-400 transition-colors duration-300 group-hover:text-gray-900 dark:group-hover:text-white"
-          strokeWidth={1.5}
-        />
-      </button>
+const NavItem = memo(
+  ({ item, isHovered, onMouseEnter, onMouseLeave, onClick, isActive }) => {
+    const Icon = item.icon;
+    return (
       <div
-        className={`absolute top-full mt-2 whitespace-nowrap text-xs font-medium transition-all duration-300 ${
-          isHovered
-            ? "opacity-100 translate-y-0"
-            : "opacity-0 -translate-y-2 pointer-events-none"
-        }`}
+        className="relative flex flex-col items-center"
+        onMouseEnter={onMouseEnter}
+        onMouseLeave={onMouseLeave}
       >
-        <span className="px-2 py-1 text-white rounded-md bg-[#2A2725] dark:bg-[#2A2725] dark:text-white">
-          {item.label}
-        </span>
+        <button
+          onClick={onClick}
+          className={`p-2 transition-all duration-300 rounded-lg group ${
+            isActive ? "bg-gray-200 dark:bg-gray-700" : ""
+          }`}
+        >
+          <Icon
+            className={`w-5 h-5 transition-colors duration-300 ${
+              isActive
+                ? "text-gray-900 dark:text-white"
+                : "text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+            }`}
+            strokeWidth={1.5}
+          />
+        </button>
+        <div
+          className={`absolute top-full mt-2 whitespace-nowrap text-xs font-medium transition-all duration-300 ${
+            isHovered
+              ? "opacity-100 translate-y-0"
+              : "opacity-0 -translate-y-2 pointer-events-none"
+          }`}
+        >
+          <span className="px-2 py-1 text-white rounded-md bg-[#2A2725] dark:bg-[#2A2725] dark:text-white">
+            {item.label}
+          </span>
+        </div>
       </div>
-    </div>
-  );
-});
+    );
+  }
+);
 
 NavItem.displayName = "NavItem";
 
@@ -71,6 +83,21 @@ const ThemeToggle = () => {
 export default function AnimatedNavbar() {
   const [hoveredIndex, setHoveredIndex] = useState(null);
   const { isDarkMode } = useTheme();
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const handleNavClick = (item) => {
+    if (item.path) {
+      // Navigate to a different route
+      navigate(item.path);
+    } else {
+      // Scroll to section on the same page (for items without a path)
+      const element = document.getElementById(item.id);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+  };
 
   return (
     <div className="fixed z-50 flex items-start justify-center w-full px-3 pt-4 md:pt-8 md:px-0">
@@ -81,10 +108,11 @@ export default function AnimatedNavbar() {
             <img
               src={isDarkMode ? LogoWhite : Logo}
               alt="KM Logo"
-              className="w-auto h-8 transition-opacity duration-300 md:h-10"
+              className="w-auto h-8 transition-opacity duration-300 cursor-pointer md:h-10"
               width="40"
               height="40"
               loading="eager"
+              onClick={() => navigate("/")}
             />
           </div>
 
@@ -94,8 +122,10 @@ export default function AnimatedNavbar() {
               key={item.id}
               item={item}
               isHovered={hoveredIndex === index}
+              isActive={item.path && location.pathname === item.path}
               onMouseEnter={() => setHoveredIndex(index)}
               onMouseLeave={() => setHoveredIndex(null)}
+              onClick={() => handleNavClick(item)}
             />
           ))}
 
