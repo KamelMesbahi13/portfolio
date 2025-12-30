@@ -129,7 +129,6 @@ export default function AnimatedNavbar() {
             />
           ))}
 
-          {/* Theme Toggle */}
           <ThemeToggle />
         </div>
       </nav>
