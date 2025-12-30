@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import AboutUs from "./Components/AboutUs/AboutUs";
+import AboutUs from "./Components/AboutMe/AboutMe";
 import Footer from "./Components/Footer/Footer";
 import Home from "./Components/Home/Home";
 import Navbar from "./Components/Navbar/Navbar";
@@ -16,7 +16,7 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Home />} />
 
-          <Route path="/aboutus" element={<AboutUs />} />
+          <Route path="/aboutme" element={<AboutUs />} />
         </Routes>
 
         {/* <Footer /> */}
