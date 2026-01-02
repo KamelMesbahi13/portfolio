@@ -1,5 +1,4 @@
 import { useState, useEffect, useRef, memo } from "react";
-import { ArrowRight } from "lucide-react";
 
 const AboutMeIntroduction = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -97,17 +96,7 @@ const AboutMeIntroduction = () => {
               className={`mt-10 md:mt-14 anim-item delay-700 ${getAnimClass(
                 "anim-hidden-up"
               )}`}
-            >
-              <button className="group flex items-center gap-2 text-sm font-bold uppercase tracking-wide text-textColorWhite dark:text-white transition-colors duration-300 hover:text-[#F87B1B] dark:hover:text-[#F87B1B]">
-                <span className="border-b-2 border-transparent transition-all duration-300 group-hover:border-[#F87B1B]">
-                  See my work
-                </span>
-                <ArrowRight
-                  size={18}
-                  className="transition-transform duration-300 group-hover:translate-x-1"
-                />
-              </button>
-            </div>
+            ></div>
           </div>
         </div>
       </div>
