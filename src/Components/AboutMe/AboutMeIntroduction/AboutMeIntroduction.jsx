@@ -52,8 +52,8 @@ const AboutMeIntroduction = () => {
             {/* Headline */}
             <h1
               className={`
-                mb-8 md:mb-12 text-3xl sm:text-4xl md:text-5xl lg:text-6xl 
-                font-medium leading-[1.1] tracking-tight text-textColorWhite dark:text-white
+                mb-8 md:mb-12 
+                text-textColorWhite dark:text-white
                 anim-item delay-200 ${getAnimClass("anim-hidden-right")}
               `}
             >

@@ -144,14 +144,14 @@ const AboutSection = () => {
     <section className="w-full min-h-screen px-6 py-20 transition-colors duration-500 bg-lightBg dark:bg-darkBg md:px-12 lg:px-24">
       {/* 1. The Large Headline */}
       <div className="max-w-5xl mx-auto mb-20 text-center md:text-left">
-        <h2 className="text-4xl md:text-5xl lg:text-6xl font-medium leading-[1.15] tracking-tight">
+        <h1 className="">
           <span className="text-textColorDark dark:text-gray-500">
             I craft strategic, visually compelling digital experiences{" "}
           </span>
           <span className="text-textColorWhite dark:text-white">
             that drive impact and engagement
           </span>
-        </h2>
+        </h1>
       </div>
 
       {/* 2. The Two-Column Grid */}
@@ -196,7 +196,7 @@ const AboutSection = () => {
                       {/* Content */}
                       <div className="flex-1 min-w-0">
                         <div className="flex items-center justify-between gap-2 mb-2">
-                          <h3 className="font-semibold leading-tight transition-colors duration-300 text-textColorWhite dark:text-white group-hover:text-secondColor dark:group-hover:text-secondColor">
+                          <h3 className="transition-colors duration-300  text-textColorWhite dark:text-white group-hover:text-secondColor dark:group-hover:text-secondColor">
                             {service.title}
                           </h3>
                           <ArrowUpRight
@@ -315,7 +315,7 @@ const AboutSection = () => {
                     <span className="inline-block text-xs font-semibold text-secondColor bg-secondColor/10 px-2.5 py-1 rounded-full mb-1">
                       Service {selectedService.id}
                     </span>
-                    <h3 className="text-xl font-bold leading-tight text-textColorWhite dark:text-white">
+                    <h3 className="text-textColorWhite dark:text-white">
                       {selectedService.title}
                     </h3>
                   </div>
