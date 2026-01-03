@@ -64,9 +64,7 @@ const FeatureItem = memo(
         <div className="w-12 h-12 rounded-full border border-[#2a2826] dark:bg-[#0C2B4E]/30 flex items-center justify-center mb-2 transition-all duration-300 hover:scale-110 hover:rotate-6 hover:border-[#F87B1B]">
           <Icon className="text-[#F87B1B] transition-transform duration-300 group-hover:rotate-[-6deg] group-hover:scale-110" />
         </div>
-        <h3 className="text-xl font-bold text-textColorWhite dark:text-white">
-          {title}
-        </h3>
+        <h3 className="text-textColorWhite dark:text-white">{title}</h3>
         <p className="text-sm leading-relaxed text-textColorWhite dark:text-textColorDark">
           {description}
         </p>
@@ -187,7 +185,7 @@ const HomeAbout = () => {
             {/* Title */}
             <h2
               className={`
-                text-4xl font-bold leading-tight text-textColorWhite dark:text-white lg:text-5xl
+                 text-textColorWhite dark:text-white lg:text-5xl
                 transition-all duration-700 ease-out
                 ${
                   isVisible

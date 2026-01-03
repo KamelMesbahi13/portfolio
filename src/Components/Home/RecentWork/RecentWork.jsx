@@ -146,9 +146,7 @@ const ProjectCard = memo(({ project, onClick }) => {
           <p className="text-xs font-semibold tracking-[0.1em] opacity-80 mb-3">
             {project.category}
           </p>
-          <h2 className="max-w-md text-xl font-bold leading-tight text-white md:text-4xl">
-            {project.title}
-          </h2>
+          <h2 className="max-w-md text-white">{project.title}</h2>
         </motion.div>
       </div>
     </motion.div>
@@ -286,9 +284,7 @@ const RecentWork = () => {
                     <p className="text-xs font-semibold tracking-[0.2em] opacity-90 mb-3 text-secondColor">
                       {selectedProject.category}
                     </p>
-                    <h2 className="text-3xl font-bold leading-tight md:text-5xl">
-                      {selectedProject.title}
-                    </h2>
+                    <h2>{selectedProject.title}</h2>
                   </motion.div>
                 </div>
               </div>
