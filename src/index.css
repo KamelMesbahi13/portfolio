@@ -4,19 +4,19 @@
 
 @layer components {
   h1 {
-    @apply mb-0 text-4xl font-bold text-gray-900 md:font-bold heading-gradient md:text-6xl dark:text-white;
+    @apply mb-0 text-4xl font-medium text-gray-900 md:font-medium heading-gradient md:text-6xl dark:text-white;
   }
 
   h2 {
-    @apply text-base font-semibold text-gray-900 md:font-bold md:text-2xl dark:text-white;
+    @apply text-base font-medium text-gray-900 md:font-medium md:text-2xl dark:text-white;
   }
 
   h6 {
-    @apply text-lg font-bold text-gray-900 md:text-xl dark:text-white;
+    @apply text-lg font-medium text-gray-900 md:text-xl dark:text-white;
   }
 
   .heading-gradient {
-    @apply relative inline-block font-bold text-transparent bg-clip-text;
+    @apply relative inline-block font-medium text-transparent bg-clip-text;
     background-image: linear-gradient(
       90deg,
       #f87b1b 0%,

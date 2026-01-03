@@ -1,46 +1,270 @@
+// import { useState, useEffect, useRef, memo } from "react";
+// import { ChevronDown, ArrowUpRight, Plus, Minus } from "lucide-react";
+
+// const SERVICES = [
+//   {
+//     id: "01",
+//     title: "Full-Stack Web Development",
+//     summary:
+//       "I build fast, scalable, and visually appealing web applications using the MERN stack. From concept to deployment, I turn ideas into high-performing digital products.",
+//     details: [
+//       "MERN stack (MongoDB, Express, React, Node.js)",
+//       "Responsive UI with Tailwind CSS & Bootstrap",
+//       "RESTful API integration & state management",
+//       "Deployment on Render / Vercel with CI/CD",
+//     ],
+//   },
+//   {
+//     id: "02",
+//     title: "WordPress Development",
+//     summary:
+//       "I design and customize WordPress and WooCommerce websites that are modern, fast, and easy to manage, including custom plugin development.",
+//     details: [
+//       "Custom WordPress & WooCommerce creation",
+//       "Theme customization & plugin integration",
+//       "SEO-friendly, responsive, and secure design",
+//       "Training and long-term client support",
+//     ],
+//   },
+//   {
+//     id: "03",
+//     title: "Maintenance & Optimization",
+//     summary:
+//       "Ongoing support to ensure your website stays optimized, secure, and aligned with your business goals.",
+//     details: [
+//       "Performance and security updates",
+//       "Bug fixes and feature enhancements",
+//       "Speed optimization & SEO improvements",
+//       "Regular backups and technical support",
+//     ],
+//   },
+//   {
+//     id: "04",
+//     title: "UI/UX Design",
+//     summary:
+//       "I craft clean, modern, and user-friendly interfaces that provide seamless user experiences across all devices.",
+//     details: [
+//       "Wireframes, mockups, and prototypes",
+//       "Modern layouts using Figma",
+//       "Responsive design & accessibility",
+//       "User testing and design iteration",
+//     ],
+//   },
+//   {
+//     id: "05",
+//     title: "E-Commerce Development",
+//     summary:
+//       "Professional e-commerce solutions that help businesses sell online effectively — from product management to payment systems.",
+//     details: [
+//       "Custom stores (MERN / WooCommerce)",
+//       "Secure payments & responsive dashboards",
+//       "Product & order management systems",
+//       "Optimized checkout flows",
+//     ],
+//   },
+//   {
+//     id: "06",
+//     title: "Branding & Logo Design",
+//     summary:
+//       "Defining visual identity through creative logo design and consistent branding systems.",
+//     details: [
+//       "Logo creation and brand guidelines",
+//       "Color palettes and typography systems",
+//       "Visual assets for marketing",
+//       "Brand storytelling",
+//     ],
+//   },
+//   {
+//     id: "07",
+//     title: "Social Media Design",
+//     summary:
+//       "Engaging social media posts, stories, and ad creatives that match your brand's identity.",
+//     details: [
+//       "Custom designs for Instagram/LinkedIn",
+//       "Ad creatives for marketing campaigns",
+//       "Story templates & carousel posts",
+//       "Consistent brand visuals",
+//     ],
+//   },
+// ];
+
+// const WhatWeOffer = () => {
+//   const [isVisible, setIsVisible] = useState(false);
+//   const [openService, setOpenService] = useState(null); // Tracks open accordion
+//   const sectionRef = useRef(null);
+
+//   // Intersection Observer for Section Reveal
+//   useEffect(() => {
+//     const el = sectionRef.current;
+//     if (!el) return;
+
+//     const observer = new IntersectionObserver(
+//       ([entry]) => {
+//         if (entry.isIntersecting) {
+//           setIsVisible(true);
+//           observer.disconnect();
+//         }
+//       },
+//       { threshold: 0.1 }
+//     );
+
+//     observer.observe(el);
+//     return () => observer.disconnect();
+//   }, []);
+
+//   // Toggle Accordion Logic
+//   const toggleService = (id) => {
+//     setOpenService(openService === id ? null : id);
+//   };
+
+//   // Helper for scroll animation classes
+//   const getAnimClass = (baseClass) => {
+//     return isVisible ? "anim-visible" : baseClass;
+//   };
+
+//   return (
+//     <section
+//       ref={sectionRef}
+//       className="container w-full pt-20 pb-12 transition-colors duration-500 bg-lightBg dark:bg-darkBg md:pt-36 lg:pb-24"
+//     >
+//       <div className="px-4 mx-auto max-w-7xl sm:px-6">
+//         <div className="grid grid-cols-1 gap-10 md:grid-cols-12 md:gap-8 lg:gap-12">
+//           {/* LEFT COLUMN: Sticky Label */}
+//           <div className="relative md:col-span-3 lg:col-span-4">
+//             <div
+//               className={`md:sticky md:top-32 anim-item ${getAnimClass(
+//                 "anim-hidden-up"
+//               )}`}
+//             >
+//               <span className="flex items-center gap-2 text-sm font-bold tracking-widest uppercase text-secondColor">
+//                 <span className="w-8 h-[2px] bg-secondColor"></span>
+//                 What We Offer
+//               </span>
+
+//               <h2 className="mt-4 text-3xl font-bold leading-tight text-textColorWhite dark:text-white lg:text-4xl">
+//                 Expertise that <br /> drives growth.
+//               </h2>
+//             </div>
+//           </div>
+
+//           {/* RIGHT COLUMN: Accordion Content */}
+//           <div className="md:col-span-9 lg:col-span-8">
+//             <div className="space-y-0">
+//               {SERVICES.map((service, index) => {
+//                 const isOpen = openService === service.id;
+
+//                 return (
+//                   <div
+//                     key={service.id}
+//                     className={`border-b border-gray-300 dark:border-zinc-800 anim-item ${getAnimClass(
+//                       "anim-hidden-up"
+//                     )}`}
+//                     style={{ transitionDelay: `${index * 100}ms` }}
+//                   >
+//                     <button
+//                       onClick={() => toggleService(service.id)}
+//                       className="flex items-center justify-between w-full py-6 text-left group md:py-8"
+//                       aria-expanded={isOpen}
+//                     >
+//                       <div className="flex items-center gap-4 md:gap-8">
+//                         {/* Number */}
+//                         <span
+//                           className={`text-xl md:text-2xl font-mono font-medium transition-colors duration-300 ${
+//                             isOpen
+//                               ? "text-secondColor"
+//                               : "text-gray-400 dark:text-zinc-600"
+//                           }`}
+//                         >
+//                           {service.id}.
+//                         </span>
+
+//                         {/* Title */}
+//                         <h2
+//                           className={`font-bold uppercase tracking-tight transition-colors duration-300 ${
+//                             isOpen
+//                               ? "text-secondColor"
+//                               : "text-textColorWhite dark:text-white group-hover:text-secondColor"
+//                           }`}
+//                         >
+//                           {service.title}
+//                         </h2>
+//                       </div>
+
+//                       {/* Icon */}
+//                       <div
+//                         className={`relative flex items-center justify-center w-8 h-8 md:w-10 md:h-10 border rounded-full transition-all duration-300 ${
+//                           isOpen
+//                             ? "border-secondColor bg-secondColor text-white rotate-180"
+//                             : "border-gray-300 dark:border-zinc-700 text-gray-400 dark:text-gray-500 group-hover:border-secondColor group-hover:text-secondColor"
+//                         }`}
+//                       >
+//                         <ChevronDown size={20} />
+//                       </div>
+//                     </button>
+
+//                     {/* Expandable Content */}
+//                     <div
+//                       className={`grid transition-[grid-template-rows] duration-500 ease-in-out ${
+//                         isOpen
+//                           ? "grid-rows-[1fr] pb-8 opacity-100"
+//                           : "grid-rows-[0fr] opacity-0"
+//                       }`}
+//                     >
+//                       <div className="overflow-hidden">
+//                         <div className="pl-0 md:pl-[4.5rem] lg:pl-[5.5rem] grid gap-6 md:grid-cols-2">
+//                           {/* Summary */}
+//                           <div>
+//                             <h4 className="mb-2 text-sm font-bold tracking-wider uppercase text-textColorDark dark:text-gray-500">
+//                               Overview
+//                             </h4>
+//                             <p className="text-base leading-relaxed text-textColorWhite dark:text-gray-300">
+//                               {service.summary}
+//                             </p>
+//                           </div>
+
+//                           {/* Details List */}
+//                           <div>
+//                             <h4 className="mb-2 text-sm font-bold tracking-wider uppercase text-textColorDark dark:text-gray-500">
+//                               Services Included
+//                             </h4>
+//                             <ul className="space-y-2">
+//                               {service.details.map((detail, idx) => (
+//                                 <li
+//                                   key={idx}
+//                                   className="flex items-start gap-2 text-sm text-gray-600 dark:text-gray-400"
+//                                 >
+//                                   <ArrowUpRight
+//                                     size={16}
+//                                     className="mt-0.5 text-secondColor shrink-0"
+//                                   />
+//                                   {detail}
+//                                 </li>
+//                               ))}
+//                             </ul>
+//                           </div>
+//                         </div>
+//                       </div>
+//                     </div>
+//                   </div>
+//                 );
+//               })}
+//             </div>
+//           </div>
+//         </div>
+//       </div>
+//     </section>
+//   );
+// };
+
+// export default memo(WhatWeOffer);
+
 import { useState, useEffect, useRef, memo } from "react";
-import { ChevronDown, ArrowUpRight, Plus, Minus } from "lucide-react";
+import { ChevronDown, ArrowUpRight } from "lucide-react";
 
 const SERVICES = [
   {
     id: "01",
-    title: "Full-Stack Web Development",
-    summary:
-      "I build fast, scalable, and visually appealing web applications using the MERN stack. From concept to deployment, I turn ideas into high-performing digital products.",
-    details: [
-      "MERN stack (MongoDB, Express, React, Node.js)",
-      "Responsive UI with Tailwind CSS & Bootstrap",
-      "RESTful API integration & state management",
-      "Deployment on Render / Vercel with CI/CD",
-    ],
-  },
-  {
-    id: "02",
-    title: "WordPress Development",
-    summary:
-      "I design and customize WordPress and WooCommerce websites that are modern, fast, and easy to manage, including custom plugin development.",
-    details: [
-      "Custom WordPress & WooCommerce creation",
-      "Theme customization & plugin integration",
-      "SEO-friendly, responsive, and secure design",
-      "Training and long-term client support",
-    ],
-  },
-  {
-    id: "03",
-    title: "Maintenance & Optimization",
-    summary:
-      "Ongoing support to ensure your website stays optimized, secure, and aligned with your business goals.",
-    details: [
-      "Performance and security updates",
-      "Bug fixes and feature enhancements",
-      "Speed optimization & SEO improvements",
-      "Regular backups and technical support",
-    ],
-  },
-  {
-    id: "04",
-    title: "UI/UX Design",
+    title: "UI/UX Design", // Matching your screenshot order
     summary:
       "I craft clean, modern, and user-friendly interfaces that provide seamless user experiences across all devices.",
     details: [
@@ -51,39 +275,75 @@ const SERVICES = [
     ],
   },
   {
-    id: "05",
-    title: "E-Commerce Development",
+    id: "02",
+    title: "Graphic Design",
     summary:
-      "Professional e-commerce solutions that help businesses sell online effectively — from product management to payment systems.",
+      "Visual storytelling that communicates your brand message effectively through creative graphic solutions.",
     details: [
-      "Custom stores (MERN / WooCommerce)",
-      "Secure payments & responsive dashboards",
-      "Product & order management systems",
-      "Optimized checkout flows",
+      "Marketing materials & brochures",
+      "Social media graphics",
+      "Infographics & visual data",
+      "Print design assets",
+    ],
+  },
+  {
+    id: "03",
+    title: "Web Design",
+    summary:
+      "Designing engaging websites that balance aesthetics with functionality to drive conversions.",
+    details: [
+      "Landing page design",
+      "Website redesigns",
+      "Design systems & style guides",
+      "Interactive elements",
+    ],
+  },
+  {
+    id: "04",
+    title: "Branding",
+    summary:
+      "Defining visual identity through creative logo design and consistent branding systems.",
+    details: [
+      "Logo creation & guidelines",
+      "Color palettes & typography",
+      "Brand strategy & positioning",
+      "Visual identity packages",
+    ],
+  },
+  {
+    id: "05",
+    title: "Full-Stack Web Development",
+    summary:
+      "Building fast, scalable web applications using the MERN stack from concept to deployment.",
+    details: [
+      "MERN stack (MongoDB, Express, React, Node)",
+      "API integration & database design",
+      "Performance optimization",
+      "Secure deployment",
     ],
   },
   {
     id: "06",
-    title: "Branding & Logo Design",
+    title: "WordPress Development",
     summary:
-      "Defining visual identity through creative logo design and consistent branding systems.",
+      "Custom WordPress solutions that are easy to manage, secure, and SEO-friendly.",
     details: [
-      "Logo creation and brand guidelines",
-      "Color palettes and typography systems",
-      "Visual assets for marketing",
-      "Brand storytelling",
+      "Theme customization",
+      "Plugin development",
+      "E-commerce (WooCommerce)",
+      "Site maintenance",
     ],
   },
   {
     id: "07",
-    title: "Social Media Design",
+    title: "Social Media Content",
     summary:
-      "Engaging social media posts, stories, and ad creatives that match your brand's identity.",
+      "Engaging content creation that grows your audience and enhances brand visibility.",
     details: [
-      "Custom designs for Instagram/LinkedIn",
-      "Ad creatives for marketing campaigns",
-      "Story templates & carousel posts",
-      "Consistent brand visuals",
+      "Content strategy",
+      "Reels & Story design",
+      "Ad creatives",
+      "Copywriting support",
     ],
   },
 ];
@@ -93,7 +353,6 @@ const WhatWeOffer = () => {
   const [openService, setOpenService] = useState(null); // Tracks open accordion
   const sectionRef = useRef(null);
 
-  // Intersection Observer for Section Reveal
   useEffect(() => {
     const el = sectionRef.current;
     if (!el) return;
@@ -105,74 +364,82 @@ const WhatWeOffer = () => {
           observer.disconnect();
         }
       },
-      { threshold: 0.1 }
+      { threshold: 0.2 }
     );
 
     observer.observe(el);
     return () => observer.disconnect();
   }, []);
 
-  // Toggle Accordion Logic
-  const toggleService = (id) => {
-    setOpenService(openService === id ? null : id);
-  };
-
-  // Helper for scroll animation classes
+  // Helper to toggle animation classes
   const getAnimClass = (baseClass) => {
     return isVisible ? "anim-visible" : baseClass;
+  };
+
+  const toggleService = (id) => {
+    setOpenService(openService === id ? null : id);
   };
 
   return (
     <section
       ref={sectionRef}
-      className="container w-full pt-20 pb-12 transition-colors duration-500 bg-lightBg dark:bg-darkBg md:pt-36 lg:pb-24"
+      className="w-full pb-12 transition-colors duration-500 pt-28 bg-lightBg dark:bg-darkBg container mt-[10rem] md:pt-36 lg:pb-24"
     >
-      <div className="px-4 mx-auto max-w-7xl sm:px-6">
+      <div className="mx-auto max-w-7xl">
         <div className="grid grid-cols-1 gap-10 md:grid-cols-12 md:gap-8 lg:gap-12">
-          {/* LEFT COLUMN: Sticky Label */}
+          {/* LEFT COLUMN: Label (Sticky) */}
           <div className="relative md:col-span-3 lg:col-span-4">
             <div
               className={`md:sticky md:top-32 anim-item ${getAnimClass(
                 "anim-hidden-up"
               )}`}
             >
-              <span className="flex items-center gap-2 text-sm font-bold tracking-widest uppercase text-secondColor">
-                <span className="w-8 h-[2px] bg-secondColor"></span>
+              <span className="text-sm font-semibold tracking-widest text-gray-400 uppercase dark:text-gray-500">
                 What We Offer
               </span>
-
-              <h2 className="mt-4 text-3xl font-bold leading-tight text-textColorWhite dark:text-white lg:text-4xl">
-                Expertise that <br /> drives growth.
-              </h2>
             </div>
           </div>
 
-          {/* RIGHT COLUMN: Accordion Content */}
+          {/* RIGHT COLUMN: Content */}
           <div className="md:col-span-9 lg:col-span-8">
-            <div className="space-y-0">
+            {/* 1. Headline */}
+            <h1
+              className={`
+                mb-12 md:mb-16  
+                font-medium leading-[1.1] tracking-tight text-textColorWhite dark:text-white
+                anim-item delay-200 ${getAnimClass("anim-hidden-right")}
+              `}
+            >
+              We provide comprehensive digital solutions tailored to your unique
+              business needs
+            </h1>
+
+            {/* 2. Accordion List */}
+            <div className="border-t border-gray-200 dark:border-zinc-800">
               {SERVICES.map((service, index) => {
                 const isOpen = openService === service.id;
 
                 return (
                   <div
                     key={service.id}
-                    className={`border-b border-gray-300 dark:border-zinc-800 anim-item ${getAnimClass(
-                      "anim-hidden-up"
-                    )}`}
-                    style={{ transitionDelay: `${index * 100}ms` }}
+                    className={`
+                      border-b border-gray-200 dark:border-zinc-800 
+                      anim-item ${getAnimClass("anim-hidden-up")}
+                    `}
+                    // Stagger animation delay for list items
+                    style={{ transitionDelay: `${400 + index * 100}ms` }}
                   >
                     <button
                       onClick={() => toggleService(service.id)}
                       className="flex items-center justify-between w-full py-6 text-left group md:py-8"
-                      aria-expanded={isOpen}
                     >
-                      <div className="flex items-center gap-4 md:gap-8">
+                      <div className="flex items-baseline gap-4 md:gap-6">
                         {/* Number */}
                         <span
-                          className={`text-xl md:text-2xl font-mono font-medium transition-colors duration-300 ${
+                          className={`text-lg font-mono transition-colors duration-300 ${
                             isOpen
                               ? "text-secondColor"
-                              : "text-gray-400 dark:text-zinc-600"
+                              : "text-gray-400 dark:text-gray-600"
                           }`}
                         >
                           {service.id}.
@@ -190,16 +457,13 @@ const WhatWeOffer = () => {
                         </h3>
                       </div>
 
-                      {/* Icon */}
-                      <div
-                        className={`relative flex items-center justify-center w-8 h-8 md:w-10 md:h-10 border rounded-full transition-all duration-300 ${
-                          isOpen
-                            ? "border-secondColor bg-secondColor text-white rotate-180"
-                            : "border-gray-300 dark:border-zinc-700 text-gray-400 dark:text-gray-500 group-hover:border-secondColor group-hover:text-secondColor"
+                      {/* Chevron Icon */}
+                      <ChevronDown
+                        size={24}
+                        className={`transition-transform duration-300 text-gray-400 group-hover:text-secondColor ${
+                          isOpen ? "rotate-180 text-secondColor" : ""
                         }`}
-                      >
-                        <ChevronDown size={20} />
-                      </div>
+                      />
                     </button>
 
                     {/* Expandable Content */}
@@ -211,27 +475,21 @@ const WhatWeOffer = () => {
                       }`}
                     >
                       <div className="overflow-hidden">
-                        <div className="pl-0 md:pl-[4.5rem] lg:pl-[5.5rem] grid gap-6 md:grid-cols-2">
+                        <div className="pl-0 md:pl-[3.5rem] lg:pl-[4.5rem] grid gap-6 md:grid-cols-2">
                           {/* Summary */}
                           <div>
-                            <h4 className="mb-2 text-sm font-bold tracking-wider uppercase text-textColorDark dark:text-gray-500">
-                              Overview
-                            </h4>
-                            <p className="text-base leading-relaxed text-textColorWhite dark:text-gray-300">
+                            <p className="text-base leading-relaxed text-textColorDark dark:text-gray-400">
                               {service.summary}
                             </p>
                           </div>
 
                           {/* Details List */}
                           <div>
-                            <h4 className="mb-2 text-sm font-bold tracking-wider uppercase text-textColorDark dark:text-gray-500">
-                              Services Included
-                            </h4>
                             <ul className="space-y-2">
                               {service.details.map((detail, idx) => (
                                 <li
                                   key={idx}
-                                  className="flex items-start gap-2 text-sm text-gray-600 dark:text-gray-400"
+                                  className="flex items-start gap-2 text-sm text-textColorWhite dark:text-gray-300"
                                 >
                                   <ArrowUpRight
                                     size={16}
