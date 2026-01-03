@@ -143,9 +143,9 @@ const ServiceCard = memo(({ service, isOpen, onToggle, isVisible, index }) => {
               </div>
 
               {/* Title */}
-              <h3 className="text-2xl font-bold text-textColorWhite dark:text-white md:text-3xl lg:text-4xl">
+              <h2 className=" text-textColorWhite dark:text-white">
                 {service.title}
-              </h3>
+              </h2>
 
               {/* Summary */}
               <p
@@ -279,7 +279,7 @@ const MyQualityServices = () => {
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
           }`}
         >
-          <h1 className="text-3xl font-bold md:text-4xl lg:text-5xl text-textColorWhite dark:text-white">
+          <h1 className="text-textColorWhite dark:text-white">
             My Quality Services
           </h1>
 

@@ -100,7 +100,7 @@ const SkillCard = memo(({ skill, index, isVisible }) => {
           >
             <Icon size={28} />
           </div>
-          <h3 className="text-lg font-bold text-textColorWhite dark:text-white md:text-xl">
+          <h3 className="text-lg text-textColorWhite dark:text-white">
             {skill.name}
           </h3>
         </div>
@@ -189,7 +189,7 @@ const Technologies = () => {
             }
           `}
         >
-          <h1 className="text-3xl font-bold text-textColorWhite dark:text-white md:text-4xl lg:text-5xl">
+          <h1 className="text-textColorWhite dark:text-white">
             Skills & Technologies
           </h1>
 

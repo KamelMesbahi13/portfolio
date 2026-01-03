@@ -185,7 +185,7 @@ const Sidebar = memo(({ isVisible }) => {
       {/* Title */}
       <h3
         className={`
-          mb-3 text-xl font-bold text-textColorWhite dark:text-white
+          mb-3 text-textColorWhite dark:text-white
           transition-all duration-500 ease-out
           ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}
         `}
@@ -273,9 +273,7 @@ const FAQAccordion = () => {
             }
           `}
         >
-          <h1 className="text-3xl font-bold md:text-4xl lg:text-5xl">
-            Frequently Asked Questions
-          </h1>
+          <h1>Frequently Asked Questions</h1>
           <p
             className={`
               text-lg text-textColorWhite/60 dark:text-white/50 mt-4 transition-all duration-700 ease-out

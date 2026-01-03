@@ -284,7 +284,7 @@ const RecentWork = () => {
                     <p className="text-xs font-semibold tracking-[0.2em] opacity-90 mb-3 text-secondColor">
                       {selectedProject.category}
                     </p>
-                    <h2>{selectedProject.title}</h2>
+                    <h2 className="text-white">{selectedProject.title}</h2>
                   </motion.div>
                 </div>
               </div>
