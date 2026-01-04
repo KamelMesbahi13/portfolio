@@ -143,8 +143,8 @@ const AboutSection = () => {
   return (
     <section className="w-full min-h-screen px-6 py-20 transition-colors duration-500 bg-lightBg dark:bg-darkBg md:px-12 lg:px-24">
       {/* 1. The Large Headline */}
-      <div className="max-w-5xl mx-auto mb-20 text-center md:text-left">
-        <h1 className="">
+      <div className="max-w-5xl mx-auto my-12 text-center md:my-20 md:text-left">
+        <h1>
           <span className="text-textColorDark dark:text-gray-500">
             I craft strategic, visually compelling digital experiences{" "}
           </span>
@@ -196,7 +196,7 @@ const AboutSection = () => {
                       {/* Content */}
                       <div className="flex-1 min-w-0">
                         <div className="flex items-center justify-between gap-2 mb-2">
-                          <h3 className="transition-colors duration-300  text-textColorWhite dark:text-white group-hover:text-secondColor dark:group-hover:text-secondColor">
+                          <h3 className="transition-colors duration-300 text-textColorWhite dark:text-white group-hover:text-secondColor dark:group-hover:text-secondColor">
                             {service.title}
                           </h3>
                           <ArrowUpRight
