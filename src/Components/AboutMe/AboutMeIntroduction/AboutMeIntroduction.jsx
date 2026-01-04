@@ -30,7 +30,7 @@ const AboutMeIntroduction = () => {
   return (
     <section
       ref={sectionRef}
-      className="w-full pb-12 transition-colors duration-500 bg-lightBg dark:bg-darkBg container md:mt-[30rem] md:pt-36 lg:pb-24"
+      className="container w-full pb-12 transition-colors duration-500 bg-lightBg dark:bg-darkBg md:pt-36 lg:pb-24"
     >
       <div className="mx-auto max-w-7xl">
         <div className="grid grid-cols-1 gap-10 md:grid-cols-12 md:gap-8 lg:gap-12">
