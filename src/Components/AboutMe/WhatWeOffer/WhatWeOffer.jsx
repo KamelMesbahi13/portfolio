@@ -123,7 +123,7 @@ const WhatWeOffer = () => {
   return (
     <section
       ref={sectionRef}
-      className="w-full pb-12 transition-colors duration-500 pt-28 bg-lightBg dark:bg-darkBg container mt-[10rem] md:pt-36 lg:pb-24"
+      className="container w-full pb-12 transition-colors duration-500 bg-lightBg dark:bg-darkBg lg:pb-24"
     >
       <div className="mx-auto max-w-7xl">
         <div className="grid grid-cols-1 gap-10 md:grid-cols-12 md:gap-8 lg:gap-12">
@@ -218,7 +218,7 @@ const WhatWeOffer = () => {
                         <div className="pl-0 md:pl-[3.5rem] lg:pl-[4.5rem] grid gap-6 md:grid-cols-2">
                           {/* Summary */}
                           <div>
-                            <p className="text-base leading-relaxed text-textColorDark dark:text-gray-400">
+                            <p className="text-base leading-relaxed text-textColorWhite dark:text-textColorDark">
                               {service.summary}
                             </p>
                           </div>
