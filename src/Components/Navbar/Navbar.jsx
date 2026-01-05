@@ -91,10 +91,15 @@ export default function AnimatedNavbar() {
       // Navigate to a different route
       navigate(item.path);
     } else {
-      // Scroll to section on the same page (for items without a path)
-      const element = document.getElementById(item.id);
-      if (element) {
-        element.scrollIntoView({ behavior: "smooth" });
+      // If not on homepage, navigate to homepage first with scroll target
+      if (location.pathname !== "/") {
+        navigate("/", { state: { scrollTo: item.id } });
+      } else {
+        // Already on homepage, just scroll
+        const element = document.getElementById(item.id);
+        if (element) {
+          element.scrollIntoView({ behavior: "smooth" });
+        }
       }
     }
   };

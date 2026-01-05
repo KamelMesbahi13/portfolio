@@ -32,8 +32,8 @@ const PROJECTS = [
       "Pricing Display",
       "Image Gallery",
     ],
-    github: "#",
-    live: "#",
+    github: "https://github.com/KamelMesbahi13/hotel",
+    live: "http://localhost:5173",
   },
   {
     id: 2,
@@ -85,8 +85,8 @@ const PROJECTS = [
       "Multi-language Support",
       "Responsive Design",
     ],
-    github: "#",
-    live: "https://toolsmarketdz.com",
+    github: "https://github.com/KamelMesbahi13/Ecommerce-store",
+    live: "https://www.toolmarket.com/",
   },
   {
     id: 4,
@@ -127,6 +127,7 @@ const ProjectCard = memo(({ project, onClick }) => {
       transition={{ duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
       whileHover={{ scale: 0.98 }}
       onClick={() => onClick(project)}
+      id="projects"
       className="relative h-[280px] md:h-[380px] rounded-[24px] overflow-hidden cursor-pointer group"
     >
       <motion.img

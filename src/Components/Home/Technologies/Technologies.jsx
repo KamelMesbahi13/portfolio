@@ -73,6 +73,7 @@ const SkillCard = memo(({ skill, index, isVisible }) => {
         dark:border-white/10 dark:bg-white/[0.03] dark:shadow-none dark:hover:bg-white/[0.08] dark:hover:border-white/20 dark:hover:scale-[1.02]
         ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"}
       `}
+      id="tools"
       style={{ transitionDelay: `${index * 75}ms` }}
     >
       {/* Simple hover glow */}

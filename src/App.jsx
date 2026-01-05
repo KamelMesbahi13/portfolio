@@ -19,7 +19,7 @@ const App = () => {
           <Route path="/aboutme" element={<AboutUs />} />
         </Routes>
 
-        {/* <Footer /> */}
+        <Footer />
       </div>
     </BrowserRouter>
   );

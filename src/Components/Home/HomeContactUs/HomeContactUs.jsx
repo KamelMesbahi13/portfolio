@@ -126,6 +126,7 @@ const QuoteSidebar = memo(() => {
     <div
       className="w-full lg:w-[45%] p-6 sm:p-8 md:p-12 relative flex flex-col justify-between overflow-hidden"
       style={{ backgroundColor: COLORS.main }}
+      id="contact"
     >
       <div className="absolute top-0 left-0 w-full h-full pointer-events-none bg-gradient-to-br from-white/10 to-transparent" />
       <div className="relative z-10">

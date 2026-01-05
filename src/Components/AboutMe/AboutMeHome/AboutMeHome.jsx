@@ -280,8 +280,6 @@ const AboutSection = () => {
           </div>
         </div>
 
-        {/* RIGHT COLUMN: Large Portrait Image */}
-        {/* RIGHT COLUMN: Large Portrait Image */}
         <div
           ref={imageRef}
           className={`
