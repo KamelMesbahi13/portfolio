@@ -1,5 +1,6 @@
 import AboutUsHome from "./AboutMeHome/AboutMeHome";
 import AboutMeIntroduction from "./AboutMeIntroduction/AboutMeIntroduction";
+import Experience from "./Experience/Experience";
 import WhatWeOffer from "./WhatWeOffer/WhatWeOffer";
 
 const AboutUs = () => {
@@ -8,6 +9,7 @@ const AboutUs = () => {
       <AboutUsHome />
       <AboutMeIntroduction />
       <WhatWeOffer />
+      <Experience />
     </div>
   );
 };

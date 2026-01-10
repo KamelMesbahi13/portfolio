@@ -207,7 +207,7 @@ const AboutSection = () => {
   const [imageRef, imageVisible] = useScrollAnimation(0.2);
 
   return (
-    <section className="w-full min-h-screen px-6 py-20 overflow-hidden transition-colors duration-500 bg-lightBg dark:bg-darkBg md:px-12 lg:px-24">
+    <section className="w-full min-h-screen px-6 py-20 overflow-hidden transition-colors duration-500 md:px-12 lg:px-24">
       {/* 1. The Large Headline */}
       <div
         ref={headlineRef}
