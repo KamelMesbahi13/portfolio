@@ -258,9 +258,9 @@ const AboutSection = () => {
   `}
           >
             {[
-              { number: "3+", label: "Years Experience" },
-              { number: "50+", label: "Projects Done" },
-              { number: "30+", label: "Happy Clients" },
+              { number: "4+", label: "Years Experience" },
+              { number: "30+", label: "Projects Done" },
+              { number: "25+", label: "Happy Clients" },
             ].map((stat, index) => (
               <div
                 key={index}

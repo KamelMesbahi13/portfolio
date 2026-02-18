@@ -33,7 +33,7 @@ const PROJECTS = [
       "Image Gallery",
     ],
     github: "https://github.com/KamelMesbahi13/hotel",
-    live: "http://localhost:5173",
+    live: "https://hotelzidane.vercel.app/",
   },
   {
     id: 2,
