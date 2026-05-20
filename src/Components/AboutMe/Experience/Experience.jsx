@@ -5,27 +5,43 @@ import { ArrowRight } from "lucide-react";
 const EXPERIENCE = [
   {
     id: "01",
-    company: "Clavmen",
-    role: "Senior UX Designer",
-    date: "2021 - Present",
+    company: "ZC Digital",
+    role: "Web Developer (Remote)",
+    date: "2025 · 2026",
     description:
-      "Clavmen inspires creativity and makes learning piano fun. The lightweight body fits easily into gig bags for portability.",
+      "Development and maintenance of dynamic and high-performance websites. Integration of responsive user interfaces using HTML, CSS, Tailwind, and Bootstrap.",
   },
   {
     id: "02",
-    company: "Losify & Co",
-    role: "Lead Product Designer",
-    date: "2019 - 2021",
+    company: "Digital Team",
+    role: "Co-Founder & Operations Lead",
+    date: "2024 · 2025",
     description:
-      "Fitness and well-being with personalized coaching and innovative wellness solutions.",
+      "Co-created and managed a team specializing in digital solutions, oversaw operations, and coordinated web and mobile projects.",
   },
   {
     id: "03",
-    company: "Freelance",
-    role: "Full Stack Developer",
-    date: "2017 - 2019",
+    company: "Scientific Club (PI-Math), Boumerdes",
+    role: "Trainer / Instructor",
+    date: "2024 · 2025",
     description:
-      "Collaborated with various clients to deliver custom web solutions, focusing on performance and user experience.",
+      "Delivered web development training sessions and mentored students on their technical projects, creating educational materials adapted to various levels.",
+  },
+  {
+    id: "04",
+    company: "Association EL AYYLA",
+    role: "External Relations Manager",
+    date: "2020 · 2025",
+    description:
+      "Managed partnerships and communication with external organizations. Organized events, coordinated with sponsors, and expanded the professional network.",
+  },
+  {
+    id: "05",
+    company: "Self-employed",
+    role: "Freelance Developer",
+    date: "2021 · 2024",
+    description:
+      "Designed and developed websites for various clients. Developed web applications with React, Next.js, and Node.js according to client specifications.",
   },
 ];
 
