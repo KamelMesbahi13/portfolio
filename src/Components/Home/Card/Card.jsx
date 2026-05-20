@@ -5,20 +5,20 @@ import cvFile from "../../../assets/CV_.pdf";
 import { Github, Linkedin, Instagram, Facebook, Download } from "lucide-react";
 
 const SOCIAL_LINKS = [
-  { icon: Github, href: "https://github.com/yourusername", label: "GitHub" },
+  { icon: Github, href: "https://github.com/KamelMesbahi13", label: "GitHub" },
   {
     icon: Linkedin,
-    href: "https://linkedin.com/in/yourusername",
+    href: "https://www.linkedin.com/in/el-kamel-mesbahi-747965211",
     label: "LinkedIn",
   },
   {
     icon: Instagram,
-    href: "https://instagram.com/yourusername",
+    href: "https://www.instagram.com/kml_mesbahi/",
     label: "Instagram",
   },
   {
     icon: Facebook,
-    href: "https://facebook.com/yourusername",
+    href: "https://web.facebook.com/kamel.136.km",
     label: "Facebook",
   },
 ];
