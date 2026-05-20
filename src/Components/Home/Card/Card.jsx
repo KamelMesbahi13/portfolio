@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 import { memo } from "react";
 import mypic from "../../../assets/mypic.webp";
+import cvFile from "../../../assets/CV_.pdf";
 import { Github, Linkedin, Instagram, Facebook, Download } from "lucide-react";
 
 const SOCIAL_LINKS = [
@@ -105,7 +106,10 @@ const Card = () => {
 
           {/* Contact Button: Clean Black */}
           <a
-            href="#contact"
+            href={cvFile}
+            download="CV_.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
             className="flex items-center justify-center w-full gap-2 py-4 text-sm font-bold tracking-wider text-white uppercase transition-all duration-300 bg-black shadow-lg rounded-xl hover:-translate-y-1 hover:shadow-xl active:scale-95"
           >
             <Download size={18} />
