@@ -132,3 +132,4 @@ const Card = () => {
 };
 
 export default memo(Card);
+
